@@ -1,0 +1,45 @@
+
+#ifndef SEPathBase_H
+#define SEPathBase_H
+
+
+#include "SEIncludeLibrary.h"
+#include "SEDefinition.h"
+
+#define BOOST_FILESYSTEM_NO_DEPRECATED
+#include <boost/filesystem.hpp>
+using namespace boost::filesystem;
+
+
+class SEPathBase;
+
+typedef shared_ptr<SEPathBase> SEPathPtr;
+typedef vector< SEPathPtr, SEAllocator<SEPathPtr> > SEPathArray;
+
+class SEPathBase
+{
+protected:
+	path mPath;
+
+public:
+
+	static void CurrentDirectory(SEPathBase* outPath);
+
+	SEPathBase(const sechar* _cString);
+	SEPathBase(void);
+	virtual ~SEPathBase(void);
+
+	virtual void Init( const sechar* _cString);
+	const sechar* cString() const;
+	const sechar* name() const;
+	void AppendName( const char* name );
+
+	virtual void ChildArray(SEPathArray* pathArray) const;
+	virtual bool IsFolder() const;
+};
+
+typedef SEPathBase SEPath;
+
+
+#endif SEPathBase_H
+

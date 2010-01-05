@@ -1,0 +1,441 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D3623260D0F684500981E51 /* sampleAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* sampleAppDelegate.m */; };
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		2514C27210084DB100A42282 /* ES1Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2514C26E10084DB100A42282 /* ES1Renderer.m */; };
+		2514C27310084DB100A42282 /* ES2Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2514C27010084DB100A42282 /* ES2Renderer.m */; };
+		2514C27B10084DCA00A42282 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 2514C27910084DCA00A42282 /* Shader.fsh */; };
+		2514C27C10084DCA00A42282 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 2514C27A10084DCA00A42282 /* Shader.vsh */; };
+		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		28FD14FE0DC6FC130079059D /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FD14FD0DC6FC130079059D /* EAGLView.m */; };
+		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
+		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
+		8A3B3C0D10F32A0700CDC4D4 /* objects in Resources */ = {isa = PBXBuildFile; fileRef = 8A3B3C0A10F32A0700CDC4D4 /* objects */; };
+		8A3B3D7910F347AC00CDC4D4 /* error_code.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3B3D7410F347AC00CDC4D4 /* error_code.o */; };
+		8A3B3D7A10F347AC00CDC4D4 /* operations.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3B3D7510F347AC00CDC4D4 /* operations.o */; };
+		8A3B3D7B10F347AC00CDC4D4 /* path.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3B3D7610F347AC00CDC4D4 /* path.o */; };
+		8A3B3D7C10F347AC00CDC4D4 /* portability.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3B3D7710F347AC00CDC4D4 /* portability.o */; };
+		8A3B3D7D10F347AC00CDC4D4 /* utf8_codecvt_facet.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3B3D7810F347AC00CDC4D4 /* utf8_codecvt_facet.o */; };
+		8A8A300B10F26BCA004F63F5 /* SEAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8A2FF510F26BCA004F63F5 /* SEAllocator.cpp */; };
+		8A8A300C10F26BCA004F63F5 /* SEError.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8A2FF810F26BCA004F63F5 /* SEError.cpp */; };
+		8A8A300D10F26BCA004F63F5 /* SEFileLineReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8A2FFA10F26BCA004F63F5 /* SEFileLineReader.cpp */; };
+		8A8A300E10F26BCA004F63F5 /* SEFileReaderBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8A2FFC10F26BCA004F63F5 /* SEFileReaderBase.cpp */; };
+		8A8A300F10F26BCA004F63F5 /* SELoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8A2FFF10F26BCA004F63F5 /* SELoader.cpp */; };
+		8A8A301010F26BCA004F63F5 /* SEObjectStore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8A300310F26BCA004F63F5 /* SEObjectStore.cpp */; };
+		8A8A301110F26BCA004F63F5 /* SEPathBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8A300510F26BCA004F63F5 /* SEPathBase.cpp */; };
+		8A8A301210F26BCA004F63F5 /* SETools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8A300710F26BCA004F63F5 /* SETools.cpp */; };
+		8A8A30B510F26F88004F63F5 /* SEiPhoneFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8A30B110F26F88004F63F5 /* SEiPhoneFileReader.cpp */; };
+		8A8A30B610F26F88004F63F5 /* SEiPhonePath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8A30B310F26F88004F63F5 /* SEiPhonePath.cpp */; };
+		8A8A30F610F2713A004F63F5 /* SEMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8A30F210F2713A004F63F5 /* SEMesh.cpp */; };
+		8A8A30F710F2713A004F63F5 /* SEVertexGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8A30F410F2713A004F63F5 /* SEVertexGroup.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D3623240D0F684500981E51 /* sampleAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sampleAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* sampleAppDelegate.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = sampleAppDelegate.m; sourceTree = "<group>"; };
+		1D6058910D05DD3D006BFB54 /* tetris3d.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tetris3d.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2514C26D10084DB100A42282 /* ES1Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ES1Renderer.h; sourceTree = "<group>"; };
+		2514C26E10084DB100A42282 /* ES1Renderer.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = ES1Renderer.m; sourceTree = "<group>"; };
+		2514C26F10084DB100A42282 /* ES2Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ES2Renderer.h; sourceTree = "<group>"; };
+		2514C27010084DB100A42282 /* ES2Renderer.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = ES2Renderer.m; sourceTree = "<group>"; };
+		2514C27110084DB100A42282 /* ESRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESRenderer.h; sourceTree = "<group>"; };
+		2514C27910084DCA00A42282 /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
+		2514C27A10084DCA00A42282 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
+		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		28FD14FC0DC6FC130079059D /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
+		28FD14FD0DC6FC130079059D /* EAGLView.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = EAGLView.m; sourceTree = "<group>"; };
+		28FD14FF0DC6FC520079059D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = main.m; sourceTree = "<group>"; };
+		32CA4F630368D1EE00C91783 /* sample_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sample_Prefix.pch; sourceTree = "<group>"; };
+		8A3B3C0A10F32A0700CDC4D4 /* objects */ = {isa = PBXFileReference; lastKnownFileType = folder; name = objects; path = ../../objects; sourceTree = SOURCE_ROOT; };
+		8A3B3D7410F347AC00CDC4D4 /* error_code.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = error_code.o; path = devicelib/error_code.o; sourceTree = "<group>"; };
+		8A3B3D7510F347AC00CDC4D4 /* operations.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = operations.o; path = devicelib/operations.o; sourceTree = "<group>"; };
+		8A3B3D7610F347AC00CDC4D4 /* path.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = path.o; path = devicelib/path.o; sourceTree = "<group>"; };
+		8A3B3D7710F347AC00CDC4D4 /* portability.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = portability.o; path = devicelib/portability.o; sourceTree = "<group>"; };
+		8A3B3D7810F347AC00CDC4D4 /* utf8_codecvt_facet.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = utf8_codecvt_facet.o; path = devicelib/utf8_codecvt_facet.o; sourceTree = "<group>"; };
+		8A8A2FF510F26BCA004F63F5 /* SEAllocator.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEAllocator.cpp; path = ../../src/Tools/SEAllocator.cpp; sourceTree = SOURCE_ROOT; };
+		8A8A2FF610F26BCA004F63F5 /* SEAllocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEAllocator.h; path = ../../src/Tools/SEAllocator.h; sourceTree = SOURCE_ROOT; };
+		8A8A2FF710F26BCA004F63F5 /* SEDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEDefinition.h; path = ../../src/Tools/SEDefinition.h; sourceTree = SOURCE_ROOT; };
+		8A8A2FF810F26BCA004F63F5 /* SEError.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEError.cpp; path = ../../src/Tools/SEError.cpp; sourceTree = SOURCE_ROOT; };
+		8A8A2FF910F26BCA004F63F5 /* SEError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEError.h; path = ../../src/Tools/SEError.h; sourceTree = SOURCE_ROOT; };
+		8A8A2FFA10F26BCA004F63F5 /* SEFileLineReader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEFileLineReader.cpp; path = ../../src/Tools/SEFileLineReader.cpp; sourceTree = SOURCE_ROOT; };
+		8A8A2FFB10F26BCA004F63F5 /* SEFileLineReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEFileLineReader.h; path = ../../src/Tools/SEFileLineReader.h; sourceTree = SOURCE_ROOT; };
+		8A8A2FFC10F26BCA004F63F5 /* SEFileReaderBase.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEFileReaderBase.cpp; path = ../../src/Tools/SEFileReaderBase.cpp; sourceTree = SOURCE_ROOT; };
+		8A8A2FFD10F26BCA004F63F5 /* SEFileReaderBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEFileReaderBase.h; path = ../../src/Tools/SEFileReaderBase.h; sourceTree = SOURCE_ROOT; };
+		8A8A2FFE10F26BCA004F63F5 /* SEIncludeLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEIncludeLibrary.h; path = ../../src/Tools/SEIncludeLibrary.h; sourceTree = SOURCE_ROOT; };
+		8A8A2FFF10F26BCA004F63F5 /* SELoader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SELoader.cpp; path = ../../src/Tools/SELoader.cpp; sourceTree = SOURCE_ROOT; };
+		8A8A300010F26BCA004F63F5 /* SELoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SELoader.h; path = ../../src/Tools/SELoader.h; sourceTree = SOURCE_ROOT; };
+		8A8A300110F26BCA004F63F5 /* SELoaderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SELoaderDelegate.h; path = ../../src/Tools/SELoaderDelegate.h; sourceTree = SOURCE_ROOT; };
+		8A8A300210F26BCA004F63F5 /* SEMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEMain.h; path = ../../src/Tools/SEMain.h; sourceTree = SOURCE_ROOT; };
+		8A8A300310F26BCA004F63F5 /* SEObjectStore.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEObjectStore.cpp; path = ../../src/Tools/SEObjectStore.cpp; sourceTree = SOURCE_ROOT; };
+		8A8A300410F26BCA004F63F5 /* SEObjectStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEObjectStore.h; path = ../../src/Tools/SEObjectStore.h; sourceTree = SOURCE_ROOT; };
+		8A8A300510F26BCA004F63F5 /* SEPathBase.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEPathBase.cpp; path = ../../src/Tools/SEPathBase.cpp; sourceTree = SOURCE_ROOT; };
+		8A8A300610F26BCA004F63F5 /* SEPathBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEPathBase.h; path = ../../src/Tools/SEPathBase.h; sourceTree = SOURCE_ROOT; };
+		8A8A300710F26BCA004F63F5 /* SETools.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SETools.cpp; path = ../../src/Tools/SETools.cpp; sourceTree = SOURCE_ROOT; };
+		8A8A300810F26BCA004F63F5 /* SETools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SETools.h; path = ../../src/Tools/SETools.h; sourceTree = SOURCE_ROOT; };
+		8A8A30B110F26F88004F63F5 /* SEiPhoneFileReader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEiPhoneFileReader.cpp; path = ../../src/Tools/win/SEiPhoneFileReader.cpp; sourceTree = SOURCE_ROOT; };
+		8A8A30B210F26F88004F63F5 /* SEiPhoneFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEiPhoneFileReader.h; path = ../../src/Tools/win/SEiPhoneFileReader.h; sourceTree = SOURCE_ROOT; };
+		8A8A30B310F26F88004F63F5 /* SEiPhonePath.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEiPhonePath.cpp; path = ../../src/Tools/win/SEiPhonePath.cpp; sourceTree = SOURCE_ROOT; };
+		8A8A30B410F26F88004F63F5 /* SEiPhonePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEiPhonePath.h; path = ../../src/Tools/win/SEiPhonePath.h; sourceTree = SOURCE_ROOT; };
+		8A8A30F210F2713A004F63F5 /* SEMesh.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEMesh.cpp; path = ../../src/3D/SEMesh.cpp; sourceTree = SOURCE_ROOT; };
+		8A8A30F310F2713A004F63F5 /* SEMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEMesh.h; path = ../../src/3D/SEMesh.h; sourceTree = SOURCE_ROOT; };
+		8A8A30F410F2713A004F63F5 /* SEVertexGroup.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEVertexGroup.cpp; path = ../../src/3D/SEVertexGroup.cpp; sourceTree = SOURCE_ROOT; };
+		8A8A30F510F2713A004F63F5 /* SEVertexGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEVertexGroup.h; path = ../../src/3D/SEVertexGroup.h; sourceTree = SOURCE_ROOT; };
+		8D1107310486CEB800E47090 /* sample-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "sample-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */,
+				28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */,
+				8A3B3D7910F347AC00CDC4D4 /* error_code.o in Frameworks */,
+				8A3B3D7A10F347AC00CDC4D4 /* operations.o in Frameworks */,
+				8A3B3D7B10F347AC00CDC4D4 /* path.o in Frameworks */,
+				8A3B3D7C10F347AC00CDC4D4 /* portability.o in Frameworks */,
+				8A3B3D7D10F347AC00CDC4D4 /* utf8_codecvt_facet.o in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				2514C26D10084DB100A42282 /* ES1Renderer.h */,
+				2514C26E10084DB100A42282 /* ES1Renderer.m */,
+				2514C26F10084DB100A42282 /* ES2Renderer.h */,
+				2514C27010084DB100A42282 /* ES2Renderer.m */,
+				2514C27110084DB100A42282 /* ESRenderer.h */,
+				28FD14FC0DC6FC130079059D /* EAGLView.h */,
+				28FD14FD0DC6FC130079059D /* EAGLView.m */,
+				1D3623240D0F684500981E51 /* sampleAppDelegate.h */,
+				1D3623250D0F684500981E51 /* sampleAppDelegate.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* tetris3d.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2514C27610084DB600A42282 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				2514C27910084DCA00A42282 /* Shader.fsh */,
+				2514C27A10084DCA00A42282 /* Shader.vsh */,
+			);
+			name = Shaders;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				8A8A2FEE10F26BA4004F63F5 /* engine */,
+				080E96DDFE201D6D7F000001 /* Classes */,
+				2514C27610084DB600A42282 /* Shaders */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32CA4F630368D1EE00C91783 /* sample_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8A3B3C0A10F32A0700CDC4D4 /* objects */,
+				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
+				8D1107310486CEB800E47090 /* sample-Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				28FD15070DC6FC5B0079059D /* QuartzCore.framework */,
+				28FD14FF0DC6FC520079059D /* OpenGLES.framework */,
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8A3B3B3B10F31DA100CDC4D4 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				8A3B3D7410F347AC00CDC4D4 /* error_code.o */,
+				8A3B3D7510F347AC00CDC4D4 /* operations.o */,
+				8A3B3D7610F347AC00CDC4D4 /* path.o */,
+				8A3B3D7710F347AC00CDC4D4 /* portability.o */,
+				8A3B3D7810F347AC00CDC4D4 /* utf8_codecvt_facet.o */,
+			);
+			name = libs;
+			sourceTree = "<group>";
+		};
+		8A8A2FEE10F26BA4004F63F5 /* engine */ = {
+			isa = PBXGroup;
+			children = (
+				8A3B3B3B10F31DA100CDC4D4 /* libs */,
+				8A8A30B010F26F71004F63F5 /* iPhone */,
+				8A8A2FF010F26BB1004F63F5 /* tools */,
+				8A8A2FEF10F26BAA004F63F5 /* 3d */,
+			);
+			name = engine;
+			sourceTree = "<group>";
+		};
+		8A8A2FEF10F26BAA004F63F5 /* 3d */ = {
+			isa = PBXGroup;
+			children = (
+				8A8A30F210F2713A004F63F5 /* SEMesh.cpp */,
+				8A8A30F310F2713A004F63F5 /* SEMesh.h */,
+				8A8A30F410F2713A004F63F5 /* SEVertexGroup.cpp */,
+				8A8A30F510F2713A004F63F5 /* SEVertexGroup.h */,
+			);
+			name = 3d;
+			sourceTree = "<group>";
+		};
+		8A8A2FF010F26BB1004F63F5 /* tools */ = {
+			isa = PBXGroup;
+			children = (
+				8A8A2FF510F26BCA004F63F5 /* SEAllocator.cpp */,
+				8A8A2FF610F26BCA004F63F5 /* SEAllocator.h */,
+				8A8A2FF710F26BCA004F63F5 /* SEDefinition.h */,
+				8A8A2FF810F26BCA004F63F5 /* SEError.cpp */,
+				8A8A2FF910F26BCA004F63F5 /* SEError.h */,
+				8A8A2FFA10F26BCA004F63F5 /* SEFileLineReader.cpp */,
+				8A8A2FFB10F26BCA004F63F5 /* SEFileLineReader.h */,
+				8A8A2FFC10F26BCA004F63F5 /* SEFileReaderBase.cpp */,
+				8A8A2FFD10F26BCA004F63F5 /* SEFileReaderBase.h */,
+				8A8A2FFE10F26BCA004F63F5 /* SEIncludeLibrary.h */,
+				8A8A2FFF10F26BCA004F63F5 /* SELoader.cpp */,
+				8A8A300010F26BCA004F63F5 /* SELoader.h */,
+				8A8A300110F26BCA004F63F5 /* SELoaderDelegate.h */,
+				8A8A300210F26BCA004F63F5 /* SEMain.h */,
+				8A8A300310F26BCA004F63F5 /* SEObjectStore.cpp */,
+				8A8A300410F26BCA004F63F5 /* SEObjectStore.h */,
+				8A8A300510F26BCA004F63F5 /* SEPathBase.cpp */,
+				8A8A300610F26BCA004F63F5 /* SEPathBase.h */,
+				8A8A300710F26BCA004F63F5 /* SETools.cpp */,
+				8A8A300810F26BCA004F63F5 /* SETools.h */,
+			);
+			name = tools;
+			sourceTree = "<group>";
+		};
+		8A8A30B010F26F71004F63F5 /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				8A8A30B110F26F88004F63F5 /* SEiPhoneFileReader.cpp */,
+				8A8A30B210F26F88004F63F5 /* SEiPhoneFileReader.h */,
+				8A8A30B310F26F88004F63F5 /* SEiPhonePath.cpp */,
+				8A8A30B410F26F88004F63F5 /* SEiPhonePath.h */,
+			);
+			name = iPhone;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* sample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "sample" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = sample;
+			productName = sample;
+			productReference = 1D6058910D05DD3D006BFB54 /* tetris3d.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "sample" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* sample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2514C27B10084DCA00A42282 /* Shader.fsh in Resources */,
+				2514C27C10084DCA00A42282 /* Shader.vsh in Resources */,
+				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
+				8A3B3C0D10F32A0700CDC4D4 /* objects in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1D3623260D0F684500981E51 /* sampleAppDelegate.m in Sources */,
+				28FD14FE0DC6FC130079059D /* EAGLView.m in Sources */,
+				2514C27210084DB100A42282 /* ES1Renderer.m in Sources */,
+				2514C27310084DB100A42282 /* ES2Renderer.m in Sources */,
+				8A8A300B10F26BCA004F63F5 /* SEAllocator.cpp in Sources */,
+				8A8A300C10F26BCA004F63F5 /* SEError.cpp in Sources */,
+				8A8A300D10F26BCA004F63F5 /* SEFileLineReader.cpp in Sources */,
+				8A8A300E10F26BCA004F63F5 /* SEFileReaderBase.cpp in Sources */,
+				8A8A300F10F26BCA004F63F5 /* SELoader.cpp in Sources */,
+				8A8A301010F26BCA004F63F5 /* SEObjectStore.cpp in Sources */,
+				8A8A301110F26BCA004F63F5 /* SEPathBase.cpp in Sources */,
+				8A8A301210F26BCA004F63F5 /* SETools.cpp in Sources */,
+				8A8A30B510F26F88004F63F5 /* SEiPhoneFileReader.cpp in Sources */,
+				8A8A30B610F26F88004F63F5 /* SEiPhonePath.cpp in Sources */,
+				8A8A30F610F2713A004F63F5 /* SEMesh.cpp in Sources */,
+				8A8A30F710F2713A004F63F5 /* SEVertexGroup.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = sample_Prefix.pch;
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "sample-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				PRODUCT_NAME = tetris3d;
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = sample_Prefix.pch;
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "sample-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				PRODUCT_NAME = sample;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: ALEXEY GLUSHKOV (QZ7U9CCS65)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ALEXEY GLUSHKOV (QZ7U9CCS65)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_VERSION = 4.0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /Volumes/SECOND/iPhoneProjects/boost_1_41_0;
+				PREBINDING = NO;
+				PROVISIONING_PROFILE = "AE662ED0-4764-40ED-ABD1-48E1409FA30C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AE662ED0-4764-40ED-ABD1-48E1409FA30C";
+				SDKROOT = iphoneos3.0;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "sample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "sample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
