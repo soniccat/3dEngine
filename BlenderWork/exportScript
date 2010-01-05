@@ -1,0 +1,128 @@
+import bpy
+import Blender
+from Blender import *
+
+
+SMOOTH_DEF = 1
+
+
+outFile = open("out.txt", "w")
+
+
+def meshProcess(object):
+	print "---- meshProcess start ----"
+	print object.getData(name_only=1)
+
+	outFile.write( "type Mesh\n" )
+	outFile.write( "name %s\n" % object.getData(name_only=1) )
+	
+	mesh = object.getData(mesh=1)
+	print "vertex count %d" % len(mesh.verts)
+	print "face count %d" % len(mesh.faces)
+	
+	outFile.write( "vertexCount %d\n" % len(mesh.verts) )
+	
+	
+
+	for vert in mesh.verts:
+		#print vert.index
+		#print vert.co
+		#print vert.no
+		vert.sel = 0
+		outFile.write( "vert %f %f %f\n" % (vert.co.x, vert.co.y, vert.co.z) )
+			
+	for groupName in mesh.getVertGroupNames():
+		vertIndexes = mesh.getVertsFromGroup(groupName)
+		outFile.write( "vertexGroup %s\n" % groupName )
+		
+		for vertIndex in vertIndexes:
+			mesh.verts[vertIndex].sel = 1
+			
+		faceCount = 0
+		for face in mesh.faces:
+			if( face.verts[0].sel == 1 and face.verts[1].sel == 1 and face.verts[2].sel == 1 ):
+				faceCount += 1
+				
+		print "vertex group ", groupName
+		print "vertex count %d" % len(vertIndexes)
+		print "face count %d" % faceCount
+		outFile.write( "vertexIndexCount %d\n" % faceCount )
+		
+		for face in mesh.faces:
+			if( face.verts[0].sel == 1 and face.verts[1].sel == 1 and face.verts[2].sel == 1 ):
+				outFile.write( "face %d %d %d\n" % (face.verts[0].index, face.verts[1].index, face.verts[2].index) )
+
+		for vertIndex in vertIndexes:
+			mesh.verts[vertIndex].sel = 0
+			
+		outFile.write( "end\n" )
+	
+	#print
+	#print "mesh.faces"	
+	#for face in mesh.faces:
+	#	print
+	#	print face, "no = ", face.no
+	#	
+	#	if( mesh.faceUV ):
+	#		print "have uv"
+	#		
+	#		for uv in face.uv:
+	#			print uv
+	#			
+	#	else:
+	#		print "not have uv"
+	#	
+	#	print "\tface.verts"
+	#	for vert in face.verts:
+	#		print "\tindex = ", vert.index, "no = ", vert.no
+			
+	print "materials"
+	for material in mesh.materials:
+		print material
+		print "alpha = ", material.alpha
+		print "diffuse = ", material.rgbCol
+		print "specular = ", material.specCol
+		
+		print
+		print "Textures"
+		for texture in material.getTextures():
+			if(texture != None):
+				print texture
+				print texture.tex.image.filename
+		
+		
+	outFile.write( "end\n" )
+	
+	print "---- meshProcess end ----"
+
+
+def cameraProcess(object):
+	print "---- cameraProcess start ----"
+	print object.getData(name_only=1)
+	print "---- cameraProcess end ----"
+	
+	
+def lampProcess(object):
+	print "---- lampProcess start ----"
+	print object.getData(name_only=1)
+	print "---- lampProcess end ----"
+
+
+print "---- start ----"
+print list(bpy.data.objects)
+
+for obj in bpy.data.objects:
+	mesh = obj.getData(mesh=1)
+	print type(mesh)
+
+	if( type(mesh) == Types.MeshType ):
+		meshProcess(obj)
+		
+	elif( type(mesh) == Types.CameraType ):
+		cameraProcess(obj)
+		
+	elif( type(mesh) == Types.LampType ):
+		lampProcess(obj)
+		
+outFile.close()
+print "---- end ----"
