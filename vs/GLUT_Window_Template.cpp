@@ -376,6 +376,8 @@ void centerOnScreen ()
 //-------------------------------------------------------------------------
 //  Program Main method.
 //-------------------------------------------------------------------------
+SETexturePtr objectTexture;
+
 void main (int argc, sechar **argv)
 {
 	mass.reserve(8);
@@ -390,9 +392,6 @@ void main (int argc, sechar **argv)
 	//delete a;
 
 	loader.Load( &currentPath );
-
-	SEImageLoader imageLoader;
-	SEImagePtr image = imageLoader.Load( "Aeronautics_02505u-grayscale.jpg" );
 
 	//  Set the window x and y coordinates such that the 
 	//  window becomes centered
@@ -423,6 +422,17 @@ void main (int argc, sechar **argv)
 	glutPassiveMotionFunc (pmotion);
 	glutKeyboardFunc (keyboard);
 	glutSpecialFunc (special);
+
+
+
+	SEImageLoader imageLoader;
+	SEImagePtr image = imageLoader.Load( "test.jpg" );
+
+	SETexturePtr texture( new SETexture );
+	texture->Init( image );
+	texture->Use();
+
+	objectTexture = texture;
 
 	//  Start GLUT event processing loop
 	glutMainLoop();

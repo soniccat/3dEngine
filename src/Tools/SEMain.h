@@ -17,5 +17,6 @@
 #include "SESceneLoader.h"
 
 #include "SEImageLoader.h"
+#include "SETexture.h"
 
 #endif //SEMainDEF

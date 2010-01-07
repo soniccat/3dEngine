@@ -37,6 +37,7 @@ void SEMesh::SetVertexArrayCount( int count )
 	mVertexArraySize = count*3;
 	mVertexArray = SEVertexArrayPtr( new float[count*3] );
 	mNormalArray = SENormalArrayPtr( new float[count*3] );
+	mUVArray = SEUVArrayPtr( new float[count*3] );
 }
 
 void SEMesh::SetVertex( int index, float x, float y, float z)
@@ -55,6 +56,14 @@ void SEMesh::SetNormal( int index, float x, float y, float z)
 	mNormalArray[index*3]   = x;
 	mNormalArray[index*3+1] = y;
 	mNormalArray[index*3+2] = z;
+}
+
+void SEMesh::SetUV( int index, float u, float v )
+{
+	SEAssert( index*2 < mVertexArraySize, "uv bound check" );
+
+	mUVArray[index*2]	= u;
+	mUVArray[index*2+1] = v;
 }
 
 void SEMesh::AddVertexGroup( SEVertexGroupPtr group )
@@ -98,6 +107,14 @@ void SEMesh::ParseData( SESceneLoader* loader )
 		}
 		break;
 
+	case 3:
+		if( streq( loader->dataType(), "uv" ) )
+		{
+			SetUV( loader->currentIndex(), atof(loader->value1()), atof(loader->value2()) );
+			loader->SetCurrentIndex( loader->currentIndex() + 1 );
+		}
+		break;
+
 	case 4:
 		if( streq( loader->dataType(), "vert" ) )
 		{
@@ -108,11 +125,14 @@ void SEMesh::ParseData( SESceneLoader* loader )
 		{
 			SetNormal( loader->currentIndex(), atof(loader->value1()), atof(loader->value2()), atof(loader->value3()) );
 			loader->SetCurrentIndex( loader->currentIndex() + 1 );
+		
 		}
 		break;
 	}
 
-	if( !streq( loader->dataType(), "vert" ) && !streq( loader->dataType(), "norm" ) )
+	if( !streq( loader->dataType(), "vert" ) && 
+		!streq( loader->dataType(), "norm" ) &&
+		!streq( loader->dataType(), "uv" ) )
 		loader->SetCurrentIndex( 0 );
 }
 
@@ -123,15 +143,18 @@ void SEMesh::Draw()
 	
 	SEIndexArrayPtr  indexArrayPtr;
 
+	
 	glEnable( GL_LIGHTING );
 	glEnable( GL_LIGHT0 );
+	glEnable( GL_TEXTURE_2D );
 
 	glEnableClientState( GL_VERTEX_ARRAY );
 	glEnableClientState( GL_NORMAL_ARRAY );
+	glEnableClientState( GL_TEXTURE_COORD_ARRAY );
 
 	/*for( int i=0; i<mVertexArraySize/3; ++i )
 	{
-		printf("%f %f %f\n", mNormalArray[i*3], mNormalArray[i*3+1], mNormalArray[i*3+2]);
+		printf("%f %f \n", mUVArray[i*2], mUVArray[i*2+1]);
 	}*/
 
 	while( start != end )
@@ -141,6 +164,7 @@ void SEMesh::Draw()
 		glNormal3f(0,0,1);
 		glVertexPointer( 3, GL_FLOAT, 0, mVertexArray.get() );
 		glNormalPointer( GL_FLOAT, 0, mNormalArray.get() );
+		glTexCoordPointer( 2, GL_FLOAT, 0, mUVArray.get() );
 
 		glDrawElements( GL_TRIANGLES, (*start)->indexArraySize() ,GL_UNSIGNED_SHORT, indexArrayPtr.get() );
 

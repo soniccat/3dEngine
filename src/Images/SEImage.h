@@ -28,6 +28,12 @@ public:
 
 	void Init( uint width, uint height, SEImageDataPtr data );
 	void FreeData();
+
+	GLenum pixelFormat() const;
+	GLenum pixelDataType() const;
+	uint height() const;
+	uint width() const;
+	SEImageDataPtr data() const;
 };
 
 typedef shared_ptr<SEImage> SEImagePtr;

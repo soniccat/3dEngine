@@ -98,36 +98,45 @@ def meshProcess(object):
 	#
 	
 	#uv to vertex index
-	uvDict = {}
-	
-	for pair in baseVertexPair:
-		pair[0].sel = 1
-	
-	if( mesh.faceUV ):
-		print "export vertex UV"
-	
-		for face in mesh.faces:
-			for vert in face.verts:
-				if( vert.sel == 1 ):
-					vert.sel = 0
-					uvDict[ baseVertex[vert] ] = face.uv[ face.verts.index(vert) ]
+#	uvDict = {}
+#	
+#	if( mesh.faceUV ):
+#		print "export vertex UV"
+#		
+#		#delimeter it need to reload loader state
+#		outFile.write( "\n" )
+#		
+#		for pair in baseVertexPair:
+#			pair[0].sel = 1
+#	
+#		for face in mesh.faces:
+#			for vert in face.verts:
+#				if( vert.sel == 1 ):
+#					vert.sel = 0
+#					uvDict[ baseVertex[vert] ] = face.uv[ face.verts.index(vert) ]
+#				else:
+#					if uvDict[ baseVertex[vert] ][0] == face.uv[ face.verts.index(vert) ][1] and uvDict[ baseVertex[vert] ][1] == face.uv[ face.verts.index(vert) ][0]:
+#						print "BANG !!!"
+#	
+#		for i in range(0,len(uvDict.keys())):
+#			outFile.write( "uv %f %f\n" % ( uvDict[i][0], uvDict[i][1] ) )
+#		
+#		for face in solidFaceList:
+#			for uv in face.uv:
+#				outFile.write( "uv %f %f\n" % ( uv[0], uv[1] ) )
+#				
+#		for pair in baseVertexPair:
+#			pair[0].sel = 0
 
-				
-				#for uv in face.uv:
-				#	outFile.write( "uv %f %f\n" % ( uv.x, uv.y ) )
+	if( mesh.vertexUV ):
+		print "export vertex UV"
 		
-		#for face in solidFaceList:
-		#	outFile.write( "norm %f %f %f\n" % (face.no.x, face.no.y, face.no.z) )
-		#	outFile.write( "norm %f %f %f\n" % (face.no.x, face.no.y, face.no.z) )
-		#	outFile.write( "norm %f %f %f\n" % (face.no.x, face.no.y, face.no.z) )
+		#delimeter it need to reload loader state
+		outFile.write( "\n" )
 		
+		for pair in baseVertexPair:
+			outFile.write( "uv %f %f\n" % ( pair[0].uvco.x, pair[0].uvco.y) )
 	
-	for i in range(0,len(baseVertex.keys())):
-		outFile.write( "uv %f %f\n" % ( uvDict[i].x, uvDict[i].y ) )
-		
-	for face in solidFaceList:
-		for uv in face.uv:
-			outFile.write( "uv %f %f\n" % ( uv.x, uv.y ) )
 			
 	#
 	#vertexGroupIndex export

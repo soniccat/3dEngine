@@ -34,3 +34,28 @@ void SEImage::FreeData()
 	mData = SEImageDataPtr();
 	delete[] data;
 }
+
+GLenum SEImage::pixelFormat() const
+{
+	return mPixelFormat;
+}
+
+GLenum SEImage::pixelDataType() const
+{
+	return mPixelDataType;
+}
+
+uint SEImage::height() const
+{
+	return mHeight;
+}
+
+uint SEImage::width() const
+{
+	return mWidth;
+}
+
+SEImageDataPtr SEImage::data() const
+{
+	return mData;
+}
