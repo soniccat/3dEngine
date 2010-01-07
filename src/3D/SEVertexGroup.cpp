@@ -1,5 +1,5 @@
 #include "SEVertexGroup.h"
-#include "SELoader.h"
+#include "SESceneLoader.h"
 #include "SETools.h"
 
 SEVertexGroup::SEVertexGroup(void)
@@ -39,7 +39,7 @@ void SEVertexGroup::SetFace( int index, float v1, float v2, float v3)
 	mIndexArray[index*3 + 2] = v3;
 }
 
-void SEVertexGroup::ParseData( SELoader* loader )
+void SEVertexGroup::ParseData( SESceneLoader* loader )
 {
 	switch( loader->validValueCount() )
 	{

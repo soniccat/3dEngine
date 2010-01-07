@@ -14,7 +14,8 @@
 
 #include "SEMesh.h"
 #include "SEObjectStore.h"
-#include "SELoader.h"
+#include "SESceneLoader.h"
 
+#include "SEImageLoader.h"
 
 #endif //SEMainDEF

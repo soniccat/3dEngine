@@ -11,4 +11,9 @@ using namespace std;
 #include <boost/smart_ptr/shared_array.hpp>
 using namespace boost;
 
+#define BOOST_FILESYSTEM_NO_DEPRECATED
+#include <boost/filesystem.hpp>
+using namespace boost::filesystem;
+
+
 #include "SEAllocator.h"

@@ -6,10 +6,6 @@
 #include "SEIncludeLibrary.h"
 #include "SEDefinition.h"
 
-#define BOOST_FILESYSTEM_NO_DEPRECATED
-#include <boost/filesystem.hpp>
-using namespace boost::filesystem;
-
 
 class SEPathBase;
 

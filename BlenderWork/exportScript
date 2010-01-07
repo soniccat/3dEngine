@@ -1,12 +1,21 @@
 import bpy
 import Blender
+import copy
 from Blender import *
 
 
-SMOOTH_DEF = 1
-
 
 outFile = open("out.txt", "w")
+
+
+
+def	compareVertexIndexPair(a, b):
+	if( a[1] < b[1]):
+		return -1
+	elif( a[1] == b[1] ):
+		return 0
+	else:
+		return 1
 
 
 def meshProcess(object):
@@ -20,17 +29,109 @@ def meshProcess(object):
 	print "vertex count %d" % len(mesh.verts)
 	print "face count %d" % len(mesh.faces)
 	
-	outFile.write( "vertexCount %d\n" % len(mesh.verts) )
+	#
+	#mesh data
+	#
+	solidFaceList = [];
+	indexList  = [];
+	normalList = [];
 	
+	#assign base smooth vertex with new indexes
+	baseVertex = {}
 	
-
-	for vert in mesh.verts:
-		#print vert.index
-		#print vert.co
-		#print vert.no
-		vert.sel = 0
-		outFile.write( "vert %f %f %f\n" % (vert.co.x, vert.co.y, vert.co.z) )
+	#
+	#mesh prepare, generate vertex and new indexes
+	#
+	currentIndex = 0
+	
+	for face in mesh.faces:
+		if( face.smooth ):
 			
+			if( face.verts[0] not in baseVertex.keys() ):
+				baseVertex[ face.verts[0] ] = currentIndex
+				currentIndex = currentIndex + 1
+				
+			if( face.verts[1] not in baseVertex.keys() ):
+				baseVertex[ face.verts[1] ] = currentIndex
+				currentIndex = currentIndex + 1
+				
+			if( face.verts[2] not in baseVertex.keys() ):
+				baseVertex[ face.verts[2] ] = currentIndex
+				currentIndex = currentIndex + 1
+			
+		else:
+			
+			solidFaceList.append( face )
+	
+	#
+	#vertex export
+	#
+	baseVertexPair = baseVertex.items()
+	baseVertexPair.sort(compareVertexIndexPair)
+	
+	outFile.write( "vertexCount %d\n" % (len(baseVertex.keys()) + len(solidFaceList)*3) )
+	for pair in baseVertexPair:
+		outFile.write( "vert %f %f %f\n" % ( pair[0].co.x, pair[0].co.y, pair[0].co.z) )
+	
+	for face in solidFaceList:
+		outFile.write( "vert %f %f %f\n" % (face.verts[0].co.x, face.verts[0].co.y, face.verts[0].co.z) )
+		outFile.write( "vert %f %f %f\n" % (face.verts[1].co.x, face.verts[1].co.y, face.verts[1].co.z) )
+		outFile.write( "vert %f %f %f\n" % (face.verts[2].co.x, face.verts[2].co.y, face.verts[2].co.z) )
+		
+	
+	#delimeter it need to reload loader state
+	outFile.write( "\n" )
+	
+	#
+	#normal export
+	#
+	for pair in baseVertexPair:
+		outFile.write( "norm %f %f %f\n" % ( pair[0].no.x, pair[0].no.y, pair[0].no.z) )
+		
+	for face in solidFaceList:
+		outFile.write( "norm %f %f %f\n" % (face.no.x, face.no.y, face.no.z) )
+		outFile.write( "norm %f %f %f\n" % (face.no.x, face.no.y, face.no.z) )
+		outFile.write( "norm %f %f %f\n" % (face.no.x, face.no.y, face.no.z) )
+		
+	#
+	#uv export
+	#
+	
+	#uv to vertex index
+	uvDict = {}
+	
+	for pair in baseVertexPair:
+		pair[0].sel = 1
+	
+	if( mesh.faceUV ):
+		print "export vertex UV"
+	
+		for face in mesh.faces:
+			for vert in face.verts:
+				if( vert.sel == 1 ):
+					vert.sel = 0
+					uvDict[ baseVertex[vert] ] = face.uv[ face.verts.index(vert) ]
+
+				
+				#for uv in face.uv:
+				#	outFile.write( "uv %f %f\n" % ( uv.x, uv.y ) )
+		
+		#for face in solidFaceList:
+		#	outFile.write( "norm %f %f %f\n" % (face.no.x, face.no.y, face.no.z) )
+		#	outFile.write( "norm %f %f %f\n" % (face.no.x, face.no.y, face.no.z) )
+		#	outFile.write( "norm %f %f %f\n" % (face.no.x, face.no.y, face.no.z) )
+		
+	
+	for i in range(0,len(baseVertex.keys())):
+		outFile.write( "uv %f %f\n" % ( uvDict[i].x, uvDict[i].y ) )
+		
+	for face in solidFaceList:
+		for uv in face.uv:
+			outFile.write( "uv %f %f\n" % ( uv.x, uv.y ) )
+			
+	#
+	#vertexGroupIndex export
+	#
 	for groupName in mesh.getVertGroupNames():
 		vertIndexes = mesh.getVertsFromGroup(groupName)
 		outFile.write( "vertexGroup %s\n" % groupName )
@@ -43,21 +144,31 @@ def meshProcess(object):
 			if( face.verts[0].sel == 1 and face.verts[1].sel == 1 and face.verts[2].sel == 1 ):
 				faceCount += 1
 				
-		print "vertex group ", groupName
-		print "vertex count %d" % len(vertIndexes)
-		print "face count %d" % faceCount
+				
 		outFile.write( "vertexIndexCount %d\n" % faceCount )
+		solidIndexOffset = len( mesh.verts )
 		
 		for face in mesh.faces:
 			if( face.verts[0].sel == 1 and face.verts[1].sel == 1 and face.verts[2].sel == 1 ):
-				outFile.write( "face %d %d %d\n" % (face.verts[0].index, face.verts[1].index, face.verts[2].index) )
+				if( face.smooth ):
+
+					outFile.write( "face %d %d %d\n" % ( baseVertex[ face.verts[0] ], baseVertex[ face.verts[1] ], baseVertex[ face.verts[2] ] ) )					
+				
+				else:
+					
+					solidVertexIndex = len(baseVertex) + solidFaceList.index(face)*3
+					outFile.write( "face %d %d %d\n" % (solidVertexIndex, solidVertexIndex+1, solidVertexIndex+2) )					
+					
 
 		for vertIndex in vertIndexes:
 			mesh.verts[vertIndex].sel = 0
-			
+				
 		outFile.write( "end\n" )
+		
+		
+	print "smooth mode =", mesh.mode & Mesh.Modes["AUTOSMOOTH"]
 	
-	#print
+	#printa
 	#print "mesh.faces"	
 	#for face in mesh.faces:
 	#	print

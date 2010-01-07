@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="GLUT_Window_Template"
 	ProjectGUID="{E139394B-B5FD-4D4C-BA29-AFCE559274B1}"
+	RootNamespace="GLUT_Window_Template"
 	TargetFrameworkVersion="0"
 	>
 	<Platforms>
@@ -44,7 +45,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="E:\Programs\VS2005\MyProjects\OpenGL\3dEngine\OpenGLlibs\include;E:\Programs\VS2005\MyProjects\boost_1_41_0;E:\Programs\VS2005\MyProjects\OpenGL\3dEngine\src;E:\Programs\VS2005\MyProjects\OpenGL\3dEngine\src\Tools;E:\Programs\VS2005\MyProjects\OpenGL\3dEngine\src\Tools\win;E:\Programs\VS2005\MyProjects\OpenGL\3dEngine\src\3D"
+				AdditionalIncludeDirectories="E:\Programs\VS2005\MyProjects\OpenGL\3dEngine\OpenGLlibs\include;E:\Programs\VS2005\MyProjects\boost_1_41_0;E:\Programs\VS2005\MyProjects\OpenGL\3dEngine\src;E:\Programs\VS2005\MyProjects\OpenGL\3dEngine\src\Tools;E:\Programs\VS2005\MyProjects\OpenGL\3dEngine\src\Tools\win;E:\Programs\VS2005\MyProjects\OpenGL\3dEngine\src\3D;E:\Programs\VS2005\MyProjects\OpenGL\3dEngine\libjpg;E:\Programs\VS2005\MyProjects\OpenGL\3dEngine\src\Images;E:\Programs\VS2005\MyProjects\OpenGL\3dEngine\src\win"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -200,11 +201,31 @@
 			Name="3D"
 			>
 			<File
+				RelativePath="..\src\3D\SEIncludeOpenGL.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\3D\SEMaterial.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\src\3D\SEMaterial.h"
+				>
+			</File>
+			<File
 				RelativePath="..\src\3D\SEMesh.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\src\3D\SEMesh.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\3D\SETexture.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\src\3D\SETexture.h"
 				>
 			</File>
 			<File
@@ -219,6 +240,10 @@
 		<Filter
 			Name="tools"
 			>
+			<File
+				RelativePath=".\jconfig.h"
+				>
+			</File>
 			<Filter
 				Name="header"
 				>
@@ -243,15 +268,11 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\Tools\SEImageLoader.h"
+					>
+				</File>
+				<File
 					RelativePath="..\src\Tools\SEIncludeLibrary.h"
-					>
-				</File>
-				<File
-					RelativePath="..\src\Tools\SELoader.h"
-					>
-				</File>
-				<File
-					RelativePath="..\src\Tools\SELoaderDelegate.h"
 					>
 				</File>
 				<File
@@ -264,6 +285,14 @@
 				</File>
 				<File
 					RelativePath="..\src\Tools\SEPathBase.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\Tools\SESceneLoader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\Tools\SESceneLoaderDelegate.h"
 					>
 				</File>
 				<File
@@ -291,7 +320,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\src\Tools\SELoader.cpp"
+					RelativePath="..\src\Tools\SEImageLoader.cpp"
 					>
 				</File>
 				<File
@@ -303,7 +332,31 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\Tools\SESceneLoader.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\Tools\SETools.cpp"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="images"
+				>
+				<File
+					RelativePath="..\src\Images\SEImage.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\Images\SEImage.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\Images\SEJpegImage.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\Images\SEJpegImage.h"
 					>
 				</File>
 			</Filter>
@@ -327,6 +380,14 @@
 					PreprocessorDefinitions=""
 				/>
 			</FileConfiguration>
+		</File>
+		<File
+			RelativePath=".\libjpeg.lib"
+			>
+		</File>
+		<File
+			RelativePath=".\pngbar.jpg"
+			>
 		</File>
 	</Files>
 	<Globals>

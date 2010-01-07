@@ -9,7 +9,7 @@
 //*************************************************************************
 
 #include "SEMain.h"
-#include "SELoader.h"
+#include "SESceneLoader.h"
 #include <vector>
 using namespace std;
 
@@ -21,7 +21,6 @@ using namespace std;
 
 #define DEGREES_TO_RADIANS(__ANGLE__) ((__ANGLE__) / 180.0 * 3.14f)
 #include <cmath>
-
 
 vector<int, SEAllocator<int>> mass;
 
@@ -63,6 +62,7 @@ void init ()
 {	
 	//  Set the frame buffer clear color to black. 
 	glClearColor (0.0, 0.0, 0.0, 0.0);
+	glEnable(GL_DEPTH_TEST);
 }
 
 //-------------------------------------------------------------------------
@@ -76,7 +76,7 @@ void display (void)
 	//  Clear the window or more specifically the frame buffer...
 	//  This happens by replacing all the contents of the frame
 	//  buffer by the clear color (black in our case)
-	glClear (GL_COLOR_BUFFER_BIT);
+	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//  Draw object
 	drawObject ();
@@ -119,6 +119,7 @@ void drawObject ()
 	glRotatef(-angle,1,1,0);
 	glTranslatef(0,0,5);
 
+	glFlush();
 	glutPostRedisplay();
 }
 
@@ -146,7 +147,6 @@ GLfloat zFar = 100.0;
 GLfloat fieldOfView = 60.0; 
 GLfloat size; 
 
-//glEnable(GL_DEPTH_TEST); 
 size = zNear * tanf(DEGREES_TO_RADIANS(fieldOfView) / 2.0); 
 glFrustum(-size, size, -size / (window_width / window_height), size / (window_width / window_height), zNear, zFar);
 
@@ -372,6 +372,7 @@ void centerOnScreen ()
 	window_y = (glutGet (GLUT_SCREEN_HEIGHT) - window_height)/2;
 }
 
+
 //-------------------------------------------------------------------------
 //  Program Main method.
 //-------------------------------------------------------------------------
@@ -379,14 +380,19 @@ void main (int argc, sechar **argv)
 {
 	mass.reserve(8);
 
-	SELoader loader;
+	SESceneLoader loader;
 	SEPath currentPath;
 	SEPath::CurrentDirectory( &currentPath );
 	currentPath.AppendName( "objects" );
 
+	//SEPath* a = (SEPath*) malloc(sizeof(SEPath));
+	//a = new(a) SEPath();
+	//delete a;
+
 	loader.Load( &currentPath );
 
-
+	SEImageLoader imageLoader;
+	SEImagePtr image = imageLoader.Load( "Aeronautics_02505u-grayscale.jpg" );
 
 	//  Set the window x and y coordinates such that the 
 	//  window becomes centered
@@ -398,7 +404,8 @@ void main (int argc, sechar **argv)
 	glutInit(&argc, argv);
 	glutInitWindowSize (window_width, window_height);
 	glutInitWindowPosition (window_x, window_y);
-	glutInitDisplayMode (GLUT_RGBA | GLUT_DOUBLE);
+
+	glutInitDisplayMode (GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
 	glutCreateWindow (window_title);
 
 	//  View in full screen if the full_screen flag is on

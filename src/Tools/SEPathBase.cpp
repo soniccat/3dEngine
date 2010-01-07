@@ -15,6 +15,7 @@ SEPathBase::SEPathBase(const sechar* _cString)
 
 SEPathBase::SEPathBase(void)
 {
+	BREAKPOINTPLACE;
 }
 
 SEPathBase::~SEPathBase(void)
@@ -65,7 +66,10 @@ void SEPathBase::ChildArray(SEPathArray* pathArray)  const
 	directory_iterator end_itr;
 	for ( directory_iterator itr( mPath ); itr != end_itr; ++itr )
 	{
-		SEPathPtr pathPtr( new SEPath );
+		void* memory = malloc( sizeof( SEPath) );
+		SEPath* path = new(memory) SEPath();
+
+		SEPathPtr pathPtr( path );
 		pathPtr->Init( itr->path().string().c_str() );
 		pathArray->push_back( pathPtr );
 	}
