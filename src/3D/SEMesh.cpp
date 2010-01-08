@@ -37,7 +37,11 @@ void SEMesh::SetVertexArrayCount( int count )
 	mVertexArraySize = count*3;
 	mVertexArray = SEVertexArrayPtr( new float[count*3] );
 	mNormalArray = SENormalArrayPtr( new float[count*3] );
-	mUVArray = SEUVArrayPtr( new float[count*3] );
+
+	float* uvArr = new float[count*3];
+	memset( uvArr, 0, sizeof(float)*count*3);
+
+	mUVArray = SEUVArrayPtr( uvArr );
 }
 
 void SEMesh::SetVertex( int index, float x, float y, float z)

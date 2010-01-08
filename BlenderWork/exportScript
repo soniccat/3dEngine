@@ -32,36 +32,62 @@ def meshProcess(object):
 	#
 	#mesh data
 	#
+	newUVvertexList = [];
 	solidFaceList = [];
+	
 	indexList  = [];
 	normalList = [];
 	
-	#assign base smooth vertex with new indexes
+	#base smooth vertex to new indexes
 	baseVertex = {}
 	
 	#
 	#mesh prepare, generate vertex and new indexes
+	#genereate vertexes for solid faces
 	#
 	currentIndex = 0
 	
 	for face in mesh.faces:
 		if( face.smooth ):
-			
-			if( face.verts[0] not in baseVertex.keys() ):
-				baseVertex[ face.verts[0] ] = currentIndex
-				currentIndex = currentIndex + 1
+			for vert in face.verts:
+				vertIndex = face.verts.index(vert)
 				
-			if( face.verts[1] not in baseVertex.keys() ):
-				baseVertex[ face.verts[1] ] = currentIndex
-				currentIndex = currentIndex + 1
-				
-			if( face.verts[2] not in baseVertex.keys() ):
-				baseVertex[ face.verts[2] ] = currentIndex
-				currentIndex = currentIndex + 1
-			
+				if( face.verts[ vertIndex ] not in baseVertex.keys() ):
+					baseVertex[ face.verts[ vertIndex ] ] = currentIndex
+					currentIndex = currentIndex + 1	
+	
 		else:
-			
 			solidFaceList.append( face )
+			
+	
+	#for smooth: genereate vertex if found save vertex with different uv coordinates		
+			
+	#vertex to found uv data, to found uv repeat
+	vertexUVdict = {}
+	
+	#face to dict with [ face vertex index, new vertex index ]
+	faceVertexReplaceDict = {}
+	
+	baseVertexCount = len( baseVertex )
+			
+	for face in mesh.faces:
+		if( face.smooth ):
+			for vert in face.verts:
+				vertIndex = face.verts.index(vert)
+				
+				if( vert not in vertexUVdict.keys() ):
+					vertexUVdict[ vert ] = face.uv[ vertIndex ]
+					
+				elif vertexUVdict[ vert ].x != face.uv[ vertIndex ].x or vertexUVdict[ vert ].y != face.uv[ vertIndex ].y:
+
+					if face in faceVertexReplaceDict.keys():
+						faceVertexReplaceDict[ face ][vertIndex] = baseVertexCount + len( newUVvertexList )
+					else:
+						faceVertexReplaceDict[ face ] = {}
+						faceVertexReplaceDict[ face ][vertIndex] = baseVertexCount + len( newUVvertexList )
+						
+					newUVvertexList.append( vert )
+		
 	
 	#
 	#vertex export
@@ -69,9 +95,16 @@ def meshProcess(object):
 	baseVertexPair = baseVertex.items()
 	baseVertexPair.sort(compareVertexIndexPair)
 	
-	outFile.write( "vertexCount %d\n" % (len(baseVertex.keys()) + len(solidFaceList)*3) )
+	print "vertexUVdict len=", len( vertexUVdict )
+	print "newUVvertexList len = ", len(newUVvertexList)
+	print "solicFaceList len = ", len(solidFaceList)
+	
+	outFile.write( "vertexCount %d\n" % (len(baseVertex.keys()) + len( newUVvertexList ) + len(solidFaceList)*3) )
 	for pair in baseVertexPair:
 		outFile.write( "vert %f %f %f\n" % ( pair[0].co.x, pair[0].co.y, pair[0].co.z) )
+	
+	for vert in newUVvertexList:
+		outFile.write( "vert %f %f %f\n" % ( vert.co.x, vert.co.y, vert.co.z) )
 	
 	for face in solidFaceList:
 		outFile.write( "vert %f %f %f\n" % (face.verts[0].co.x, face.verts[0].co.y, face.verts[0].co.z) )
@@ -88,6 +121,9 @@ def meshProcess(object):
 	for pair in baseVertexPair:
 		outFile.write( "norm %f %f %f\n" % ( pair[0].no.x, pair[0].no.y, pair[0].no.z) )
 		
+	for vert in newUVvertexList:
+		outFile.write( "norm %f %f %f\n" % ( vert.no.x, vert.no.y, vert.no.z) )
+		
 	for face in solidFaceList:
 		outFile.write( "norm %f %f %f\n" % (face.no.x, face.no.y, face.no.z) )
 		outFile.write( "norm %f %f %f\n" % (face.no.x, face.no.y, face.no.z) )
@@ -96,12 +132,40 @@ def meshProcess(object):
 	#
 	#uv export
 	#
-	
+	if( mesh.faceUV ):
+		print "export face UV"
+		
+		#delimeter need to reload loader state
+		outFile.write( "\n" )
+		
+		for pair in baseVertexPair:
+			pair[0].sel = 1
+			
+		for face in mesh.faces:
+			for vert in face.verts:
+				if( vert in baseVertex.keys() and vert.sel == 1 ):
+					outFile.write( "uv %f %f\n" % ( face.uv[ face.verts.index(vert) ][0], face.uv[ face.verts.index(vert) ][1] ) )
+					vert.sel = 0
+					
+		for face in mesh.faces:
+			if face in faceVertexReplaceDict.keys():
+				for vert in face.verts:
+					if face.verts.index(vert) in faceVertexReplaceDict[face].keys():
+						print faceVertexReplaceDict[face][ face.verts.index(vert) ]
+						#outFile.write( "uv 1 1\n" )
+						outFile.write( "uv %f %f\n" % ( face.uv[ face.verts.index(vert) ][0], face.uv[ face.verts.index(vert) ][1] ) )
+					
+		for face in solidFaceList:
+			for uv in face.uv:
+				outFile.write( "uv %f %f\n" % ( uv[0], uv[1] ) )
+				
 	#uv to vertex index
 #	uvDict = {}
 #	
 #	if( mesh.faceUV ):
 #		print "export vertex UV"
+#		
+#		
 #		
 #		#delimeter it need to reload loader state
 #		outFile.write( "\n" )
@@ -128,14 +192,14 @@ def meshProcess(object):
 #		for pair in baseVertexPair:
 #			pair[0].sel = 0
 
-	if( mesh.vertexUV ):
-		print "export vertex UV"
-		
-		#delimeter it need to reload loader state
-		outFile.write( "\n" )
-		
-		for pair in baseVertexPair:
-			outFile.write( "uv %f %f\n" % ( pair[0].uvco.x, pair[0].uvco.y) )
+#	if( mesh.vertexUV ):
+#		print "export vertex UV"
+#		
+#		#delimeter it need to reload loader state
+#		outFile.write( "\n" )
+#		
+#		for pair in baseVertexPair:
+#			outFile.write( "uv %f %f\n" % ( pair[0].uvco.x, pair[0].uvco.y) )
 	
 			
 	#
@@ -160,12 +224,25 @@ def meshProcess(object):
 		for face in mesh.faces:
 			if( face.verts[0].sel == 1 and face.verts[1].sel == 1 and face.verts[2].sel == 1 ):
 				if( face.smooth ):
+					
+					#check
+					if face in faceVertexReplaceDict.keys():
+						outFile.write( "face")
+						
+						for vert in face.verts:	
+							if face.verts.index( vert ) in faceVertexReplaceDict[face].keys():
+								outFile.write( " %d" % faceVertexReplaceDict[face][ face.verts.index(vert) ] )
+							else:
+								outFile.write( " %d" %  baseVertex[ face.verts[ face.verts.index(vert) ] ]  )
 
-					outFile.write( "face %d %d %d\n" % ( baseVertex[ face.verts[0] ], baseVertex[ face.verts[1] ], baseVertex[ face.verts[2] ] ) )					
+						outFile.write( "\n" )
+
+					else:
+						outFile.write( "face %d %d %d\n" % ( baseVertex[ face.verts[0] ], baseVertex[ face.verts[1] ], baseVertex[ face.verts[2] ] ) )					
 				
 				else:
 					
-					solidVertexIndex = len(baseVertex) + solidFaceList.index(face)*3
+					solidVertexIndex = len(baseVertex) + len(newUVvertexList) + solidFaceList.index(face)*3
 					outFile.write( "face %d %d %d\n" % (solidVertexIndex, solidVertexIndex+1, solidVertexIndex+2) )					
 					
 
