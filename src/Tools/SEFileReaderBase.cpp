@@ -18,6 +18,7 @@ void SEFileReaderBase::Load(const SEPathBase* filePath)
 	mCurrentFile = filePath;
 
 	sechar buffer[SEFILEREADER_BUFFER_LENGHT];
+	TRACE( filePath->cString() );
 	
 	FILE* file = fopen(filePath->cString(), "r");
 	int feofFlag = feof(file);

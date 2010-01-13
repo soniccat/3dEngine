@@ -14,6 +14,8 @@ SESceneLoader::~SESceneLoader(void)
 
 void SESceneLoader::Load(const SEPathBase* path)
 {
+	TRACE(path->cString());
+	
 	if( path->IsFolder() )
 	{
 		//SEPath* debugPath;

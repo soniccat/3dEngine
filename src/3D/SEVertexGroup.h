@@ -1,9 +1,13 @@
-#pragma once
+
+#ifndef SEVertexGroup_H
+#define SEVertexGroup_H
+
 
 #include "SEIncludeLibrary.h"
 #include "SEDefinition.h"
 #include "SEAllocator.h"
 #include "SESceneLoaderDelegate.h"
+#include "SEMaterial.h"
 
 class SEVertexGroup;
 
@@ -16,6 +20,7 @@ class SEVertexGroup: public SESceneLoaderDelegate
 	SEString mName;
 	int mIndexArraySize;
 	SEIndexArrayPtr mIndexArray;
+	SEMaterialPtr mMaterial;
 
 public:
 	SEVertexGroup(void);
@@ -25,12 +30,14 @@ public:
 	SEIndexArrayPtr indexArray();
 	int indexArraySize();
 
-
-
 	void SetFace( int index, float v1, float v2, float v3);
+	void SetMaterial( SEMaterialPtr material );
 
 	virtual void ParseData( SESceneLoader* loader );
 
 	void SetName( const char* name );
 	const SEString& name();
 };
+
+
+#endif SEVertexGroup_H

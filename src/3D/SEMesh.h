@@ -30,7 +30,6 @@ class SEMesh: public SESceneLoaderDelegate
 	
 	SEVertexGroupArray mVertexGroupArray;
 
-
 public:
 	SEMesh(void);
 	~SEMesh(void);

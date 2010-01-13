@@ -395,7 +395,7 @@ void main (int argc, sechar **argv)
 
 	//  Set the window x and y coordinates such that the 
 	//  window becomes centered
-	centerOnScreen ();
+	centerOnScreen();
 
 	//  Connect to the windowing system + create a window
 	//  with the specified dimensions and position

@@ -19,24 +19,76 @@
 		28FD14FE0DC6FC130079059D /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FD14FD0DC6FC130079059D /* EAGLView.m */; };
 		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
 		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
-		8A3B3C0D10F32A0700CDC4D4 /* objects in Resources */ = {isa = PBXBuildFile; fileRef = 8A3B3C0A10F32A0700CDC4D4 /* objects */; };
-		8A3B3D7910F347AC00CDC4D4 /* error_code.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3B3D7410F347AC00CDC4D4 /* error_code.o */; };
-		8A3B3D7A10F347AC00CDC4D4 /* operations.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3B3D7510F347AC00CDC4D4 /* operations.o */; };
-		8A3B3D7B10F347AC00CDC4D4 /* path.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3B3D7610F347AC00CDC4D4 /* path.o */; };
-		8A3B3D7C10F347AC00CDC4D4 /* portability.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3B3D7710F347AC00CDC4D4 /* portability.o */; };
-		8A3B3D7D10F347AC00CDC4D4 /* utf8_codecvt_facet.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3B3D7810F347AC00CDC4D4 /* utf8_codecvt_facet.o */; };
-		8A8A300B10F26BCA004F63F5 /* SEAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8A2FF510F26BCA004F63F5 /* SEAllocator.cpp */; };
-		8A8A300C10F26BCA004F63F5 /* SEError.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8A2FF810F26BCA004F63F5 /* SEError.cpp */; };
-		8A8A300D10F26BCA004F63F5 /* SEFileLineReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8A2FFA10F26BCA004F63F5 /* SEFileLineReader.cpp */; };
-		8A8A300E10F26BCA004F63F5 /* SEFileReaderBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8A2FFC10F26BCA004F63F5 /* SEFileReaderBase.cpp */; };
-		8A8A300F10F26BCA004F63F5 /* SELoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8A2FFF10F26BCA004F63F5 /* SELoader.cpp */; };
-		8A8A301010F26BCA004F63F5 /* SEObjectStore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8A300310F26BCA004F63F5 /* SEObjectStore.cpp */; };
-		8A8A301110F26BCA004F63F5 /* SEPathBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8A300510F26BCA004F63F5 /* SEPathBase.cpp */; };
-		8A8A301210F26BCA004F63F5 /* SETools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8A300710F26BCA004F63F5 /* SETools.cpp */; };
-		8A8A30B510F26F88004F63F5 /* SEiPhoneFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8A30B110F26F88004F63F5 /* SEiPhoneFileReader.cpp */; };
-		8A8A30B610F26F88004F63F5 /* SEiPhonePath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8A30B310F26F88004F63F5 /* SEiPhonePath.cpp */; };
-		8A8A30F610F2713A004F63F5 /* SEMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8A30F210F2713A004F63F5 /* SEMesh.cpp */; };
-		8A8A30F710F2713A004F63F5 /* SEVertexGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8A30F410F2713A004F63F5 /* SEVertexGroup.cpp */; };
+		8AA2438410F8535A00AAAC13 /* SEAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA2436E10F8535A00AAAC13 /* SEAllocator.cpp */; };
+		8AA2438510F8535A00AAAC13 /* SEError.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA2437110F8535A00AAAC13 /* SEError.cpp */; };
+		8AA2438610F8535A00AAAC13 /* SEFileLineReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA2437310F8535A00AAAC13 /* SEFileLineReader.cpp */; };
+		8AA2438710F8535A00AAAC13 /* SEFileReaderBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA2437510F8535A00AAAC13 /* SEFileReaderBase.cpp */; };
+		8AA2438810F8535A00AAAC13 /* SEImageLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA2437710F8535A00AAAC13 /* SEImageLoader.cpp */; };
+		8AA2438910F8535A00AAAC13 /* SEObjectStore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA2437B10F8535A00AAAC13 /* SEObjectStore.cpp */; };
+		8AA2438A10F8535A00AAAC13 /* SEPathBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA2437D10F8535A00AAAC13 /* SEPathBase.cpp */; };
+		8AA2438B10F8535A00AAAC13 /* SESceneLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA2437F10F8535A00AAAC13 /* SESceneLoader.cpp */; };
+		8AA2438C10F8535A00AAAC13 /* SETools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA2438210F8535A00AAAC13 /* SETools.cpp */; };
+		8AA2439610F8537000AAAC13 /* SEMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA2438E10F8537000AAAC13 /* SEMaterial.cpp */; };
+		8AA2439710F8537000AAAC13 /* SEMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA2439010F8537000AAAC13 /* SEMesh.cpp */; };
+		8AA2439810F8537000AAAC13 /* SETexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA2439210F8537000AAAC13 /* SETexture.cpp */; };
+		8AA2439910F8537000AAAC13 /* SEVertexGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA2439410F8537000AAAC13 /* SEVertexGroup.cpp */; };
+		8AA2439E10F8537F00AAAC13 /* SEImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA2439A10F8537F00AAAC13 /* SEImage.cpp */; };
+		8AA2439F10F8537F00AAAC13 /* SEJpegImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA2439C10F8537F00AAAC13 /* SEJpegImage.cpp */; };
+		8AA243A510F853B100AAAC13 /* error_code.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA243A010F853B100AAAC13 /* error_code.o */; };
+		8AA243A610F853B100AAAC13 /* operations.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA243A110F853B100AAAC13 /* operations.o */; };
+		8AA243A710F853B100AAAC13 /* path.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA243A210F853B100AAAC13 /* path.o */; };
+		8AA243A810F853B100AAAC13 /* portability.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA243A310F853B100AAAC13 /* portability.o */; };
+		8AA243A910F853B100AAAC13 /* utf8_codecvt_facet.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA243A410F853B100AAAC13 /* utf8_codecvt_facet.o */; };
+		8AA2440C10F854F600AAAC13 /* objects in Resources */ = {isa = PBXBuildFile; fileRef = 8AA2440910F854F600AAAC13 /* objects */; };
+		8AA2450510F85E1900AAAC13 /* jdcoefct.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA244F510F85E1900AAAC13 /* jdcoefct.o */; };
+		8AA2450610F85E1900AAAC13 /* jdcolor.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA244F610F85E1900AAAC13 /* jdcolor.o */; };
+		8AA2450710F85E1900AAAC13 /* jddctmgr.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA244F710F85E1900AAAC13 /* jddctmgr.o */; };
+		8AA2450810F85E1900AAAC13 /* jdhuff.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA244F810F85E1900AAAC13 /* jdhuff.o */; };
+		8AA2450910F85E1900AAAC13 /* jdinput.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA244F910F85E1900AAAC13 /* jdinput.o */; };
+		8AA2450A10F85E1900AAAC13 /* jdmainct.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA244FA10F85E1900AAAC13 /* jdmainct.o */; };
+		8AA2450B10F85E1900AAAC13 /* jdmarker.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA244FB10F85E1900AAAC13 /* jdmarker.o */; };
+		8AA2450C10F85E1900AAAC13 /* jdmaster.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA244FC10F85E1900AAAC13 /* jdmaster.o */; };
+		8AA2450D10F85E1900AAAC13 /* jdmerge.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA244FD10F85E1900AAAC13 /* jdmerge.o */; };
+		8AA2450E10F85E1900AAAC13 /* jdpostct.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA244FE10F85E1900AAAC13 /* jdpostct.o */; };
+		8AA2450F10F85E1900AAAC13 /* jdsample.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA244FF10F85E1900AAAC13 /* jdsample.o */; };
+		8AA2451010F85E1900AAAC13 /* jidctflt.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2450010F85E1900AAAC13 /* jidctflt.o */; };
+		8AA2451110F85E1900AAAC13 /* jidctfst.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2450110F85E1900AAAC13 /* jidctfst.o */; };
+		8AA2451210F85E1900AAAC13 /* jidctint.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2450210F85E1900AAAC13 /* jidctint.o */; };
+		8AA2451310F85E1900AAAC13 /* jquant1.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2450310F85E1900AAAC13 /* jquant1.o */; };
+		8AA2451410F85E1900AAAC13 /* jquant2.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2450410F85E1900AAAC13 /* jquant2.o */; };
+		8AA2451810F85E4900AAAC13 /* jerror.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2451710F85E4900AAAC13 /* jerror.o */; };
+		8AA2452310F85E8800AAAC13 /* jdapimin.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2451E10F85E8800AAAC13 /* jdapimin.o */; };
+		8AA2452410F85E8800AAAC13 /* jdapistd.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2451F10F85E8800AAAC13 /* jdapistd.o */; };
+		8AA2452510F85E8800AAAC13 /* jdarith.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2452010F85E8800AAAC13 /* jdarith.o */; };
+		8AA2452610F85E8800AAAC13 /* jdatadst.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2452110F85E8800AAAC13 /* jdatadst.o */; };
+		8AA2452710F85E8800AAAC13 /* jdatasrc.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2452210F85E8800AAAC13 /* jdatasrc.o */; };
+		8AA2452C10F85E9C00AAAC13 /* jfdctflt.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2452910F85E9C00AAAC13 /* jfdctflt.o */; };
+		8AA2452D10F85E9C00AAAC13 /* jfdctfst.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2452A10F85E9C00AAAC13 /* jfdctfst.o */; };
+		8AA2452E10F85E9C00AAAC13 /* jfdctint.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2452B10F85E9C00AAAC13 /* jfdctint.o */; };
+		8AA2453410F85EAF00AAAC13 /* jmemmgr.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2453010F85EAF00AAAC13 /* jmemmgr.o */; };
+		8AA2453510F85EAF00AAAC13 /* jmemnobs.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2453110F85EAF00AAAC13 /* jmemnobs.o */; };
+		8AA2453710F85EAF00AAAC13 /* jutils.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2453310F85EAF00AAAC13 /* jutils.o */; };
+		8AA2454110F85F0B00AAAC13 /* jdtrans.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2454010F85F0B00AAAC13 /* jdtrans.o */; };
+		8AA2454410F85F1F00AAAC13 /* jcinit.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2454310F85F1F00AAAC13 /* jcinit.o */; };
+		8AA2454F10F85F3E00AAAC13 /* jcmainct.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2454710F85F3E00AAAC13 /* jcmainct.o */; };
+		8AA2455010F85F3E00AAAC13 /* jcmarker.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2454810F85F3E00AAAC13 /* jcmarker.o */; };
+		8AA2455110F85F3E00AAAC13 /* jcmaster.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2454910F85F3E00AAAC13 /* jcmaster.o */; };
+		8AA2455210F85F3E00AAAC13 /* jcomapi.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2454A10F85F3E00AAAC13 /* jcomapi.o */; };
+		8AA2455310F85F3E00AAAC13 /* jcparam.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2454B10F85F3E00AAAC13 /* jcparam.o */; };
+		8AA2455410F85F3E00AAAC13 /* jcprepct.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2454C10F85F3E00AAAC13 /* jcprepct.o */; };
+		8AA2455510F85F3E00AAAC13 /* jcsample.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2454D10F85F3E00AAAC13 /* jcsample.o */; };
+		8AA2455610F85F3E00AAAC13 /* jctrans.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2454E10F85F3E00AAAC13 /* jctrans.o */; };
+		8AA2456510F85F6900AAAC13 /* jaricom.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2455D10F85F6900AAAC13 /* jaricom.o */; };
+		8AA2456610F85F6900AAAC13 /* jcapimin.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2455E10F85F6900AAAC13 /* jcapimin.o */; };
+		8AA2456710F85F6900AAAC13 /* jcapistd.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2455F10F85F6900AAAC13 /* jcapistd.o */; };
+		8AA2456810F85F6900AAAC13 /* jcarith.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2456010F85F6900AAAC13 /* jcarith.o */; };
+		8AA2456910F85F6900AAAC13 /* jccoefct.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2456110F85F6900AAAC13 /* jccoefct.o */; };
+		8AA2456A10F85F6900AAAC13 /* jccolor.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2456210F85F6900AAAC13 /* jccolor.o */; };
+		8AA2456B10F85F6900AAAC13 /* jcdctmgr.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2456310F85F6900AAAC13 /* jcdctmgr.o */; };
+		8AA2456C10F85F6900AAAC13 /* jchuff.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2456410F85F6900AAAC13 /* jchuff.o */; };
+		8AA2456F10F861AD00AAAC13 /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8AA2456E10F861AD00AAAC13 /* test.jpg */; };
+		8AA2472410F871D000AAAC13 /* fon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8AA2472310F871D000AAAC13 /* fon.jpg */; };
+		8AA2477110F8755900AAAC13 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2477010F8755900AAAC13 /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,40 +111,108 @@
 		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* sample_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sample_Prefix.pch; sourceTree = "<group>"; };
-		8A3B3C0A10F32A0700CDC4D4 /* objects */ = {isa = PBXFileReference; lastKnownFileType = folder; name = objects; path = ../../objects; sourceTree = SOURCE_ROOT; };
-		8A3B3D7410F347AC00CDC4D4 /* error_code.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = error_code.o; path = devicelib/error_code.o; sourceTree = "<group>"; };
-		8A3B3D7510F347AC00CDC4D4 /* operations.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = operations.o; path = devicelib/operations.o; sourceTree = "<group>"; };
-		8A3B3D7610F347AC00CDC4D4 /* path.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = path.o; path = devicelib/path.o; sourceTree = "<group>"; };
-		8A3B3D7710F347AC00CDC4D4 /* portability.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = portability.o; path = devicelib/portability.o; sourceTree = "<group>"; };
-		8A3B3D7810F347AC00CDC4D4 /* utf8_codecvt_facet.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = utf8_codecvt_facet.o; path = devicelib/utf8_codecvt_facet.o; sourceTree = "<group>"; };
-		8A8A2FF510F26BCA004F63F5 /* SEAllocator.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEAllocator.cpp; path = ../../src/Tools/SEAllocator.cpp; sourceTree = SOURCE_ROOT; };
-		8A8A2FF610F26BCA004F63F5 /* SEAllocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEAllocator.h; path = ../../src/Tools/SEAllocator.h; sourceTree = SOURCE_ROOT; };
-		8A8A2FF710F26BCA004F63F5 /* SEDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEDefinition.h; path = ../../src/Tools/SEDefinition.h; sourceTree = SOURCE_ROOT; };
-		8A8A2FF810F26BCA004F63F5 /* SEError.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEError.cpp; path = ../../src/Tools/SEError.cpp; sourceTree = SOURCE_ROOT; };
-		8A8A2FF910F26BCA004F63F5 /* SEError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEError.h; path = ../../src/Tools/SEError.h; sourceTree = SOURCE_ROOT; };
-		8A8A2FFA10F26BCA004F63F5 /* SEFileLineReader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEFileLineReader.cpp; path = ../../src/Tools/SEFileLineReader.cpp; sourceTree = SOURCE_ROOT; };
-		8A8A2FFB10F26BCA004F63F5 /* SEFileLineReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEFileLineReader.h; path = ../../src/Tools/SEFileLineReader.h; sourceTree = SOURCE_ROOT; };
-		8A8A2FFC10F26BCA004F63F5 /* SEFileReaderBase.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEFileReaderBase.cpp; path = ../../src/Tools/SEFileReaderBase.cpp; sourceTree = SOURCE_ROOT; };
-		8A8A2FFD10F26BCA004F63F5 /* SEFileReaderBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEFileReaderBase.h; path = ../../src/Tools/SEFileReaderBase.h; sourceTree = SOURCE_ROOT; };
-		8A8A2FFE10F26BCA004F63F5 /* SEIncludeLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEIncludeLibrary.h; path = ../../src/Tools/SEIncludeLibrary.h; sourceTree = SOURCE_ROOT; };
-		8A8A2FFF10F26BCA004F63F5 /* SELoader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SELoader.cpp; path = ../../src/Tools/SELoader.cpp; sourceTree = SOURCE_ROOT; };
-		8A8A300010F26BCA004F63F5 /* SELoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SELoader.h; path = ../../src/Tools/SELoader.h; sourceTree = SOURCE_ROOT; };
-		8A8A300110F26BCA004F63F5 /* SELoaderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SELoaderDelegate.h; path = ../../src/Tools/SELoaderDelegate.h; sourceTree = SOURCE_ROOT; };
-		8A8A300210F26BCA004F63F5 /* SEMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEMain.h; path = ../../src/Tools/SEMain.h; sourceTree = SOURCE_ROOT; };
-		8A8A300310F26BCA004F63F5 /* SEObjectStore.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEObjectStore.cpp; path = ../../src/Tools/SEObjectStore.cpp; sourceTree = SOURCE_ROOT; };
-		8A8A300410F26BCA004F63F5 /* SEObjectStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEObjectStore.h; path = ../../src/Tools/SEObjectStore.h; sourceTree = SOURCE_ROOT; };
-		8A8A300510F26BCA004F63F5 /* SEPathBase.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEPathBase.cpp; path = ../../src/Tools/SEPathBase.cpp; sourceTree = SOURCE_ROOT; };
-		8A8A300610F26BCA004F63F5 /* SEPathBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEPathBase.h; path = ../../src/Tools/SEPathBase.h; sourceTree = SOURCE_ROOT; };
-		8A8A300710F26BCA004F63F5 /* SETools.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SETools.cpp; path = ../../src/Tools/SETools.cpp; sourceTree = SOURCE_ROOT; };
-		8A8A300810F26BCA004F63F5 /* SETools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SETools.h; path = ../../src/Tools/SETools.h; sourceTree = SOURCE_ROOT; };
-		8A8A30B110F26F88004F63F5 /* SEiPhoneFileReader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEiPhoneFileReader.cpp; path = ../../src/Tools/win/SEiPhoneFileReader.cpp; sourceTree = SOURCE_ROOT; };
-		8A8A30B210F26F88004F63F5 /* SEiPhoneFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEiPhoneFileReader.h; path = ../../src/Tools/win/SEiPhoneFileReader.h; sourceTree = SOURCE_ROOT; };
-		8A8A30B310F26F88004F63F5 /* SEiPhonePath.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEiPhonePath.cpp; path = ../../src/Tools/win/SEiPhonePath.cpp; sourceTree = SOURCE_ROOT; };
-		8A8A30B410F26F88004F63F5 /* SEiPhonePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEiPhonePath.h; path = ../../src/Tools/win/SEiPhonePath.h; sourceTree = SOURCE_ROOT; };
-		8A8A30F210F2713A004F63F5 /* SEMesh.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEMesh.cpp; path = ../../src/3D/SEMesh.cpp; sourceTree = SOURCE_ROOT; };
-		8A8A30F310F2713A004F63F5 /* SEMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEMesh.h; path = ../../src/3D/SEMesh.h; sourceTree = SOURCE_ROOT; };
-		8A8A30F410F2713A004F63F5 /* SEVertexGroup.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEVertexGroup.cpp; path = ../../src/3D/SEVertexGroup.cpp; sourceTree = SOURCE_ROOT; };
-		8A8A30F510F2713A004F63F5 /* SEVertexGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEVertexGroup.h; path = ../../src/3D/SEVertexGroup.h; sourceTree = SOURCE_ROOT; };
+		8AA2436E10F8535A00AAAC13 /* SEAllocator.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEAllocator.cpp; path = ../src/Tools/SEAllocator.cpp; sourceTree = SOURCE_ROOT; };
+		8AA2436F10F8535A00AAAC13 /* SEAllocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEAllocator.h; path = ../src/Tools/SEAllocator.h; sourceTree = SOURCE_ROOT; };
+		8AA2437010F8535A00AAAC13 /* SEDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEDefinition.h; path = ../src/Tools/SEDefinition.h; sourceTree = SOURCE_ROOT; };
+		8AA2437110F8535A00AAAC13 /* SEError.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEError.cpp; path = ../src/Tools/SEError.cpp; sourceTree = SOURCE_ROOT; };
+		8AA2437210F8535A00AAAC13 /* SEError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEError.h; path = ../src/Tools/SEError.h; sourceTree = SOURCE_ROOT; };
+		8AA2437310F8535A00AAAC13 /* SEFileLineReader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEFileLineReader.cpp; path = ../src/Tools/SEFileLineReader.cpp; sourceTree = SOURCE_ROOT; };
+		8AA2437410F8535A00AAAC13 /* SEFileLineReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEFileLineReader.h; path = ../src/Tools/SEFileLineReader.h; sourceTree = SOURCE_ROOT; };
+		8AA2437510F8535A00AAAC13 /* SEFileReaderBase.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEFileReaderBase.cpp; path = ../src/Tools/SEFileReaderBase.cpp; sourceTree = SOURCE_ROOT; };
+		8AA2437610F8535A00AAAC13 /* SEFileReaderBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEFileReaderBase.h; path = ../src/Tools/SEFileReaderBase.h; sourceTree = SOURCE_ROOT; };
+		8AA2437710F8535A00AAAC13 /* SEImageLoader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEImageLoader.cpp; path = ../src/Tools/SEImageLoader.cpp; sourceTree = SOURCE_ROOT; };
+		8AA2437810F8535A00AAAC13 /* SEImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEImageLoader.h; path = ../src/Tools/SEImageLoader.h; sourceTree = SOURCE_ROOT; };
+		8AA2437910F8535A00AAAC13 /* SEIncludeLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEIncludeLibrary.h; path = ../src/Tools/SEIncludeLibrary.h; sourceTree = SOURCE_ROOT; };
+		8AA2437A10F8535A00AAAC13 /* SEMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEMain.h; path = ../src/Tools/SEMain.h; sourceTree = SOURCE_ROOT; };
+		8AA2437B10F8535A00AAAC13 /* SEObjectStore.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEObjectStore.cpp; path = ../src/Tools/SEObjectStore.cpp; sourceTree = SOURCE_ROOT; };
+		8AA2437C10F8535A00AAAC13 /* SEObjectStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEObjectStore.h; path = ../src/Tools/SEObjectStore.h; sourceTree = SOURCE_ROOT; };
+		8AA2437D10F8535A00AAAC13 /* SEPathBase.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEPathBase.cpp; path = ../src/Tools/SEPathBase.cpp; sourceTree = SOURCE_ROOT; };
+		8AA2437E10F8535A00AAAC13 /* SEPathBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEPathBase.h; path = ../src/Tools/SEPathBase.h; sourceTree = SOURCE_ROOT; };
+		8AA2437F10F8535A00AAAC13 /* SESceneLoader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SESceneLoader.cpp; path = ../src/Tools/SESceneLoader.cpp; sourceTree = SOURCE_ROOT; };
+		8AA2438010F8535A00AAAC13 /* SESceneLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SESceneLoader.h; path = ../src/Tools/SESceneLoader.h; sourceTree = SOURCE_ROOT; };
+		8AA2438110F8535A00AAAC13 /* SESceneLoaderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SESceneLoaderDelegate.h; path = ../src/Tools/SESceneLoaderDelegate.h; sourceTree = SOURCE_ROOT; };
+		8AA2438210F8535A00AAAC13 /* SETools.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SETools.cpp; path = ../src/Tools/SETools.cpp; sourceTree = SOURCE_ROOT; };
+		8AA2438310F8535A00AAAC13 /* SETools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SETools.h; path = ../src/Tools/SETools.h; sourceTree = SOURCE_ROOT; };
+		8AA2438D10F8537000AAAC13 /* SEIncludeOpenGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEIncludeOpenGL.h; path = ../src/3D/SEIncludeOpenGL.h; sourceTree = SOURCE_ROOT; };
+		8AA2438E10F8537000AAAC13 /* SEMaterial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SEMaterial.cpp; path = ../src/3D/SEMaterial.cpp; sourceTree = SOURCE_ROOT; };
+		8AA2438F10F8537000AAAC13 /* SEMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEMaterial.h; path = ../src/3D/SEMaterial.h; sourceTree = SOURCE_ROOT; };
+		8AA2439010F8537000AAAC13 /* SEMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SEMesh.cpp; path = ../src/3D/SEMesh.cpp; sourceTree = SOURCE_ROOT; };
+		8AA2439110F8537000AAAC13 /* SEMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEMesh.h; path = ../src/3D/SEMesh.h; sourceTree = SOURCE_ROOT; };
+		8AA2439210F8537000AAAC13 /* SETexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SETexture.cpp; path = ../src/3D/SETexture.cpp; sourceTree = SOURCE_ROOT; };
+		8AA2439310F8537000AAAC13 /* SETexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SETexture.h; path = ../src/3D/SETexture.h; sourceTree = SOURCE_ROOT; };
+		8AA2439410F8537000AAAC13 /* SEVertexGroup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SEVertexGroup.cpp; path = ../src/3D/SEVertexGroup.cpp; sourceTree = SOURCE_ROOT; };
+		8AA2439510F8537000AAAC13 /* SEVertexGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEVertexGroup.h; path = ../src/3D/SEVertexGroup.h; sourceTree = SOURCE_ROOT; };
+		8AA2439A10F8537F00AAAC13 /* SEImage.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEImage.cpp; path = ../src/Images/SEImage.cpp; sourceTree = SOURCE_ROOT; };
+		8AA2439B10F8537F00AAAC13 /* SEImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEImage.h; path = ../src/Images/SEImage.h; sourceTree = SOURCE_ROOT; };
+		8AA2439C10F8537F00AAAC13 /* SEJpegImage.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SEJpegImage.cpp; path = ../src/Images/SEJpegImage.cpp; sourceTree = SOURCE_ROOT; };
+		8AA2439D10F8537F00AAAC13 /* SEJpegImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEJpegImage.h; path = ../src/Images/SEJpegImage.h; sourceTree = SOURCE_ROOT; };
+		8AA243A010F853B100AAAC13 /* error_code.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = error_code.o; path = simlib/error_code.o; sourceTree = "<group>"; };
+		8AA243A110F853B100AAAC13 /* operations.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = operations.o; path = simlib/operations.o; sourceTree = "<group>"; };
+		8AA243A210F853B100AAAC13 /* path.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = path.o; path = simlib/path.o; sourceTree = "<group>"; };
+		8AA243A310F853B100AAAC13 /* portability.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = portability.o; path = simlib/portability.o; sourceTree = "<group>"; };
+		8AA243A410F853B100AAAC13 /* utf8_codecvt_facet.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = utf8_codecvt_facet.o; path = simlib/utf8_codecvt_facet.o; sourceTree = "<group>"; };
+		8AA2440910F854F600AAAC13 /* objects */ = {isa = PBXFileReference; lastKnownFileType = folder; name = objects; path = ../objects; sourceTree = SOURCE_ROOT; };
+		8AA244AD10F85B2000AAAC13 /* jconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jconfig.h; path = ../src/iPhone/jconfig.h; sourceTree = SOURCE_ROOT; };
+		8AA244B010F85B5200AAAC13 /* cderror.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cderror.h; path = ../libjpg/cderror.h; sourceTree = SOURCE_ROOT; };
+		8AA244B110F85B5200AAAC13 /* cdjpeg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cdjpeg.h; path = ../libjpg/cdjpeg.h; sourceTree = SOURCE_ROOT; };
+		8AA244B210F85B5200AAAC13 /* jdct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdct.h; path = ../libjpg/jdct.h; sourceTree = SOURCE_ROOT; };
+		8AA244B310F85B5200AAAC13 /* jerror.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jerror.h; path = ../libjpg/jerror.h; sourceTree = SOURCE_ROOT; };
+		8AA244B410F85B5200AAAC13 /* jinclude.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jinclude.h; path = ../libjpg/jinclude.h; sourceTree = SOURCE_ROOT; };
+		8AA244B510F85B5200AAAC13 /* jmemsys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jmemsys.h; path = ../libjpg/jmemsys.h; sourceTree = SOURCE_ROOT; };
+		8AA244B610F85B5200AAAC13 /* jmorecfg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jmorecfg.h; path = ../libjpg/jmorecfg.h; sourceTree = SOURCE_ROOT; };
+		8AA244B710F85B5200AAAC13 /* jpegint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jpegint.h; path = ../libjpg/jpegint.h; sourceTree = SOURCE_ROOT; };
+		8AA244B810F85B5200AAAC13 /* jpeglib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jpeglib.h; path = ../libjpg/jpeglib.h; sourceTree = SOURCE_ROOT; };
+		8AA244B910F85B5200AAAC13 /* jversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jversion.h; path = ../libjpg/jversion.h; sourceTree = SOURCE_ROOT; };
+		8AA244BA10F85B5200AAAC13 /* transupp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = transupp.h; path = ../libjpg/transupp.h; sourceTree = SOURCE_ROOT; };
+		8AA244F510F85E1900AAAC13 /* jdcoefct.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jdcoefct.o; path = simlib/jpg/jdcoefct.o; sourceTree = "<group>"; };
+		8AA244F610F85E1900AAAC13 /* jdcolor.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jdcolor.o; path = simlib/jpg/jdcolor.o; sourceTree = "<group>"; };
+		8AA244F710F85E1900AAAC13 /* jddctmgr.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jddctmgr.o; path = simlib/jpg/jddctmgr.o; sourceTree = "<group>"; };
+		8AA244F810F85E1900AAAC13 /* jdhuff.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jdhuff.o; path = simlib/jpg/jdhuff.o; sourceTree = "<group>"; };
+		8AA244F910F85E1900AAAC13 /* jdinput.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jdinput.o; path = simlib/jpg/jdinput.o; sourceTree = "<group>"; };
+		8AA244FA10F85E1900AAAC13 /* jdmainct.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jdmainct.o; path = simlib/jpg/jdmainct.o; sourceTree = "<group>"; };
+		8AA244FB10F85E1900AAAC13 /* jdmarker.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jdmarker.o; path = simlib/jpg/jdmarker.o; sourceTree = "<group>"; };
+		8AA244FC10F85E1900AAAC13 /* jdmaster.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jdmaster.o; path = simlib/jpg/jdmaster.o; sourceTree = "<group>"; };
+		8AA244FD10F85E1900AAAC13 /* jdmerge.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jdmerge.o; path = simlib/jpg/jdmerge.o; sourceTree = "<group>"; };
+		8AA244FE10F85E1900AAAC13 /* jdpostct.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jdpostct.o; path = simlib/jpg/jdpostct.o; sourceTree = "<group>"; };
+		8AA244FF10F85E1900AAAC13 /* jdsample.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jdsample.o; path = simlib/jpg/jdsample.o; sourceTree = "<group>"; };
+		8AA2450010F85E1900AAAC13 /* jidctflt.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jidctflt.o; path = simlib/jpg/jidctflt.o; sourceTree = "<group>"; };
+		8AA2450110F85E1900AAAC13 /* jidctfst.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jidctfst.o; path = simlib/jpg/jidctfst.o; sourceTree = "<group>"; };
+		8AA2450210F85E1900AAAC13 /* jidctint.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jidctint.o; path = simlib/jpg/jidctint.o; sourceTree = "<group>"; };
+		8AA2450310F85E1900AAAC13 /* jquant1.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jquant1.o; path = simlib/jpg/jquant1.o; sourceTree = "<group>"; };
+		8AA2450410F85E1900AAAC13 /* jquant2.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jquant2.o; path = simlib/jpg/jquant2.o; sourceTree = "<group>"; };
+		8AA2451710F85E4900AAAC13 /* jerror.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jerror.o; path = simlib/jpg/jerror.o; sourceTree = "<group>"; };
+		8AA2451E10F85E8800AAAC13 /* jdapimin.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jdapimin.o; path = simlib/jpg/jdapimin.o; sourceTree = "<group>"; };
+		8AA2451F10F85E8800AAAC13 /* jdapistd.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jdapistd.o; path = simlib/jpg/jdapistd.o; sourceTree = "<group>"; };
+		8AA2452010F85E8800AAAC13 /* jdarith.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jdarith.o; path = simlib/jpg/jdarith.o; sourceTree = "<group>"; };
+		8AA2452110F85E8800AAAC13 /* jdatadst.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jdatadst.o; path = simlib/jpg/jdatadst.o; sourceTree = "<group>"; };
+		8AA2452210F85E8800AAAC13 /* jdatasrc.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jdatasrc.o; path = simlib/jpg/jdatasrc.o; sourceTree = "<group>"; };
+		8AA2452910F85E9C00AAAC13 /* jfdctflt.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jfdctflt.o; path = simlib/jpg/jfdctflt.o; sourceTree = "<group>"; };
+		8AA2452A10F85E9C00AAAC13 /* jfdctfst.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jfdctfst.o; path = simlib/jpg/jfdctfst.o; sourceTree = "<group>"; };
+		8AA2452B10F85E9C00AAAC13 /* jfdctint.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jfdctint.o; path = simlib/jpg/jfdctint.o; sourceTree = "<group>"; };
+		8AA2453010F85EAF00AAAC13 /* jmemmgr.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jmemmgr.o; path = simlib/jpg/jmemmgr.o; sourceTree = "<group>"; };
+		8AA2453110F85EAF00AAAC13 /* jmemnobs.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jmemnobs.o; path = simlib/jpg/jmemnobs.o; sourceTree = "<group>"; };
+		8AA2453310F85EAF00AAAC13 /* jutils.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jutils.o; path = simlib/jpg/jutils.o; sourceTree = "<group>"; };
+		8AA2454010F85F0B00AAAC13 /* jdtrans.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jdtrans.o; path = simlib/jpg/jdtrans.o; sourceTree = "<group>"; };
+		8AA2454310F85F1F00AAAC13 /* jcinit.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jcinit.o; path = simlib/jpg/jcinit.o; sourceTree = "<group>"; };
+		8AA2454710F85F3E00AAAC13 /* jcmainct.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jcmainct.o; path = simlib/jpg/jcmainct.o; sourceTree = "<group>"; };
+		8AA2454810F85F3E00AAAC13 /* jcmarker.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jcmarker.o; path = simlib/jpg/jcmarker.o; sourceTree = "<group>"; };
+		8AA2454910F85F3E00AAAC13 /* jcmaster.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jcmaster.o; path = simlib/jpg/jcmaster.o; sourceTree = "<group>"; };
+		8AA2454A10F85F3E00AAAC13 /* jcomapi.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jcomapi.o; path = simlib/jpg/jcomapi.o; sourceTree = "<group>"; };
+		8AA2454B10F85F3E00AAAC13 /* jcparam.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jcparam.o; path = simlib/jpg/jcparam.o; sourceTree = "<group>"; };
+		8AA2454C10F85F3E00AAAC13 /* jcprepct.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jcprepct.o; path = simlib/jpg/jcprepct.o; sourceTree = "<group>"; };
+		8AA2454D10F85F3E00AAAC13 /* jcsample.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jcsample.o; path = simlib/jpg/jcsample.o; sourceTree = "<group>"; };
+		8AA2454E10F85F3E00AAAC13 /* jctrans.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jctrans.o; path = simlib/jpg/jctrans.o; sourceTree = "<group>"; };
+		8AA2455D10F85F6900AAAC13 /* jaricom.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jaricom.o; path = simlib/jpg/jaricom.o; sourceTree = "<group>"; };
+		8AA2455E10F85F6900AAAC13 /* jcapimin.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jcapimin.o; path = simlib/jpg/jcapimin.o; sourceTree = "<group>"; };
+		8AA2455F10F85F6900AAAC13 /* jcapistd.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jcapistd.o; path = simlib/jpg/jcapistd.o; sourceTree = "<group>"; };
+		8AA2456010F85F6900AAAC13 /* jcarith.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jcarith.o; path = simlib/jpg/jcarith.o; sourceTree = "<group>"; };
+		8AA2456110F85F6900AAAC13 /* jccoefct.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jccoefct.o; path = simlib/jpg/jccoefct.o; sourceTree = "<group>"; };
+		8AA2456210F85F6900AAAC13 /* jccolor.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jccolor.o; path = simlib/jpg/jccolor.o; sourceTree = "<group>"; };
+		8AA2456310F85F6900AAAC13 /* jcdctmgr.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jcdctmgr.o; path = simlib/jpg/jcdctmgr.o; sourceTree = "<group>"; };
+		8AA2456410F85F6900AAAC13 /* jchuff.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = jchuff.o; path = simlib/jpg/jchuff.o; sourceTree = "<group>"; };
+		8AA2456E10F861AD00AAAC13 /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
+		8AA2472310F871D000AAAC13 /* fon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fon.jpg; sourceTree = "<group>"; };
+		8AA2477010F8755900AAAC13 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* sample-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "sample-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,11 +225,58 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */,
 				28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */,
-				8A3B3D7910F347AC00CDC4D4 /* error_code.o in Frameworks */,
-				8A3B3D7A10F347AC00CDC4D4 /* operations.o in Frameworks */,
-				8A3B3D7B10F347AC00CDC4D4 /* path.o in Frameworks */,
-				8A3B3D7C10F347AC00CDC4D4 /* portability.o in Frameworks */,
-				8A3B3D7D10F347AC00CDC4D4 /* utf8_codecvt_facet.o in Frameworks */,
+				8AA243A510F853B100AAAC13 /* error_code.o in Frameworks */,
+				8AA243A610F853B100AAAC13 /* operations.o in Frameworks */,
+				8AA243A710F853B100AAAC13 /* path.o in Frameworks */,
+				8AA243A810F853B100AAAC13 /* portability.o in Frameworks */,
+				8AA243A910F853B100AAAC13 /* utf8_codecvt_facet.o in Frameworks */,
+				8AA2450510F85E1900AAAC13 /* jdcoefct.o in Frameworks */,
+				8AA2450610F85E1900AAAC13 /* jdcolor.o in Frameworks */,
+				8AA2450710F85E1900AAAC13 /* jddctmgr.o in Frameworks */,
+				8AA2450810F85E1900AAAC13 /* jdhuff.o in Frameworks */,
+				8AA2450910F85E1900AAAC13 /* jdinput.o in Frameworks */,
+				8AA2450A10F85E1900AAAC13 /* jdmainct.o in Frameworks */,
+				8AA2450B10F85E1900AAAC13 /* jdmarker.o in Frameworks */,
+				8AA2450C10F85E1900AAAC13 /* jdmaster.o in Frameworks */,
+				8AA2450D10F85E1900AAAC13 /* jdmerge.o in Frameworks */,
+				8AA2450E10F85E1900AAAC13 /* jdpostct.o in Frameworks */,
+				8AA2450F10F85E1900AAAC13 /* jdsample.o in Frameworks */,
+				8AA2451010F85E1900AAAC13 /* jidctflt.o in Frameworks */,
+				8AA2451110F85E1900AAAC13 /* jidctfst.o in Frameworks */,
+				8AA2451210F85E1900AAAC13 /* jidctint.o in Frameworks */,
+				8AA2451310F85E1900AAAC13 /* jquant1.o in Frameworks */,
+				8AA2451410F85E1900AAAC13 /* jquant2.o in Frameworks */,
+				8AA2451810F85E4900AAAC13 /* jerror.o in Frameworks */,
+				8AA2452310F85E8800AAAC13 /* jdapimin.o in Frameworks */,
+				8AA2452410F85E8800AAAC13 /* jdapistd.o in Frameworks */,
+				8AA2452510F85E8800AAAC13 /* jdarith.o in Frameworks */,
+				8AA2452610F85E8800AAAC13 /* jdatadst.o in Frameworks */,
+				8AA2452710F85E8800AAAC13 /* jdatasrc.o in Frameworks */,
+				8AA2452C10F85E9C00AAAC13 /* jfdctflt.o in Frameworks */,
+				8AA2452D10F85E9C00AAAC13 /* jfdctfst.o in Frameworks */,
+				8AA2452E10F85E9C00AAAC13 /* jfdctint.o in Frameworks */,
+				8AA2453410F85EAF00AAAC13 /* jmemmgr.o in Frameworks */,
+				8AA2453510F85EAF00AAAC13 /* jmemnobs.o in Frameworks */,
+				8AA2453710F85EAF00AAAC13 /* jutils.o in Frameworks */,
+				8AA2454110F85F0B00AAAC13 /* jdtrans.o in Frameworks */,
+				8AA2454410F85F1F00AAAC13 /* jcinit.o in Frameworks */,
+				8AA2454F10F85F3E00AAAC13 /* jcmainct.o in Frameworks */,
+				8AA2455010F85F3E00AAAC13 /* jcmarker.o in Frameworks */,
+				8AA2455110F85F3E00AAAC13 /* jcmaster.o in Frameworks */,
+				8AA2455210F85F3E00AAAC13 /* jcomapi.o in Frameworks */,
+				8AA2455310F85F3E00AAAC13 /* jcparam.o in Frameworks */,
+				8AA2455410F85F3E00AAAC13 /* jcprepct.o in Frameworks */,
+				8AA2455510F85F3E00AAAC13 /* jcsample.o in Frameworks */,
+				8AA2455610F85F3E00AAAC13 /* jctrans.o in Frameworks */,
+				8AA2456510F85F6900AAAC13 /* jaricom.o in Frameworks */,
+				8AA2456610F85F6900AAAC13 /* jcapimin.o in Frameworks */,
+				8AA2456710F85F6900AAAC13 /* jcapistd.o in Frameworks */,
+				8AA2456810F85F6900AAAC13 /* jcarith.o in Frameworks */,
+				8AA2456910F85F6900AAAC13 /* jccoefct.o in Frameworks */,
+				8AA2456A10F85F6900AAAC13 /* jccolor.o in Frameworks */,
+				8AA2456B10F85F6900AAAC13 /* jcdctmgr.o in Frameworks */,
+				8AA2456C10F85F6900AAAC13 /* jchuff.o in Frameworks */,
+				8AA2477110F8755900AAAC13 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,6 +289,7 @@
 				2514C26D10084DB100A42282 /* ES1Renderer.h */,
 				2514C26E10084DB100A42282 /* ES1Renderer.m */,
 				2514C26F10084DB100A42282 /* ES2Renderer.h */,
+				8AA244AD10F85B2000AAAC13 /* jconfig.h */,
 				2514C27010084DB100A42282 /* ES2Renderer.m */,
 				2514C27110084DB100A42282 /* ESRenderer.h */,
 				28FD14FC0DC6FC130079059D /* EAGLView.h */,
@@ -159,6 +327,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				8AA2477010F8755900AAAC13 /* CoreGraphics.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -175,7 +344,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8A3B3C0A10F32A0700CDC4D4 /* objects */,
+				8AA2472310F871D000AAAC13 /* fon.jpg */,
+				8AA2456E10F861AD00AAAC13 /* test.jpg */,
+				8AA2440910F854F600AAAC13 /* objects */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* sample-Info.plist */,
 			);
@@ -196,11 +367,13 @@
 		8A3B3B3B10F31DA100CDC4D4 /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				8A3B3D7410F347AC00CDC4D4 /* error_code.o */,
-				8A3B3D7510F347AC00CDC4D4 /* operations.o */,
-				8A3B3D7610F347AC00CDC4D4 /* path.o */,
-				8A3B3D7710F347AC00CDC4D4 /* portability.o */,
-				8A3B3D7810F347AC00CDC4D4 /* utf8_codecvt_facet.o */,
+				8AA244AF10F85B4500AAAC13 /* jpgInclude */,
+				8AA2441A10F85A4300AAAC13 /* jpg */,
+				8AA243A010F853B100AAAC13 /* error_code.o */,
+				8AA243A110F853B100AAAC13 /* operations.o */,
+				8AA243A210F853B100AAAC13 /* path.o */,
+				8AA243A310F853B100AAAC13 /* portability.o */,
+				8AA243A410F853B100AAAC13 /* utf8_codecvt_facet.o */,
 			);
 			name = libs;
 			sourceTree = "<group>";
@@ -208,8 +381,8 @@
 		8A8A2FEE10F26BA4004F63F5 /* engine */ = {
 			isa = PBXGroup;
 			children = (
+				8AA2436D10F8532600AAAC13 /* images */,
 				8A3B3B3B10F31DA100CDC4D4 /* libs */,
-				8A8A30B010F26F71004F63F5 /* iPhone */,
 				8A8A2FF010F26BB1004F63F5 /* tools */,
 				8A8A2FEF10F26BAA004F63F5 /* 3d */,
 			);
@@ -219,10 +392,15 @@
 		8A8A2FEF10F26BAA004F63F5 /* 3d */ = {
 			isa = PBXGroup;
 			children = (
-				8A8A30F210F2713A004F63F5 /* SEMesh.cpp */,
-				8A8A30F310F2713A004F63F5 /* SEMesh.h */,
-				8A8A30F410F2713A004F63F5 /* SEVertexGroup.cpp */,
-				8A8A30F510F2713A004F63F5 /* SEVertexGroup.h */,
+				8AA2438D10F8537000AAAC13 /* SEIncludeOpenGL.h */,
+				8AA2438E10F8537000AAAC13 /* SEMaterial.cpp */,
+				8AA2438F10F8537000AAAC13 /* SEMaterial.h */,
+				8AA2439010F8537000AAAC13 /* SEMesh.cpp */,
+				8AA2439110F8537000AAAC13 /* SEMesh.h */,
+				8AA2439210F8537000AAAC13 /* SETexture.cpp */,
+				8AA2439310F8537000AAAC13 /* SETexture.h */,
+				8AA2439410F8537000AAAC13 /* SEVertexGroup.cpp */,
+				8AA2439510F8537000AAAC13 /* SEVertexGroup.h */,
 			);
 			name = 3d;
 			sourceTree = "<group>";
@@ -230,39 +408,112 @@
 		8A8A2FF010F26BB1004F63F5 /* tools */ = {
 			isa = PBXGroup;
 			children = (
-				8A8A2FF510F26BCA004F63F5 /* SEAllocator.cpp */,
-				8A8A2FF610F26BCA004F63F5 /* SEAllocator.h */,
-				8A8A2FF710F26BCA004F63F5 /* SEDefinition.h */,
-				8A8A2FF810F26BCA004F63F5 /* SEError.cpp */,
-				8A8A2FF910F26BCA004F63F5 /* SEError.h */,
-				8A8A2FFA10F26BCA004F63F5 /* SEFileLineReader.cpp */,
-				8A8A2FFB10F26BCA004F63F5 /* SEFileLineReader.h */,
-				8A8A2FFC10F26BCA004F63F5 /* SEFileReaderBase.cpp */,
-				8A8A2FFD10F26BCA004F63F5 /* SEFileReaderBase.h */,
-				8A8A2FFE10F26BCA004F63F5 /* SEIncludeLibrary.h */,
-				8A8A2FFF10F26BCA004F63F5 /* SELoader.cpp */,
-				8A8A300010F26BCA004F63F5 /* SELoader.h */,
-				8A8A300110F26BCA004F63F5 /* SELoaderDelegate.h */,
-				8A8A300210F26BCA004F63F5 /* SEMain.h */,
-				8A8A300310F26BCA004F63F5 /* SEObjectStore.cpp */,
-				8A8A300410F26BCA004F63F5 /* SEObjectStore.h */,
-				8A8A300510F26BCA004F63F5 /* SEPathBase.cpp */,
-				8A8A300610F26BCA004F63F5 /* SEPathBase.h */,
-				8A8A300710F26BCA004F63F5 /* SETools.cpp */,
-				8A8A300810F26BCA004F63F5 /* SETools.h */,
+				8AA2436E10F8535A00AAAC13 /* SEAllocator.cpp */,
+				8AA2436F10F8535A00AAAC13 /* SEAllocator.h */,
+				8AA2437010F8535A00AAAC13 /* SEDefinition.h */,
+				8AA2437110F8535A00AAAC13 /* SEError.cpp */,
+				8AA2437210F8535A00AAAC13 /* SEError.h */,
+				8AA2437310F8535A00AAAC13 /* SEFileLineReader.cpp */,
+				8AA2437410F8535A00AAAC13 /* SEFileLineReader.h */,
+				8AA2437510F8535A00AAAC13 /* SEFileReaderBase.cpp */,
+				8AA2437610F8535A00AAAC13 /* SEFileReaderBase.h */,
+				8AA2437710F8535A00AAAC13 /* SEImageLoader.cpp */,
+				8AA2437810F8535A00AAAC13 /* SEImageLoader.h */,
+				8AA2437910F8535A00AAAC13 /* SEIncludeLibrary.h */,
+				8AA2437A10F8535A00AAAC13 /* SEMain.h */,
+				8AA2437B10F8535A00AAAC13 /* SEObjectStore.cpp */,
+				8AA2437C10F8535A00AAAC13 /* SEObjectStore.h */,
+				8AA2437D10F8535A00AAAC13 /* SEPathBase.cpp */,
+				8AA2437E10F8535A00AAAC13 /* SEPathBase.h */,
+				8AA2437F10F8535A00AAAC13 /* SESceneLoader.cpp */,
+				8AA2438010F8535A00AAAC13 /* SESceneLoader.h */,
+				8AA2438110F8535A00AAAC13 /* SESceneLoaderDelegate.h */,
+				8AA2438210F8535A00AAAC13 /* SETools.cpp */,
+				8AA2438310F8535A00AAAC13 /* SETools.h */,
 			);
 			name = tools;
 			sourceTree = "<group>";
 		};
-		8A8A30B010F26F71004F63F5 /* iPhone */ = {
+		8AA2436D10F8532600AAAC13 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				8A8A30B110F26F88004F63F5 /* SEiPhoneFileReader.cpp */,
-				8A8A30B210F26F88004F63F5 /* SEiPhoneFileReader.h */,
-				8A8A30B310F26F88004F63F5 /* SEiPhonePath.cpp */,
-				8A8A30B410F26F88004F63F5 /* SEiPhonePath.h */,
+				8AA2439A10F8537F00AAAC13 /* SEImage.cpp */,
+				8AA2439B10F8537F00AAAC13 /* SEImage.h */,
+				8AA2439C10F8537F00AAAC13 /* SEJpegImage.cpp */,
+				8AA2439D10F8537F00AAAC13 /* SEJpegImage.h */,
 			);
-			name = iPhone;
+			name = images;
+			sourceTree = "<group>";
+		};
+		8AA2441A10F85A4300AAAC13 /* jpg */ = {
+			isa = PBXGroup;
+			children = (
+				8AA2455D10F85F6900AAAC13 /* jaricom.o */,
+				8AA2455E10F85F6900AAAC13 /* jcapimin.o */,
+				8AA2455F10F85F6900AAAC13 /* jcapistd.o */,
+				8AA2456010F85F6900AAAC13 /* jcarith.o */,
+				8AA2456110F85F6900AAAC13 /* jccoefct.o */,
+				8AA2456210F85F6900AAAC13 /* jccolor.o */,
+				8AA2456310F85F6900AAAC13 /* jcdctmgr.o */,
+				8AA2456410F85F6900AAAC13 /* jchuff.o */,
+				8AA2454710F85F3E00AAAC13 /* jcmainct.o */,
+				8AA2454810F85F3E00AAAC13 /* jcmarker.o */,
+				8AA2454910F85F3E00AAAC13 /* jcmaster.o */,
+				8AA2454A10F85F3E00AAAC13 /* jcomapi.o */,
+				8AA2454B10F85F3E00AAAC13 /* jcparam.o */,
+				8AA2454C10F85F3E00AAAC13 /* jcprepct.o */,
+				8AA2454D10F85F3E00AAAC13 /* jcsample.o */,
+				8AA2454E10F85F3E00AAAC13 /* jctrans.o */,
+				8AA2454310F85F1F00AAAC13 /* jcinit.o */,
+				8AA2454010F85F0B00AAAC13 /* jdtrans.o */,
+				8AA2453010F85EAF00AAAC13 /* jmemmgr.o */,
+				8AA2453110F85EAF00AAAC13 /* jmemnobs.o */,
+				8AA2453310F85EAF00AAAC13 /* jutils.o */,
+				8AA2452910F85E9C00AAAC13 /* jfdctflt.o */,
+				8AA2452A10F85E9C00AAAC13 /* jfdctfst.o */,
+				8AA2452B10F85E9C00AAAC13 /* jfdctint.o */,
+				8AA2451E10F85E8800AAAC13 /* jdapimin.o */,
+				8AA2451F10F85E8800AAAC13 /* jdapistd.o */,
+				8AA2452010F85E8800AAAC13 /* jdarith.o */,
+				8AA2452110F85E8800AAAC13 /* jdatadst.o */,
+				8AA2452210F85E8800AAAC13 /* jdatasrc.o */,
+				8AA2451710F85E4900AAAC13 /* jerror.o */,
+				8AA244F510F85E1900AAAC13 /* jdcoefct.o */,
+				8AA244F610F85E1900AAAC13 /* jdcolor.o */,
+				8AA244F710F85E1900AAAC13 /* jddctmgr.o */,
+				8AA244F810F85E1900AAAC13 /* jdhuff.o */,
+				8AA244F910F85E1900AAAC13 /* jdinput.o */,
+				8AA244FA10F85E1900AAAC13 /* jdmainct.o */,
+				8AA244FB10F85E1900AAAC13 /* jdmarker.o */,
+				8AA244FC10F85E1900AAAC13 /* jdmaster.o */,
+				8AA244FD10F85E1900AAAC13 /* jdmerge.o */,
+				8AA244FE10F85E1900AAAC13 /* jdpostct.o */,
+				8AA244FF10F85E1900AAAC13 /* jdsample.o */,
+				8AA2450010F85E1900AAAC13 /* jidctflt.o */,
+				8AA2450110F85E1900AAAC13 /* jidctfst.o */,
+				8AA2450210F85E1900AAAC13 /* jidctint.o */,
+				8AA2450310F85E1900AAAC13 /* jquant1.o */,
+				8AA2450410F85E1900AAAC13 /* jquant2.o */,
+			);
+			name = jpg;
+			sourceTree = "<group>";
+		};
+		8AA244AF10F85B4500AAAC13 /* jpgInclude */ = {
+			isa = PBXGroup;
+			children = (
+				8AA244B010F85B5200AAAC13 /* cderror.h */,
+				8AA244B110F85B5200AAAC13 /* cdjpeg.h */,
+				8AA244B210F85B5200AAAC13 /* jdct.h */,
+				8AA244B310F85B5200AAAC13 /* jerror.h */,
+				8AA244B410F85B5200AAAC13 /* jinclude.h */,
+				8AA244B510F85B5200AAAC13 /* jmemsys.h */,
+				8AA244B610F85B5200AAAC13 /* jmorecfg.h */,
+				8AA244B710F85B5200AAAC13 /* jpegint.h */,
+				8AA244B810F85B5200AAAC13 /* jpeglib.h */,
+				8AA244B910F85B5200AAAC13 /* jversion.h */,
+				8AA244BA10F85B5200AAAC13 /* transupp.h */,
+			);
+			name = jpgInclude;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -310,7 +561,9 @@
 				2514C27B10084DCA00A42282 /* Shader.fsh in Resources */,
 				2514C27C10084DCA00A42282 /* Shader.vsh in Resources */,
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
-				8A3B3C0D10F32A0700CDC4D4 /* objects in Resources */,
+				8AA2440C10F854F600AAAC13 /* objects in Resources */,
+				8AA2456F10F861AD00AAAC13 /* test.jpg in Resources */,
+				8AA2472410F871D000AAAC13 /* fon.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,18 +579,21 @@
 				28FD14FE0DC6FC130079059D /* EAGLView.m in Sources */,
 				2514C27210084DB100A42282 /* ES1Renderer.m in Sources */,
 				2514C27310084DB100A42282 /* ES2Renderer.m in Sources */,
-				8A8A300B10F26BCA004F63F5 /* SEAllocator.cpp in Sources */,
-				8A8A300C10F26BCA004F63F5 /* SEError.cpp in Sources */,
-				8A8A300D10F26BCA004F63F5 /* SEFileLineReader.cpp in Sources */,
-				8A8A300E10F26BCA004F63F5 /* SEFileReaderBase.cpp in Sources */,
-				8A8A300F10F26BCA004F63F5 /* SELoader.cpp in Sources */,
-				8A8A301010F26BCA004F63F5 /* SEObjectStore.cpp in Sources */,
-				8A8A301110F26BCA004F63F5 /* SEPathBase.cpp in Sources */,
-				8A8A301210F26BCA004F63F5 /* SETools.cpp in Sources */,
-				8A8A30B510F26F88004F63F5 /* SEiPhoneFileReader.cpp in Sources */,
-				8A8A30B610F26F88004F63F5 /* SEiPhonePath.cpp in Sources */,
-				8A8A30F610F2713A004F63F5 /* SEMesh.cpp in Sources */,
-				8A8A30F710F2713A004F63F5 /* SEVertexGroup.cpp in Sources */,
+				8AA2438410F8535A00AAAC13 /* SEAllocator.cpp in Sources */,
+				8AA2438510F8535A00AAAC13 /* SEError.cpp in Sources */,
+				8AA2438610F8535A00AAAC13 /* SEFileLineReader.cpp in Sources */,
+				8AA2438710F8535A00AAAC13 /* SEFileReaderBase.cpp in Sources */,
+				8AA2438810F8535A00AAAC13 /* SEImageLoader.cpp in Sources */,
+				8AA2438910F8535A00AAAC13 /* SEObjectStore.cpp in Sources */,
+				8AA2438A10F8535A00AAAC13 /* SEPathBase.cpp in Sources */,
+				8AA2438B10F8535A00AAAC13 /* SESceneLoader.cpp in Sources */,
+				8AA2438C10F8535A00AAAC13 /* SETools.cpp in Sources */,
+				8AA2439610F8537000AAAC13 /* SEMaterial.cpp in Sources */,
+				8AA2439710F8537000AAAC13 /* SEMesh.cpp in Sources */,
+				8AA2439810F8537000AAAC13 /* SETexture.cpp in Sources */,
+				8AA2439910F8537000AAAC13 /* SEVertexGroup.cpp in Sources */,
+				8AA2439E10F8537F00AAAC13 /* SEImage.cpp in Sources */,
+				8AA2439F10F8537F00AAAC13 /* SEJpegImage.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,6 +609,10 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = sample_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					TARGET_IPHONE_SIMULATOR,
+					DEBUG,
+				);
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "sample-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
@@ -360,6 +620,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = tetris3d;
+				SDKROOT = iphonesimulator3.0;
 			};
 			name = Debug;
 		};

@@ -2,10 +2,23 @@
 #include "SEPathBase.h"
 
 
+#if (TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE)
+#include <Foundation/Foundation.h>
+#endif
+
 void SEPathBase::CurrentDirectory(SEPathBase* outPath)
 {
+#if (TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE)
+	
+	outPath->Init( [[[NSBundle mainBundle] bundlePath] cStringUsingEncoding:NSWindowsCP1251StringEncoding] );
+	TRACE( outPath->cString() );
+	
+#else
 	path pt = current_path<path>( );
+	TRACE( pt.string().c_str() );
+	
 	outPath->Init( pt.string().c_str() );
+#endif
 }
 
 SEPathBase::SEPathBase(const sechar* _cString)
@@ -78,4 +91,9 @@ void SEPathBase::ChildArray(SEPathArray* pathArray)  const
 bool SEPathBase::IsFolder() const
 {
 	return is_directory( mPath );
+}
+
+const SEString SEPathBase::Extension() const
+{
+	return SEString( mPath.extension().c_str() );
 }

@@ -147,10 +147,10 @@ void SEMesh::Draw()
 	
 	SEIndexArrayPtr  indexArrayPtr;
 
-	
+	//FIXME: move that part or reorganize
 	glEnable( GL_LIGHTING );
 	glEnable( GL_LIGHT0 );
-	glEnable( GL_TEXTURE_2D );
+	glEnable( GL_TEXTURE_2D);
 
 	glEnableClientState( GL_VERTEX_ARRAY );
 	glEnableClientState( GL_NORMAL_ARRAY );
@@ -174,4 +174,6 @@ void SEMesh::Draw()
 
 		++start;
 	}
+	
+	SEGLAssert;
 }

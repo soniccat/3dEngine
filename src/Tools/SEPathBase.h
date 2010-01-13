@@ -28,6 +28,7 @@ public:
 	virtual void Init( const sechar* _cString);
 	const sechar* cString() const;
 	const sechar* name() const;
+	const SEString Extension() const;
 	void AppendName( const char* name );
 
 	virtual void ChildArray(SEPathArray* pathArray) const;

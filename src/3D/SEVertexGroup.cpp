@@ -58,7 +58,12 @@ void SEVertexGroup::ParseData( SESceneLoader* loader )
 
 			SEIndexArrayPtr arrayPtr( new unsigned short[ size*3 ] );
 			Init( arrayPtr, size*3 );
-		}
+		
+		}/*else if()
+		{
+			SEMaterialPtr material( new SEMaterial );
+			SetMaterial();
+		}*/
 		break;
 
 	case 4:

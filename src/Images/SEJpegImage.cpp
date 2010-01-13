@@ -1,5 +1,5 @@
 #include "SEJpegImage.h"
-#include <jpeglib.h>
+#include "jpeglib.h"
 
 SEJpegImage::SEJpegImage(void)
 {
@@ -10,7 +10,7 @@ SEJpegImage::~SEJpegImage(void)
 }
 
 void SEJpegImage::Load( const sechar* filePath )
-{
+{	
 	struct jpeg_decompress_struct cinfo;
 	struct jpeg_error_mgr jerr;
 
@@ -58,6 +58,8 @@ void SEJpegImage::Load( const sechar* filePath )
 			  cinfo.output_scanline;
 		
 		jpeg_read_scanlines( &cinfo, &row, 1 );
+		
+		printf("%d %d %d %d", row[0], row[1], row[2], row[3] );
 	}
 
 	mData = SEImageDataPtr( buffer );

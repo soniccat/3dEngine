@@ -12,13 +12,18 @@
 #define DEGREES_TO_RADIANS(__ANGLE__) ((__ANGLE__) / 180.0 * 3.14f)
 #include <cmath>
 
+SETexturePtr objectTexture;
+GLuint depthRenderbuffer;
+
+#define USE_DEPTH_BUFFER 1
+
 @implementation ES1Renderer
 
 // Create an ES 1.1 context
 - (id) init
 {
 	if (self = [super init])
-	{
+	{        
 		context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
         
         if (!context || ![EAGLContext setCurrentContext:context])
@@ -28,11 +33,12 @@
         }
 		
 		// Create default framebuffer object. The backing will be allocated for the current layer in -resizeFromLayer
-		glGenFramebuffersOES(1, &defaultFramebuffer);
+		/*glGenFramebuffersOES(1, &defaultFramebuffer);
 		glGenRenderbuffersOES(1, &colorRenderbuffer);
 		glBindFramebufferOES(GL_FRAMEBUFFER_OES, defaultFramebuffer);
 		glBindRenderbufferOES(GL_RENDERBUFFER_OES, colorRenderbuffer);
 		glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, colorRenderbuffer);
+		*/
 		
 		glViewport(0, 0, 320, 480);
 		
@@ -46,17 +52,28 @@
 		GLfloat window_width = 320;
 		GLfloat window_height = 480;
 		
-		//glEnable(GL_DEPTH_TEST); 
+		glEnable(GL_DEPTH_TEST); 
 		size = zNear * tanf(DEGREES_TO_RADIANS(fieldOfView) / 2.0); 
 		glFrustumf(-size, size, -size / (window_width / window_height), size / (window_width / window_height), zNear, zFar);
 		glMatrixMode(GL_MODELVIEW);
+		
+		//glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+		// Enable blending
+		//glEnable(GL_BLEND);
 		
 		SEPath currentPath;
 		SEPath::CurrentDirectory(&currentPath);
 		currentPath.AppendName("objects");
 		
-		SELoader loader;
+		SESceneLoader loader;
 		loader.Load( &currentPath );
+		
+		//SEImageLoader imageLoader;
+		//SEImagePtr image = imageLoader.Load("test.jpg");
+		
+		//objectTexture = SETexturePtr( new SETexture );
+		//objectTexture->Init( image );
+		//objectTexture->Use();
 		
 		BREAKPOINTPLACE;
 	}
@@ -94,7 +111,7 @@
     
 	glLoadIdentity();
 	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 	static float angle = 0;
 	angle += 0.1f;
@@ -126,13 +143,51 @@
     [context presentRenderbuffer:GL_RENDERBUFFER_OES];
 }
 
+- (BOOL)createFramebuffer:(CAEAGLLayer *)layer
+{
+    glGenFramebuffersOES(1, &defaultFramebuffer);
+    glGenRenderbuffersOES(1, &colorRenderbuffer);
+    
+    glBindFramebufferOES(GL_FRAMEBUFFER_OES, defaultFramebuffer);
+    glBindRenderbufferOES(GL_RENDERBUFFER_OES, colorRenderbuffer);
+    [context renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:layer];
+    glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, colorRenderbuffer);
+    
+    glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_WIDTH_OES, &backingWidth);
+    glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_HEIGHT_OES, &backingHeight);
+    
+    if (USE_DEPTH_BUFFER) {
+        glGenRenderbuffersOES(1, &depthRenderbuffer);
+        glBindRenderbufferOES(GL_RENDERBUFFER_OES, depthRenderbuffer);
+        glRenderbufferStorageOES(GL_RENDERBUFFER_OES, GL_DEPTH_COMPONENT16_OES, backingWidth, backingHeight);
+        glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_DEPTH_ATTACHMENT_OES, GL_RENDERBUFFER_OES, depthRenderbuffer);
+    }
+    
+    if(glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES) != GL_FRAMEBUFFER_COMPLETE_OES) {
+        NSLog(@"failed to make complete framebuffer object %x", glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES));
+        return NO;
+    }
+    
+    return YES;
+}
+
+
 - (BOOL) resizeFromLayer:(CAEAGLLayer *)layer
 {	
+	return [self createFramebuffer:layer];
+/*
 	// Allocate color buffer backing based on the current layer size
     glBindRenderbufferOES(GL_RENDERBUFFER_OES, colorRenderbuffer);
     [context renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:layer];
 	glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_WIDTH_OES, &backingWidth);
     glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_HEIGHT_OES, &backingHeight);
+	
+	if (USE_DEPTH_BUFFER) {
+        glGenRenderbuffersOES(1, &depthRenderbuffer);
+        glBindRenderbufferOES(GL_RENDERBUFFER_OES, depthRenderbuffer);
+        glRenderbufferStorageOES(GL_RENDERBUFFER_OES, GL_DEPTH_COMPONENT16_OES, backingWidth, backingHeight);
+        glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_DEPTH_ATTACHMENT_OES, GL_RENDERBUFFER_OES, depthRenderbuffer);
+    }
 	
     if (glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES) != GL_FRAMEBUFFER_COMPLETE_OES)
 	{
@@ -141,6 +196,7 @@
     }
     
     return YES;
+ */
 }
 
 - (void) dealloc
@@ -161,6 +217,12 @@
 	// Tear down context
 	if ([EAGLContext currentContext] == context)
         [EAGLContext setCurrentContext:nil];
+	
+	if(depthRenderbuffer) 
+	{
+        glDeleteRenderbuffersOES(1, &depthRenderbuffer);
+        depthRenderbuffer = 0;
+    }
 	
 	[context release];
 	context = nil;

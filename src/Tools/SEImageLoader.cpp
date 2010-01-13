@@ -1,6 +1,7 @@
 #include "SEImageLoader.h"
 #include "SEIncludeLibrary.h"
 #include "SEJpegImage.h"
+#include "SETools.h"
 
 SEImageLoader::SEImageLoader(void)
 {
@@ -12,20 +13,18 @@ SEImageLoader::~SEImageLoader(void)
 
 SEImagePtr SEImageLoader::Load( const sechar* filePath )
 {
-	return Load( path( filePath ) );
+	return Load( SEPath( filePath ) );
 }
 
-SEImagePtr SEImageLoader::Load(const path& filePath)
+SEImagePtr SEImageLoader::Load(const SEPath& filePath)
 {
-	path fpath(filePath);
-	path::string_type ext = fpath.extension();
-
+	SEString ext = filePath.Extension();
 	SEImagePtr returnImagePtr;
 
 	if( ext == ".jpg" )
 	{
 		SEJpegImage* jpegImage = new SEJpegImage;
-		jpegImage->Load( filePath.string().c_str() );
+		jpegImage->Load( filePath.cString() );
 
 		returnImagePtr = SEImagePtr( jpegImage );
 
