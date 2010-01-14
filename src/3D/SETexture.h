@@ -4,10 +4,10 @@
 
 #include "SEIncludeOpenGL.h"
 #include "SEIncludeLibrary.h"
-
 #include "SEImage.h"
+#include "SESceneLoaderDelegate.h"
 
-class SETexture
+class SETexture: public SESceneLoaderDelegate
 {
 	GLuint id;
 	SEImagePtr mImage;
@@ -18,6 +18,7 @@ public:
 
 	void Init( const SEImagePtr image );
 	void Use();
+	void ParseData( SESceneLoader* loader );
 };
 
 typedef shared_ptr<SETexture> SETexturePtr;

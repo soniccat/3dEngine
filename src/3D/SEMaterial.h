@@ -4,13 +4,20 @@
 
 #include "SEIncludeLibrary.h"
 #include "SESceneLoaderDelegate.h"
+#include "SETexture.h"
 
 
 class SEMaterial: public SESceneLoaderDelegate
 {
+	SEString mName;
+	SETexturePtr mTexture;
+	
 public:
-	SEMaterial(void);
+	SEMaterial( const char* name );
 	~SEMaterial(void);
+	
+	void ParseData( SESceneLoader* loader );
+	void SetTexture( SETexturePtr texture );
 };
 
 typedef shared_ptr<SEMaterial> SEMaterialPtr;

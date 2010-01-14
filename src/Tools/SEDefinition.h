@@ -3,7 +3,7 @@
 #define NULL 0
 #endif
 
-#define SEAssert(a,str) if(!(a)){ printf(str); assert(false); }
+#define SEAssert(a,str) if(!(a)){ printf(str);printf("\n");assert(false); }
 #define SEGLAssert if( glGetError() != 0 ) { printf("OpenGL error %d", glGetError()); assert(false); }
 #define TRACE( a ) { printf(a); printf("\n"); }
 

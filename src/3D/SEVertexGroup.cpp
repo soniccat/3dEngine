@@ -2,8 +2,9 @@
 #include "SESceneLoader.h"
 #include "SETools.h"
 
-SEVertexGroup::SEVertexGroup(void)
+SEVertexGroup::SEVertexGroup(const char* name)
 {
+	mName = name;
 	mIndexArraySize = -1;
 }
 
@@ -32,11 +33,18 @@ int SEVertexGroup::indexArraySize()
 
 void SEVertexGroup::SetFace( int index, float v1, float v2, float v3)
 {
-	SEAssert( index*3 < mIndexArraySize, "vertex index bound check" );
+	SEAssert( index*3 < mIndexArraySize, "Vertex index bound check" );
 
 	mIndexArray[index*3    ] = v1;
 	mIndexArray[index*3 + 1] = v2;
 	mIndexArray[index*3 + 2] = v3;
+}
+
+void SEVertexGroup::SetMaterial( SEMaterialPtr material )
+{
+	SEAssert( mMaterial.get() == NULL, "Material already inited" )
+	
+	mMaterial = material;
 }
 
 void SEVertexGroup::ParseData( SESceneLoader* loader )
@@ -59,11 +67,13 @@ void SEVertexGroup::ParseData( SESceneLoader* loader )
 			SEIndexArrayPtr arrayPtr( new unsigned short[ size*3 ] );
 			Init( arrayPtr, size*3 );
 		
-		}/*else if()
+		}else if( streq( loader->dataType(), "material" ) )
 		{
-			SEMaterialPtr material( new SEMaterial );
-			SetMaterial();
-		}*/
+			SEMaterialPtr material( new SEMaterial( loader->value1() ) );
+			SetMaterial( material );
+			
+			loader->AddDelegate( material );
+		}
 		break;
 
 	case 4:
@@ -86,11 +96,6 @@ void SEVertexGroup::ParseData( SESceneLoader* loader )
 
 	if( !streq( loader->dataType(), "face" ) )
 		loader->SetCurrentIndex( 0 );
-}
-
-void SEVertexGroup::SetName( const char* name )
-{
-	mName = SEString(name);
 }
 
 const SEString& SEVertexGroup::name()

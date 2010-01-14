@@ -23,7 +23,7 @@ class SEVertexGroup: public SESceneLoaderDelegate
 	SEMaterialPtr mMaterial;
 
 public:
-	SEVertexGroup(void);
+	SEVertexGroup(const char* name);
 	~SEVertexGroup(void);
 
 	void Init( SEIndexArrayPtr indexArray, int size );
@@ -35,7 +35,7 @@ public:
 
 	virtual void ParseData( SESceneLoader* loader );
 
-	void SetName( const char* name );
+	//void SetName( const char* name );
 	const SEString& name();
 };
 

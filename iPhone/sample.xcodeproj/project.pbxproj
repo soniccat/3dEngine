@@ -393,14 +393,14 @@
 			isa = PBXGroup;
 			children = (
 				8AA2438D10F8537000AAAC13 /* SEIncludeOpenGL.h */,
-				8AA2438E10F8537000AAAC13 /* SEMaterial.cpp */,
 				8AA2438F10F8537000AAAC13 /* SEMaterial.h */,
-				8AA2439010F8537000AAAC13 /* SEMesh.cpp */,
+				8AA2438E10F8537000AAAC13 /* SEMaterial.cpp */,
 				8AA2439110F8537000AAAC13 /* SEMesh.h */,
-				8AA2439210F8537000AAAC13 /* SETexture.cpp */,
+				8AA2439010F8537000AAAC13 /* SEMesh.cpp */,
 				8AA2439310F8537000AAAC13 /* SETexture.h */,
-				8AA2439410F8537000AAAC13 /* SEVertexGroup.cpp */,
+				8AA2439210F8537000AAAC13 /* SETexture.cpp */,
 				8AA2439510F8537000AAAC13 /* SEVertexGroup.h */,
+				8AA2439410F8537000AAAC13 /* SEVertexGroup.cpp */,
 			);
 			name = 3d;
 			sourceTree = "<group>";

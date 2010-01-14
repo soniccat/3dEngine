@@ -103,8 +103,8 @@ void SEMesh::ParseData( SESceneLoader* loader )
 
 		}else if( streq( loader->dataType(), "vertexGroup" ) )
 		{
-			SEVertexGroupPtr vertexGroup( new SEVertexGroup );
-			vertexGroup->SetName( loader->value1() );
+			SEVertexGroupPtr vertexGroup( new SEVertexGroup( loader->value1() ) );
+			//vertexGroup->SetName( loader->value1() );
 			AddVertexGroup( vertexGroup );
 
 			loader->AddDelegate( vertexGroup );

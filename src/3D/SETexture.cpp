@@ -1,4 +1,6 @@
 #include "SETexture.h"
+#include "SESceneLoader.h"
+#include "SETools.h"
 
 SETexture::SETexture(void)
 {
@@ -39,4 +41,17 @@ void SETexture::Init( const SEImagePtr image )
 void SETexture::Use()
 {
 	glBindTexture(GL_TEXTURE_2D, id );
+}
+
+void SETexture::ParseData( SESceneLoader* loader )
+{
+	switch( loader->validValueCount() )
+	{
+		case 1:
+			if( streq( loader->dataType(), "end") )
+			{
+				loader->PopDelegate();
+			}
+			break;
+	}
 }
