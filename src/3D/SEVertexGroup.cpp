@@ -110,6 +110,8 @@ SEMaterialPtr SEVertexGroup::material()
 
 void SEVertexGroup::Draw()
 {
-	mMaterial->Use();
+	if( mMaterial.get() )
+		mMaterial->Use();
+
 	glDrawElements( GL_TRIANGLES, mIndexArraySize ,GL_UNSIGNED_SHORT, mIndexArray.get() );
 }

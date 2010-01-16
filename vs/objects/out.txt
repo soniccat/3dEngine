@@ -1,5 +1,5 @@
 type Mesh
-name Cube
+name Plane
 vertexCount 236
 vert 0.500000 1.000000 0.000000
 vert 0.000000 1.000000 0.000000

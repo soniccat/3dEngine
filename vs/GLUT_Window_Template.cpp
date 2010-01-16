@@ -96,7 +96,7 @@ void drawObject ()
 	//  Draw Icosahedron
 	//glutWireIcosahedron ();
 
-	SEMeshPtr mesh = SEObjectStore::sharedInstance()->GetMesh( "Cube" );
+	SEMeshPtr mesh = SEObjectStore::sharedInstance()->GetMesh( "Plane" );
 
 	static GLUquadric* quadr = gluNewQuadric();
 
