@@ -24,6 +24,7 @@ class SESceneLoader: public SEFileReaderHandlerInterface
 	sechar mValue2[LOADER_BUFFER_SIZE];
 	sechar mValue3[LOADER_BUFFER_SIZE];
 	int mCurrentIndex;
+	const SEPathBase* mCurrentPath;
 
 public:
 	SESceneLoader(void);
@@ -44,6 +45,7 @@ public:
 
 	void SetCurrentIndex( int value );
 	int currentIndex();
+	const SEPathBase* currentPath(); 
 };
 
 #endif SESceneLoader_H

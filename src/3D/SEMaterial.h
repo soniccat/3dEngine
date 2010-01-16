@@ -18,6 +18,8 @@ public:
 	
 	void ParseData( SESceneLoader* loader );
 	void SetTexture( SETexturePtr texture );
+
+	void Use();
 };
 
 typedef shared_ptr<SEMaterial> SEMaterialPtr;

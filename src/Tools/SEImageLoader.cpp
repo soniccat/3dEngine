@@ -11,6 +11,24 @@ SEImageLoader::~SEImageLoader(void)
 {
 }
 
+void SEImageLoader::GetSupportedTypes( SEStringArray* outArray )
+{
+	SEAssert( outArray->size() == 0, "Out array not empty" );
+	outArray->push_back( SEString(".jpg") );
+}
+
+bool SEImageLoader::IsTypeSupported( const SEString& type )
+{
+	SEStringArray supportedFormats;
+	SEImageLoader::GetSupportedTypes( &supportedFormats );
+
+	for( uint i=0; i<supportedFormats.size();++i )
+		if( supportedFormats[i] == type )
+			return true;
+
+	return false;
+}
+
 SEImagePtr SEImageLoader::Load( const sechar* filePath )
 {
 	return Load( SEPath( filePath ) );

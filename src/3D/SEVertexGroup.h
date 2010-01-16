@@ -32,8 +32,11 @@ public:
 
 	void SetFace( int index, float v1, float v2, float v3);
 	void SetMaterial( SEMaterialPtr material );
+	SEMaterialPtr material();
+	
 
 	virtual void ParseData( SESceneLoader* loader );
+	void Draw();
 
 	//void SetName( const char* name );
 	const SEString& name();

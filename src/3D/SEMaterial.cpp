@@ -13,7 +13,7 @@ SEMaterial::~SEMaterial(void)
 
 void SEMaterial::SetTexture( SETexturePtr texture )
 {
-	SEAssert( texture.get() == 0, "Texture already inited" );
+	SEAssert( mTexture.get() == 0, "Texture already inited" );
 	mTexture = texture;
 }
 
@@ -35,4 +35,10 @@ void SEMaterial::ParseData( SESceneLoader* loader )
 			}
 			break;
 	}
+}
+
+void SEMaterial::Use()
+{
+	if( mTexture.get() )
+		mTexture->Use();
 }

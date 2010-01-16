@@ -382,16 +382,10 @@ void main (int argc, sechar **argv)
 {
 	mass.reserve(8);
 
-	SESceneLoader loader;
-	SEPath currentPath;
-	SEPath::CurrentDirectory( &currentPath );
-	currentPath.AppendName( "objects" );
-
 	//SEPath* a = (SEPath*) malloc(sizeof(SEPath));
 	//a = new(a) SEPath();
 	//delete a;
 
-	loader.Load( &currentPath );
 
 	//  Set the window x and y coordinates such that the 
 	//  window becomes centered
@@ -424,15 +418,20 @@ void main (int argc, sechar **argv)
 	glutSpecialFunc (special);
 
 
+	SESceneLoader loader;
+	SEPath currentPath;
+	SEPath::CurrentDirectory( &currentPath );
+	currentPath.AppendName( "objects" );
+	loader.Load( &currentPath );
 
-	SEImageLoader imageLoader;
-	SEImagePtr image = imageLoader.Load( "test.jpg" );
 
-	SETexturePtr texture( new SETexture );
-	texture->Init( image );
-	texture->Use();
+	//SEImageLoader imageLoader;
+	//SEImagePtr image = imageLoader.Load( "test.jpg" );
 
-	objectTexture = texture;
+	//SETexturePtr texture( new SETexture );
+	//texture->Init( image );
+	//texture->Use();
+	//objectTexture = texture;
 
 	//  Start GLUT event processing loop
 	glutMainLoop();

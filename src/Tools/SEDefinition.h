@@ -22,3 +22,7 @@ typedef char sechar;
 
 typedef unsigned int uint;
 typedef basic_string<sechar, char_traits<sechar> , SEAllocator<sechar> > SEString;
+typedef shared_ptr<SEString> SEStringPtr;
+typedef vector<SEString,SEAllocator<SEString>> SEStringArray;
+
+typedef shared_array<SEString> SEStringNativeArray;

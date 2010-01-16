@@ -1,6 +1,7 @@
 #include "SETexture.h"
 #include "SESceneLoader.h"
 #include "SETools.h"
+#include "SEImageLoader.h"
 
 SETexture::SETexture(void)
 {
@@ -51,6 +52,19 @@ void SETexture::ParseData( SESceneLoader* loader )
 			if( streq( loader->dataType(), "end") )
 			{
 				loader->PopDelegate();
+			}
+			break;
+
+		case 2:
+			if( streq( loader->dataType(), "path") )
+			{
+				SEImageLoader imageLoader;
+
+				SEPath path = loader->currentPath()->ParentPath();
+				path.AppendName( loader->value1() );
+
+				SEImagePtr image = imageLoader.Load( path.cString() );
+				Init( image );
 			}
 			break;
 	}

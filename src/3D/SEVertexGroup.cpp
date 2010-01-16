@@ -102,3 +102,14 @@ const SEString& SEVertexGroup::name()
 {
 	return mName;
 }
+
+SEMaterialPtr SEVertexGroup::material()
+{
+	return mMaterial;
+}
+
+void SEVertexGroup::Draw()
+{
+	mMaterial->Use();
+	glDrawElements( GL_TRIANGLES, mIndexArraySize ,GL_UNSIGNED_SHORT, mIndexArray.get() );
+}

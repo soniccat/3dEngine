@@ -27,6 +27,7 @@ void SESceneLoader::Load(const SEPathBase* path)
 
 		for( uint i=0; i<pathArray.size(); ++i )
 		{
+			mCurrentPath = path;
 			Load( pathArray[i].get() );
 		}
 		}
@@ -36,6 +37,11 @@ void SESceneLoader::Load(const SEPathBase* path)
 
 	}else
 	{
+		//if it is image then not load
+		if( SEImageLoader::IsTypeSupported( path->Extension() ) )
+			return;
+
+		mCurrentPath = path;
 		mFileReader.Load( path );
 	}
 }
@@ -111,4 +117,9 @@ void SESceneLoader::SetCurrentIndex( int value )
 int SESceneLoader::currentIndex()
 {
 	return mCurrentIndex;
+}
+
+const SEPathBase* SESceneLoader::currentPath()
+{
+	return mCurrentPath;
 }

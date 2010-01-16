@@ -161,17 +161,13 @@ void SEMesh::Draw()
 		printf("%f %f \n", mUVArray[i*2], mUVArray[i*2+1]);
 	}*/
 
+	glVertexPointer( 3, GL_FLOAT, 0, mVertexArray.get() );
+	glNormalPointer( GL_FLOAT, 0, mNormalArray.get() );
+	glTexCoordPointer( 2, GL_FLOAT, 0, mUVArray.get() );
+
 	while( start != end )
 	{
-		indexArrayPtr = (*start)->indexArray();
-
-		glNormal3f(0,0,1);
-		glVertexPointer( 3, GL_FLOAT, 0, mVertexArray.get() );
-		glNormalPointer( GL_FLOAT, 0, mNormalArray.get() );
-		glTexCoordPointer( 2, GL_FLOAT, 0, mUVArray.get() );
-
-		glDrawElements( GL_TRIANGLES, (*start)->indexArraySize() ,GL_UNSIGNED_SHORT, indexArrayPtr.get() );
-
+		(*start)->Draw();
 		++start;
 	}
 	

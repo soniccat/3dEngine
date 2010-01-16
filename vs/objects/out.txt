@@ -711,7 +711,15 @@ uv 0.250000 1.000000
 uv 0.250000 0.937500
 uv 0.312500 0.937500
 uv 0.312500 0.937500
+
 vertexGroup Group
+
+material mt
+texture
+path test.jpg
+end
+end
+
 vertexIndexCount 192
 face 0 1 2
 face 2 3 0

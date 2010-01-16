@@ -31,6 +31,11 @@ SEPathBase::SEPathBase(void)
 	BREAKPOINTPLACE;
 }
 
+SEPathBase::SEPathBase(const SEPathBase* pathBase)
+{
+	Init( pathBase->cString() );
+}
+
 SEPathBase::~SEPathBase(void)
 {
 	BREAKPOINTPLACE;
@@ -91,6 +96,11 @@ void SEPathBase::ChildArray(SEPathArray* pathArray)  const
 bool SEPathBase::IsFolder() const
 {
 	return is_directory( mPath );
+}
+
+SEPathBase SEPathBase::ParentPath() const
+{
+	return SEPathBase( mPath.parent_path().string().c_str() );
 }
 
 const SEString SEPathBase::Extension() const

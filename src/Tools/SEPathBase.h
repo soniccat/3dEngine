@@ -22,6 +22,7 @@ public:
 	static void CurrentDirectory(SEPathBase* outPath);
 
 	SEPathBase(const sechar* _cString);
+	SEPathBase(const SEPathBase* pathBase);
 	SEPathBase(void);
 	virtual ~SEPathBase(void);
 
@@ -30,6 +31,8 @@ public:
 	const sechar* name() const;
 	const SEString Extension() const;
 	void AppendName( const char* name );
+
+	SEPathBase ParentPath() const;
 
 	virtual void ChildArray(SEPathArray* pathArray) const;
 	virtual bool IsFolder() const;
