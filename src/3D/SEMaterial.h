@@ -13,8 +13,11 @@ class SEMaterial: public SESceneLoaderDelegate
 	SETexturePtr mTexture;
 	
 public:
-	SEMaterial( const char* name );
+	SEMaterial( );
 	~SEMaterial(void);
+
+	void SetName( const char* name );
+	const SEString& name();
 	
 	void ParseData( SESceneLoader* loader );
 	void SetTexture( SETexturePtr texture );
@@ -23,6 +26,7 @@ public:
 };
 
 typedef shared_ptr<SEMaterial> SEMaterialPtr;
+typedef vector< SEMaterialPtr, SEAllocator<SEMaterialPtr> > SEMaterialArray;
 
 
 #endif SEMaterial_H

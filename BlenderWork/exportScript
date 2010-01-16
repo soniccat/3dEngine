@@ -1,3 +1,6 @@
+import os
+import shutil
+
 import bpy
 import Blender
 import copy
@@ -5,8 +8,12 @@ from Blender import *
 
 
 
-outFile = open("out.txt", "w")
 
+def createDirectory( d ):
+	try:
+		os.mkdir( d )
+	except:
+		dummy = 0
 
 
 def	compareVertexIndexPair(a, b):
@@ -21,6 +28,9 @@ def	compareVertexIndexPair(a, b):
 def meshProcess(object):
 	print "---- meshProcess start ----"
 	print object.getData(name_only=1)
+
+
+	outFile = open("meshes/%s" % object.getData(name_only=1), "w")
 
 	outFile.write( "type Mesh\n" )
 	outFile.write( "name %s\n" % object.getData(name_only=1) )
@@ -203,37 +213,48 @@ def meshProcess(object):
 				else:
 					
 					solidVertexIndex = len(baseVertex) + len(newUVvertexList) + solidFaceList.index(face)*3
-					outFile.write( "face %d %d %d\n" % (solidVertexIndex, solidVertexIndex+1, solidVertexIndex+2) )					
-					
+					outFile.write( "face %d %d %d\n" % (solidVertexIndex, solidVertexIndex+1, solidVertexIndex+2) )				
 
 		for vertIndex in vertIndexes:
 			mesh.verts[vertIndex].sel = 0
+	
+		#material link
+		outFile.write( "material %s\n" % mesh.materials[materialNumber].name )
+				
+		outFile.write( "end\n" )
 			
-		#
-		#material export
-		#
-		material = mesh.materials[materialNumber]
-		outFile.write( "material %s\n" % material.name )
+
+	outFile.write( "end\n" )
+	outFile.close()
+
+	#
+	#material export
+	#
+	print "materials"
+	for material in mesh.materials:
+		
+		outMaterialFile = open("materials\\"+material.name, "w")
+		outMaterialFile.write( "type Material\n" )
+		outMaterialFile.write( "name %s\n" % material.name )
 		
 		for texture in material.getTextures():
 			if(texture != None):
-				outFile.write( "texture\n" )
+				outMaterialFile.write( "texture\n" )
 				
 				filename = texture.tex.image.filename
 				rInd = filename.rfind("\\")
 				print len(filename)
-				filename = filename[rInd+1 :len(filename)]
+				filename = filename[rInd+1:len(filename) ]
 				
-				outFile.write( "path %s\n" % filename )
-				outFile.write( "end\n" )
-		
-		outFile.write( "end\n" )
+				shutil.copyfile( Blender.sys.expandpath( texture.tex.image.filename ), "images\\"+filename )
 				
-		outFile.write( "end\n" )
+				outMaterialFile.write( "path ..\\images\%s\n" % filename )
+				outMaterialFile.write( "end\n" )
 		
+		outMaterialFile.write( "end\n" )
 		
+		outMaterialFile.close()
 		
-	outFile.write( "end\n" )
 	
 	print "---- meshProcess end ----"
 
@@ -251,6 +272,11 @@ def lampProcess(object):
 
 
 print "---- start ----"
+
+createDirectory("images")
+createDirectory("materials")
+createDirectory("meshes")
+
 print list(bpy.data.objects)
 
 for obj in bpy.data.objects:
@@ -266,5 +292,4 @@ for obj in bpy.data.objects:
 	elif( type(mesh) == Types.LampType ):
 		lampProcess(obj)
 		
-outFile.close()
 print "---- end ----"

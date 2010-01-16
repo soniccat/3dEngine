@@ -142,15 +142,6 @@ void SEMesh::Draw()
 	
 	SEIndexNativeArrayPtr  indexArrayPtr;
 
-	//FIXME: move that part or reorganize
-	glEnable( GL_LIGHTING );
-	glEnable( GL_LIGHT0 );
-	glEnable( GL_TEXTURE_2D);
-
-	glEnableClientState( GL_VERTEX_ARRAY );
-	glEnableClientState( GL_NORMAL_ARRAY );
-	glEnableClientState( GL_TEXTURE_COORD_ARRAY );
-
 	/*for( int i=0; i<mVertexArraySize/3; ++i )
 	{
 		printf("%f %f \n", mUVArray[i*2], mUVArray[i*2+1]);
@@ -158,13 +149,20 @@ void SEMesh::Draw()
 
 	glVertexPointer( 3, GL_FLOAT, 0, mVertexArray.get() );
 	glNormalPointer( GL_FLOAT, 0, mNormalArray.get() );
-	glTexCoordPointer( 2, GL_FLOAT, 0, mUVArray.get() );
+
+	if( mUVArray.get() )
+		glTexCoordPointer( 2, GL_FLOAT, 0, mUVArray.get() );
+	else
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	while( start != end )
 	{
 		(*start)->Draw();
 		++start;
 	}
+
+	if( !mUVArray.get() )
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	
 	SEGLAssert;
 }

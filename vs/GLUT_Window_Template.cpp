@@ -62,7 +62,8 @@ void init ()
 {	
 	//  Set the frame buffer clear color to black. 
 	glClearColor (0.0, 0.0, 0.0, 0.0);
-	glEnable(GL_DEPTH_TEST);
+	
+	SELoadDefaultOpenGLSettings();
 }
 
 //-------------------------------------------------------------------------

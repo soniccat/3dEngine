@@ -80,6 +80,13 @@ void SESceneLoader::HandleString(const sechar* string, bool isEndOfFile)
 			mDelegateStack.push( mesh );
 
 			SEObjectStore::sharedInstance()->AddMesh( mesh );
+
+		}else if( streq( mValue1, "Material" ) )
+		{
+			SEMaterialPtr material( SENewObject<SEMaterial>() );
+			mDelegateStack.push( material );
+
+			SEObjectStore::sharedInstance()->AddMaterial( material );
 		}
 	}
 }

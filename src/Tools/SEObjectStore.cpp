@@ -43,3 +43,25 @@ SEMeshPtr SEObjectStore::GetMesh( const char* name )
 	SEAssert(false, "Mesh not found");
 	return SEMeshPtr();
 }
+
+void SEObjectStore::AddMaterial( SEMaterialPtr material )
+{
+	mMaterialArray.push_back( material );
+}
+
+SEMaterialPtr SEObjectStore::GetMaterial( const char* name )
+{
+	SEMaterialArray::iterator start = mMaterialArray.begin();
+	SEMaterialArray::iterator end = mMaterialArray.end();
+
+	while( start != end )
+	{
+		if( streq( (*start)->name().c_str(), name) )
+			return *start;
+
+		++start;
+	}
+
+	SEAssert(false, "Material not found");
+	return SEMaterialPtr();
+}

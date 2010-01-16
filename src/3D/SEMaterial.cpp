@@ -2,9 +2,9 @@
 #include "SESceneLoader.h"
 #include "SETools.h"
 
-SEMaterial::SEMaterial( const char* name )
+SEMaterial::SEMaterial( )
 {
-	mName = name;
+	
 }
 
 SEMaterial::~SEMaterial(void)
@@ -34,6 +34,17 @@ void SEMaterial::ParseData( SESceneLoader* loader )
 				loader->AddDelegate( texture );
 			}
 			break;
+
+		case 2:
+			if( streq( loader->dataType(), "name") )
+			{
+				SetName( loader->value1() ); 
+			}
+			break;
+
+		default:
+			SEAssert(false, "Unknow material value");
+			break;
 	}
 }
 
@@ -41,4 +52,14 @@ void SEMaterial::Use()
 {
 	if( mTexture.get() )
 		mTexture->Use();
+}
+
+void SEMaterial::SetName( const char* name )
+{
+	mName = name;
+}
+
+const SEString& SEMaterial::name()
+{
+	return mName;
 }

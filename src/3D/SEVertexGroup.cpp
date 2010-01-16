@@ -1,6 +1,7 @@
 #include "SEVertexGroup.h"
 #include "SESceneLoader.h"
 #include "SETools.h"
+#include "SEObjectStore.h"
 
 SEVertexGroup::SEVertexGroup(const char* name)
 {
@@ -69,10 +70,7 @@ void SEVertexGroup::ParseData( SESceneLoader* loader )
 		
 		}else if( streq( loader->dataType(), "material" ) )
 		{
-			SEMaterialPtr material( SENewObject<SEMaterial>( loader->value1() ) );
-			SetMaterial( material );
-			
-			loader->AddDelegate( material );
+			SetMaterial( SEObjectStore::sharedInstance()->GetMaterial( loader->value1() ) );
 		}
 		break;
 
