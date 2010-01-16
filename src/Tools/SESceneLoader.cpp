@@ -3,7 +3,7 @@
 
 SESceneLoader::SESceneLoader(void)
 {
-	mFileReader.SetHandler( this );
+	mFileReader.SetDelegate( this );
 	mCurrentIndex = 0;
 }
 
@@ -76,7 +76,7 @@ void SESceneLoader::HandleString(const sechar* string, bool isEndOfFile)
 	{
 		if( streq( mValue1, "Mesh" ) )
 		{
-			SEMeshPtr mesh( new SEMesh );
+			SEMeshPtr mesh( SENewObject<SEMesh>() );
 			mDelegateStack.push( mesh );
 
 			SEObjectStore::sharedInstance()->AddMesh( mesh );

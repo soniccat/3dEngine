@@ -91,7 +91,7 @@ void display (void)
 void drawObject ()
 {
 	//  Show when are displaying an object
-	printf ("Displaying object...\n");
+	//printf ("Displaying object...\n");
 	
 	//  Draw Icosahedron
 	//glutWireIcosahedron ();

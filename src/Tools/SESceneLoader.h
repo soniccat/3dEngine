@@ -11,7 +11,7 @@
 
 
 //executing string from file export in subclass
-class SESceneLoader: public SEFileReaderHandlerInterface
+class SESceneLoader: public SEFileReaderDelegate
 {
 	SEFileLineReader mFileReader;
 	SESceneLoaderDelegateStack mDelegateStack;

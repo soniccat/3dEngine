@@ -16,7 +16,7 @@ SEMesh::~SEMesh(void)
 	BREAKPOINTPLACE;
 }
 
-SEVertexArrayPtr SEMesh::vertexArray()
+SEVertexNativeArrayPtr SEMesh::vertexArray()
 {
 	return mVertexArray;
 }
@@ -35,13 +35,9 @@ void SEMesh::SetVertexArrayCount( int count )
 {
 	SEAssert( mVertexArray.get() == 0, "not allocated check" );
 	mVertexArraySize = count*3;
-	mVertexArray = SEVertexArrayPtr( new float[count*3] );
-	mNormalArray = SENormalArrayPtr( new float[count*3] );
-
-	float* uvArr = new float[count*3];
-	memset( uvArr, 0, sizeof(float)*count*3);
-
-	mUVArray = SEUVArrayPtr( uvArr );
+	mVertexArray = SEVertexNativeArrayPtr( SENewArray<float>(count*3) );
+	mNormalArray = SENormalNativeArrayPtr( SENewArray<float>(count*3) );
+	mUVArray = SEUVNativeArrayPtr( SENewArray<float>(count*3) );
 }
 
 void SEMesh::SetVertex( int index, float x, float y, float z)
@@ -103,8 +99,7 @@ void SEMesh::ParseData( SESceneLoader* loader )
 
 		}else if( streq( loader->dataType(), "vertexGroup" ) )
 		{
-			SEVertexGroupPtr vertexGroup( new SEVertexGroup( loader->value1() ) );
-			//vertexGroup->SetName( loader->value1() );
+			SEVertexGroupPtr vertexGroup( SENewObject<SEVertexGroup>( loader->value1() ) );
 			AddVertexGroup( vertexGroup );
 
 			loader->AddDelegate( vertexGroup );
@@ -145,7 +140,7 @@ void SEMesh::Draw()
 	SEVertexGroupArray::iterator start = mVertexGroupArray.begin();
 	SEVertexGroupArray::iterator end   = mVertexGroupArray.end();
 	
-	SEIndexArrayPtr  indexArrayPtr;
+	SEIndexNativeArrayPtr  indexArrayPtr;
 
 	//FIXME: move that part or reorganize
 	glEnable( GL_LIGHTING );

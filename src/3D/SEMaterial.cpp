@@ -28,7 +28,7 @@ void SEMaterial::ParseData( SESceneLoader* loader )
 				
 			}else if( streq( loader->dataType(), "texture") )
 			{
-				SETexturePtr texture = SETexturePtr( new SETexture );
+				SETexturePtr texture = SETexturePtr( SENewObject<SETexture>() );
 				SetTexture( texture );
 				
 				loader->AddDelegate( texture );

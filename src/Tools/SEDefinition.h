@@ -25,4 +25,4 @@ typedef basic_string<sechar, char_traits<sechar> , SEAllocator<sechar> > SEStrin
 typedef shared_ptr<SEString> SEStringPtr;
 typedef vector<SEString,SEAllocator<SEString>> SEStringArray;
 
-typedef shared_array<SEString> SEStringNativeArray;
+typedef shared_array<SEString> SEStringNativeArrayPtr;

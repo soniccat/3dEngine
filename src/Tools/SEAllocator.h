@@ -62,9 +62,9 @@ public:
   SEAllocator& operator=(const SEAllocator<U>&) { return *this; }
 };
 
-//operators ( ==, != ) added to resolve iPhone compiler error:
 //basic_string.h:213: error: no match for 'operator==' in '__alloc1 == __alloc2
 
+//operators ( ==, != ) added to resolve iPhone compiler error:
 template<typename _T1, typename _T2>
 inline bool
 operator==(const SEAllocator<_T1>&, const SEAllocator<_T2>&)
@@ -74,5 +74,6 @@ template<typename _T1, typename _T2>
 inline bool
 operator!=(const SEAllocator<_T1>&, const SEAllocator<_T2>&)
 { return false; }
+
 
 #endif SEAllocator_H

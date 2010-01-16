@@ -31,7 +31,7 @@ void SEFileLineReader::HandleString(const sechar* string, bool isEndOfFile)
 			substring = stringBuffer.substr( lastEndOfLineIndex, currentEndOfLineIndex-lastEndOfLineIndex );
 
 			lastEndOfLineIndex = currentEndOfLineIndex;
-			mHandler->HandleString( substring.c_str(), isEndOfFile );
+			mDelegate->HandleString( substring.c_str(), isEndOfFile );
 
 		}else
 			break;

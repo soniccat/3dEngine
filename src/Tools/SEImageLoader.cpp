@@ -41,7 +41,7 @@ SEImagePtr SEImageLoader::Load(const SEPath& filePath)
 
 	if( ext == ".jpg" )
 	{
-		SEJpegImage* jpegImage = new SEJpegImage;
+		SEJpegImage* jpegImage = SENewObject<SEJpegImage>();
 		jpegImage->Load( filePath.cString() );
 
 		returnImagePtr = SEImagePtr( jpegImage );

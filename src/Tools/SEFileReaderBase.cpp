@@ -21,6 +21,8 @@ void SEFileReaderBase::Load(const SEPathBase* filePath)
 	TRACE( filePath->cString() );
 	
 	FILE* file = fopen(filePath->cString(), "r");
+	SEAssert(file!=0, "file not open");
+
 	int feofFlag = feof(file);
 
 	while( feofFlag == 0 )
@@ -44,16 +46,16 @@ void SEFileReaderBase::Close()
 
 void SEFileReaderBase::HandleString(const sechar* string, bool isEndOfFile)
 {
-	if( mHandler )
-		mHandler->HandleString(string, isEndOfFile);
+	if( mDelegate )
+		mDelegate->HandleString(string, isEndOfFile);
 }
 
-void SEFileReaderBase::SetHandler( SEFileReaderHandlerInterface* _handler )
+void SEFileReaderBase::SetDelegate( SEFileReaderDelegate* _delegate )
 {
-	mHandler = _handler;
+	mDelegate = _delegate;
 }
 
-SEFileReaderHandlerInterface* SEFileReaderBase::handler()
+SEFileReaderDelegate* SEFileReaderBase::delegate()
 {
-	return mHandler;
+	return mDelegate;
 }

@@ -9,17 +9,17 @@
 
 class SEPathBase;
 
-class SEFileReaderHandlerInterface
+class SEFileReaderDelegate
 {
 public:
 	virtual void HandleString(const sechar* string, bool isEndOfFile)=0;
 }; 
 
-typedef shared_ptr<SEFileReaderHandlerInterface> SEFileReaderHandlerInterfacePtr;
-typedef vector< SEFileReaderHandlerInterfacePtr, SEAllocator<SEFileReaderHandlerInterfacePtr> > SEFileReaderHandlerInterfaceArray;
+typedef shared_ptr<SEFileReaderDelegate> SEFileReaderDelegatePtr;
+typedef vector< SEFileReaderDelegatePtr, SEAllocator<SEFileReaderDelegatePtr> > SEFileReaderDelegateArray;
 
 
-class SEFileReaderBase: public SEFileReaderHandlerInterface, public SEErrorInterface
+class SEFileReaderBase: public SEFileReaderDelegate, public SEErrorInterface
 {
 protected:
 	SEError error;
@@ -27,7 +27,7 @@ protected:
 	sechar* mCurrentType;
 	const SEPathBase* mCurrentFile;
 
-	SEFileReaderHandlerInterface* mHandler;
+	SEFileReaderDelegate* mDelegate;
 
 public:
 	SEFileReaderBase(void);
@@ -37,8 +37,8 @@ public:
 	virtual void Close();
 	virtual void HandleString(const sechar* string, bool isEndOfFile);
 
-	void SetHandler( SEFileReaderHandlerInterface* _handler );
-	SEFileReaderHandlerInterface* handler();
+	void SetDelegate( SEFileReaderDelegate* _delegate );
+	SEFileReaderDelegate* delegate();
 };
 
 typedef SEFileReaderBase SEFileReader;

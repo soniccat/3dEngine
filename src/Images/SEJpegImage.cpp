@@ -59,7 +59,7 @@ void SEJpegImage::Load( const sechar* filePath )
 		
 		jpeg_read_scanlines( &cinfo, &row, 1 );
 		
-		printf("%d %d %d %d", row[0], row[1], row[2], row[3] );
+		//printf("%d %d %d %d", row[0], row[1], row[2], row[3] );
 	}
 
 	mData = SEImageDataPtr( buffer );

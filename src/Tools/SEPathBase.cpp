@@ -1,4 +1,5 @@
 
+#include "SEMemory.h"
 #include "SEPathBase.h"
 
 
@@ -84,10 +85,7 @@ void SEPathBase::ChildArray(SEPathArray* pathArray)  const
 	directory_iterator end_itr;
 	for ( directory_iterator itr( mPath ); itr != end_itr; ++itr )
 	{
-		void* memory = malloc( sizeof( SEPath) );
-		SEPath* path = new(memory) SEPath();
-
-		SEPathPtr pathPtr( path );
+		SEPathPtr pathPtr( SENewObject<SEPath>() );
 		pathPtr->Init( itr->path().string().c_str() );
 		pathArray->push_back( pathPtr );
 	}

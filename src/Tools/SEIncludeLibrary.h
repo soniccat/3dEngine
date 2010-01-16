@@ -17,3 +17,4 @@ using namespace boost::filesystem;
 
 
 #include "SEAllocator.h"
+#include "SEMemory.h"

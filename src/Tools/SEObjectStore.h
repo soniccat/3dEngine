@@ -11,9 +11,8 @@ class SEObjectStore
 	static SEObjectStorePtr mInstance;
 	SEMeshArray mMeshArray;
 
-	SEObjectStore(void);
-
 public:
+	SEObjectStore(void);
 	~SEObjectStore(void);
 
 	static SEObjectStorePtr sharedInstance();

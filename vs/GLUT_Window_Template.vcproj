@@ -240,10 +240,6 @@
 		<Filter
 			Name="tools"
 			>
-			<File
-				RelativePath=".\jconfig.h"
-				>
-			</File>
 			<Filter
 				Name="header"
 				>
@@ -277,6 +273,10 @@
 				</File>
 				<File
 					RelativePath="..\src\Tools\SEMain.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\Tools\SEMemory.h"
 					>
 				</File>
 				<File

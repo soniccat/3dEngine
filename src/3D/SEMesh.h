@@ -15,18 +15,18 @@ class SESceneLoader;
 
 typedef shared_ptr<SEMesh> SEMeshPtr;
 typedef vector< SEMeshPtr, SEAllocator<SEMeshPtr> > SEMeshArray;
-typedef shared_array<float> SEVertexArrayPtr;
-typedef shared_array<float> SENormalArrayPtr;
-typedef shared_array<float> SEUVArrayPtr;
+typedef shared_array<float> SEVertexNativeArrayPtr;
+typedef shared_array<float> SENormalNativeArrayPtr;
+typedef shared_array<float> SEUVNativeArrayPtr;
 
 class SEMesh: public SESceneLoaderDelegate
 {
 	SEString mName;
 
 	int mVertexArraySize;
-	SEVertexArrayPtr mVertexArray;
-	SENormalArrayPtr mNormalArray;
-	SEUVArrayPtr	 mUVArray;
+	SEVertexNativeArrayPtr	mVertexArray;
+	SENormalNativeArrayPtr	mNormalArray;
+	SEUVNativeArrayPtr		mUVArray;
 	
 	SEVertexGroupArray mVertexGroupArray;
 
@@ -34,7 +34,7 @@ public:
 	SEMesh(void);
 	~SEMesh(void);
 
-	SEVertexArrayPtr vertexArray();
+	SEVertexNativeArrayPtr vertexArray();
 
 	void SetName( const char* name );
 	const SEString& name();

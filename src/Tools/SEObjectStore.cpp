@@ -16,7 +16,7 @@ SEObjectStorePtr SEObjectStore::sharedInstance()
 {
 	if( mInstance.get() == 0 )
 	{
-		mInstance = SEObjectStorePtr( new SEObjectStore );
+		mInstance = SEObjectStorePtr( SENewObject<SEObjectStore>() );
 	}
 
 	return mInstance;

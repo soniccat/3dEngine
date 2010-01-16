@@ -13,7 +13,7 @@ SEVertexGroup::~SEVertexGroup(void)
 	BREAKPOINTPLACE;
 }
 
-void SEVertexGroup::Init( SEIndexArrayPtr indexArray, int size )
+void SEVertexGroup::Init( SEIndexNativeArrayPtr indexArray, int size )
 {
 	SEAssert( mIndexArraySize == -1, "Object already inited" );
 
@@ -21,7 +21,7 @@ void SEVertexGroup::Init( SEIndexArrayPtr indexArray, int size )
 	mIndexArraySize = size;
 }
 
-SEIndexArrayPtr SEVertexGroup::indexArray()
+SEIndexNativeArrayPtr SEVertexGroup::indexArray()
 {
 	return mIndexArray;
 }
@@ -31,7 +31,7 @@ int SEVertexGroup::indexArraySize()
 	return mIndexArraySize;
 }
 
-void SEVertexGroup::SetFace( int index, float v1, float v2, float v3)
+void SEVertexGroup::SetFace( int index, SEIndexType v1, SEIndexType v2, SEIndexType v3)
 {
 	SEAssert( index*3 < mIndexArraySize, "Vertex index bound check" );
 
@@ -64,12 +64,12 @@ void SEVertexGroup::ParseData( SESceneLoader* loader )
 			int size = atoi( loader->value1() );
 			SEAssert( size > 0, "vertexIndexCount value check" );
 
-			SEIndexArrayPtr arrayPtr( new unsigned short[ size*3 ] );
+			SEIndexNativeArrayPtr arrayPtr( SENewArray<SEIndexType>( size*3 ) );
 			Init( arrayPtr, size*3 );
 		
 		}else if( streq( loader->dataType(), "material" ) )
 		{
-			SEMaterialPtr material( new SEMaterial( loader->value1() ) );
+			SEMaterialPtr material( SENewObject<SEMaterial>( loader->value1() ) );
 			SetMaterial( material );
 			
 			loader->AddDelegate( material );
