@@ -45,7 +45,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="E:\Programs\VS2005\MyProjects\OpenGL\3dEngine\OpenGLlibs\include;E:\Programs\VS2005\MyProjects\boost_1_41_0;E:\Programs\VS2005\MyProjects\OpenGL\3dEngine\src;E:\Programs\VS2005\MyProjects\OpenGL\3dEngine\src\Tools;E:\Programs\VS2005\MyProjects\OpenGL\3dEngine\src\Tools\win;E:\Programs\VS2005\MyProjects\OpenGL\3dEngine\src\3D;E:\Programs\VS2005\MyProjects\OpenGL\3dEngine\libjpg;E:\Programs\VS2005\MyProjects\OpenGL\3dEngine\src\Images;E:\Programs\VS2005\MyProjects\OpenGL\3dEngine\src\win"
+				AdditionalIncludeDirectories="..\OpenGLlibs\include;E:\Sources\boost_1_41_0;..\src;..\src\Tools;..\src\Tools\win;..\src\3D;..\libjpg;..\src\Images;..\src\win"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
