@@ -14,6 +14,7 @@
   void operator=(const TypeName&)
 
 #define BREAKPOINTPLACE {int i=0;++i;}
+#define RAD_TO_DEG (180.0f/3.14f)
 
 
 #define PATH_DELIMETER '/'

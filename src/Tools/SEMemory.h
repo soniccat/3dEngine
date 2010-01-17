@@ -7,43 +7,55 @@
 template<typename T>
 T* SENewObject()
 {
-	void* mem = malloc(sizeof(T));
-	return new(mem)T;
+	return new T;
+
+	//void* mem = malloc(sizeof(T));
+	//return new(mem)T;
 }
 
 template<typename T, typename ARG1>
 T* SENewObject( ARG1 arg1)
 {
-	void* mem = malloc(sizeof(T));
-	return new(mem)T(arg1);
+	return new T(arg1);
+
+	//void* mem = malloc(sizeof(T));
+	//return new(mem)T(arg1);
 }
 
 template<typename T, typename ARG1, typename ARG2>
 T* SENewObject( ARG1 arg1, ARG2 arg2)
 {
-	void* mem = malloc(sizeof(T));
-	return new(mem)T(arg1, arg2);
+	return new T(arg1, arg2);
+
+	//void* mem = malloc(sizeof(T));
+	//return new(mem)T(arg1, arg2);
 }
 
 template<typename T, typename ARG1, typename ARG2, typename ARG3>
 T* SENewObject( ARG1 arg1, ARG2 arg2, ARG3 arg3)
 {
-	void* mem = malloc(sizeof(T));
-	return new(mem)T(arg1, arg2, arg3);
+	return new T(arg1, arg2, arg3);
+
+	//void* mem = malloc(sizeof(T));
+	//return new(mem)T(arg1, arg2, arg3);
 }
 
 template<typename T, typename ARG1, typename ARG2, typename ARG3, typename ARG4>
 T* SENewObject( ARG1 arg1, ARG2 arg2, ARG3 arg3, ARG4 arg4)
 {
-	void* mem = malloc(sizeof(T));
-	return new(mem)T(arg1, arg2, arg3, arg4);
+	return new T(arg1, arg2, arg3, arg4);
+
+	//void* mem = malloc(sizeof(T));
+	//return new(mem)T(arg1, arg2, arg3, arg4);
 }
 
 template<typename T>
 T* SENewArray( size_t itemCount )
 {
-	T* arr = (T*)calloc( itemCount, sizeof(T) );
-	return new(arr) T[itemCount];
+	return new T[itemCount];
+
+	//T* arr = (T*)calloc( itemCount, sizeof(T) );
+	//return new(arr) T[itemCount];
 }
 
 

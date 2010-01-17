@@ -9,6 +9,9 @@
 
 typedef shared_ptr<btRigidBody> btRigidBodyPtr;
 
+class SEPhysicObject;
+typedef shared_ptr<SEPhysicObject> SEPhysicObjectPtr;
+
 
 class SEPhysicObject: public SEObjectInterface
 {
@@ -21,7 +24,9 @@ public:
 
 	void Init( SEMeshPtr mesh, const btRigidBody::btRigidBodyConstructionInfo& info );
 
-	virtual void Draw()=0;
+	virtual void Draw();
+	btRigidBodyPtr  rigidBody();
+	SEMeshPtr		mesh();
 };
 
 

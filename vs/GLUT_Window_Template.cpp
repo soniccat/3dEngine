@@ -81,6 +81,11 @@ void init ()
 //  This function is passed to glutDisplayFunc in order to display 
 //	OpenGL contents on the window.
 //-------------------------------------------------------------------------
+
+SEPhysicObjectPtr physicObject1;
+SEPhysicObjectPtr physicObject2;
+
+
 void display (void)
 {
 	SEGLAssert;
@@ -99,7 +104,7 @@ void display (void)
 		SEPhysicWorld::sharedInstance()->world()->stepSimulation(1.f/60.f,10);
 		
 		//print positions of all objects
-		for (int j= SEPhysicWorld::sharedInstance()->world()->getNumCollisionObjects()-1; j>=0 ;j--)
+		/*for (int j= SEPhysicWorld::sharedInstance()->world()->getNumCollisionObjects()-1; j>=0 ;j--)
 		{
 			btCollisionObject* obj = SEPhysicWorld::sharedInstance()->world()->getCollisionObjectArray()[j];
 			btRigidBody* body = btRigidBody::upcast(obj);
@@ -134,10 +139,16 @@ void display (void)
 					glTranslatef(-trans.getOrigin().getX(),-trans.getOrigin().getY(),-trans.getOrigin().getZ() );
 				}
 			}
-		}
+		}*/
 	//}
 
 	//  Draw object
+
+		if( physicObject1.get() )
+			physicObject1->Draw();
+
+		if( physicObject2.get() )
+			physicObject2->Draw();
 	
 
 	glTranslatef(0,0,10);
@@ -159,7 +170,7 @@ void drawObject ()
 	//  Draw Icosahedron
 	//glutWireIcosahedron ();
 
-	SEMeshPtr mesh = SEObjectStore::sharedInstance()->GetMesh( "Plane" );
+	//SEMeshPtr mesh = SEObjectStore::sharedInstance()->GetMesh( "Plane" );
 
 	//static GLUquadric* quadr = gluNewQuadric();
 
@@ -176,7 +187,7 @@ void drawObject ()
 	//glRotatef(angle,1,1,0);
 	//gluSphere( quadr,5,10,10 );
 	
-	mesh->Draw();
+	//mesh->Draw();
 
 	//glRotatef(-angle,1,1,0);
 }
@@ -448,10 +459,10 @@ void main (int argc, sechar **argv)
 	btConstraintSolverPtr		solver					= btConstraintSolverPtr( SENewObject<btSequentialImpulseConstraintSolver>() );
 
 	SEPhysicWorld::sharedInstance()->InitDiscreteDynamicsWorld( dispatcher ,overlappingPairCache, solver, collisionConfiguration );
-	SEPhysicWorld::sharedInstance()->world()->setGravity(btVector3(0,-8,0));
+	SEPhysicWorld::sharedInstance()->world()->setGravity(btVector3(0,-5,0));
 
 	///create a few basic rigid bodies
-	btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(1.0),btScalar(1.0),btScalar(1.0)));
+	btCollisionShape* groundShape = SENewObject<btBoxShape>(btVector3(btScalar(1.0),btScalar(1.0),btScalar(1.0)));
 
 	/*
 	btTriangleMesh* triangleMesh = new btTriangleMesh();
@@ -459,51 +470,6 @@ void main (int argc, sechar **argv)
 
 	btCollisionShape = new btBvhTriangleMeshShape( triangleMesh, 1, 1 ); 
 	*/
-
-	btTransform groundTransform;
-	groundTransform.setIdentity();
-	groundTransform.setOrigin(btVector3(0,0,0));
-
-	{
-		btScalar mass(0.0);
-
-		//rigidbody is dynamic if and only if mass is non zero, otherwise static
-		bool isDynamic = (mass != 0.f);
-
-		btVector3 localInertia(0,0,0);
-		if (isDynamic)
-			groundShape->calculateLocalInertia(mass,localInertia);
-
-		//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
-		btDefaultMotionState* myMotionState = new btDefaultMotionState(groundTransform);
-		btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,groundShape,localInertia);
-		btRigidBody* body = new btRigidBody(rbInfo);
-
-		//add the body to the dynamics world
-		SEPhysicWorld::sharedInstance()->world()->addRigidBody(body);
-	}
-
-	groundTransform.setOrigin(btVector3(0.0,5,1));
-
-	{
-		btScalar mass(0.1);
-
-		//rigidbody is dynamic if and only if mass is non zero, otherwise static
-		bool isDynamic = (mass != 0.f);
-
-		btVector3 localInertia(0,0,0);
-		if (isDynamic)
-			groundShape->calculateLocalInertia(mass,localInertia);
-
-		//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
-		btDefaultMotionState* myMotionState = new btDefaultMotionState(groundTransform);
-		btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,groundShape,localInertia);
-		btRigidBody* body = new btRigidBody(rbInfo);
-
-		//add the body to the dynamics world
-		SEPhysicWorld::sharedInstance()->world()->addRigidBody(body);
-	}
-
 
 
 	//SEPath* a = (SEPath*) malloc(sizeof(SEPath));
@@ -549,6 +515,60 @@ void main (int argc, sechar **argv)
 	loader.Load( &currentPath );
 
 
+	btTransform groundTransform;
+	groundTransform.setIdentity();
+	groundTransform.setOrigin(btVector3(0,0,0));
+
+	{
+		btScalar mass(0.0);
+
+		//rigidbody is dynamic if and only if mass is non zero, otherwise static
+		bool isDynamic = (mass != 0.f);
+
+		btVector3 localInertia(0,0,0);
+		if (isDynamic)
+			groundShape->calculateLocalInertia(mass,localInertia);
+
+		//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
+		btDefaultMotionState* myMotionState = SENewObject<btDefaultMotionState>(groundTransform);
+		btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,groundShape,localInertia);
+		//btRigidBody* body = new btRigidBody(rbInfo);
+
+		SEMeshPtr mesh = SEObjectStore::sharedInstance()->GetMesh( "Plane" );
+
+		physicObject1 = SEPhysicObjectPtr(SENewObject<SEPhysicObject>());
+		physicObject1->Init( mesh, rbInfo );
+
+		//add the body to the dynamics world
+		SEPhysicWorld::sharedInstance()->world()->addRigidBody( physicObject1->rigidBody().get() );
+	}
+
+	groundTransform.setOrigin(btVector3(0.0,5,1));
+
+	{
+		btScalar mass(0.1);
+
+		//rigidbody is dynamic if and only if mass is non zero, otherwise static
+		bool isDynamic = (mass != 0.f);
+
+		btVector3 localInertia(0,0,0);
+		if (isDynamic)
+			groundShape->calculateLocalInertia(mass,localInertia);
+
+		//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
+		btDefaultMotionState* myMotionState = SENewObject<btDefaultMotionState>(groundTransform);
+		btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,groundShape,localInertia);
+
+		SEMeshPtr mesh = SEObjectStore::sharedInstance()->GetMesh( "Plane" );
+
+		physicObject2 = SEPhysicObjectPtr(SENewObject<SEPhysicObject>());
+		physicObject2->Init( mesh, rbInfo );
+
+		//add the body to the dynamics world
+		SEPhysicWorld::sharedInstance()->world()->addRigidBody( physicObject2->rigidBody().get() );
+	}
+
+
 	//SEImageLoader imageLoader;
 	//SEImagePtr image = imageLoader.Load( "test.jpg" );
 
@@ -559,5 +579,7 @@ void main (int argc, sechar **argv)
 
 	//  Start GLUT event processing loop
 	glutMainLoop();
+
+
 }
 
