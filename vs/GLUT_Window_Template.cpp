@@ -11,6 +11,17 @@
 #include "SEMain.h"
 #include "SESceneLoader.h"
 #include <vector>
+
+#include "btBulletDynamicsCommon.h"
+/*
+btDefaultCollisionConfiguration* collisionConfiguration;
+btCollisionDispatcher* dispatcher;
+btBroadphaseInterface* overlappingPairCache;
+btSequentialImpulseConstraintSolver* solver;
+btDiscreteDynamicsWorld* dynamicsWorld;
+*/
+
+
 using namespace std;
 
 //  Include GLUT, OpenGL, and GLU libraries
@@ -79,11 +90,62 @@ void display (void)
 	//  buffer by the clear color (black in our case)
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	glLoadIdentity();
+	glTranslatef(0,0,-10);
+
+
+	//for (int i=0;i<150;i++)
+	//{
+		SEPhysicWorld::sharedInstance()->world()->stepSimulation(1.f/60.f,10);
+		
+		//print positions of all objects
+		for (int j= SEPhysicWorld::sharedInstance()->world()->getNumCollisionObjects()-1; j>=0 ;j--)
+		{
+			btCollisionObject* obj = SEPhysicWorld::sharedInstance()->world()->getCollisionObjectArray()[j];
+			btRigidBody* body = btRigidBody::upcast(obj);
+			if (body && body->getMotionState())
+			{
+				btTransform trans;
+				body->getMotionState()->getWorldTransform(trans);
+				
+				if( j == 0 )
+				{
+					glTranslatef( trans.getOrigin().getX(), trans.getOrigin().getY(), trans.getOrigin().getZ() );
+					drawObject();
+					glTranslatef(-trans.getOrigin().getX(),-trans.getOrigin().getY(),-trans.getOrigin().getZ() );
+
+				}else if( j == 1 )
+				{
+					glTranslatef( trans.getOrigin().getX(), trans.getOrigin().getY(), trans.getOrigin().getZ() );
+					
+					btQuaternion quatern = trans.getRotation();
+					btVector3 vec = quatern.getAxis();
+
+					float radToGrad = 180.0/3.14;
+
+					//printf("world pos = %f,%f,%f\n",float(trans.getOrigin().getX()),float(trans.getOrigin().getY()),float(trans.getOrigin().getZ()));
+					printf("world rot = %f,%f,%f,%f\n",quatern.getAngle(),vec.x(), vec.y(), vec.z());
+
+
+					glRotatef( quatern.getAngle()*radToGrad, vec.x(), vec.y(), vec.z() );
+					drawObject();
+					glRotatef( -quatern.getAngle()*radToGrad, vec.x(), vec.y(), vec.z() );
+
+					glTranslatef(-trans.getOrigin().getX(),-trans.getOrigin().getY(),-trans.getOrigin().getZ() );
+				}
+			}
+		}
+	//}
+
 	//  Draw object
-	drawObject ();
+	
+
+	glTranslatef(0,0,10);
 
 	//  Swap contents of backward and forward frame buffers
 	glutSwapBuffers ();
+	glFlush();
+	glutPostRedisplay();
 }
 
 //-------------------------------------------------------------------------
@@ -99,29 +161,24 @@ void drawObject ()
 
 	SEMeshPtr mesh = SEObjectStore::sharedInstance()->GetMesh( "Plane" );
 
-	static GLUquadric* quadr = gluNewQuadric();
+	//static GLUquadric* quadr = gluNewQuadric();
 
-	glLoadIdentity();
 	//gluLookAt (0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.1, 0.0);
 
-	static float angle = 0;
-	angle += 0.1f;
+	//static float angle = 0;
+	//angle += 0.1f;
 	
 
 	//static float z = -1;
 	//z += -0.01f;
 
-	glTranslatef(0,0,-5);
-	glRotatef(angle,1,1,0);
+	
+	//glRotatef(angle,1,1,0);
 	//gluSphere( quadr,5,10,10 );
 	
 	mesh->Draw();
 
-	glRotatef(-angle,1,1,0);
-	glTranslatef(0,0,5);
-
-	glFlush();
-	glutPostRedisplay();
+	//glRotatef(-angle,1,1,0);
 }
 
 //-------------------------------------------------------------------------
@@ -379,9 +436,75 @@ void centerOnScreen ()
 //-------------------------------------------------------------------------
 SETexturePtr objectTexture;
 
+
+
 void main (int argc, sechar **argv)
 {
 	mass.reserve(8);
+
+	btCollisionConfigurationPtr collisionConfiguration	= btCollisionConfigurationPtr( SENewObject<btDefaultCollisionConfiguration>() );
+	btDispatcherPtr				dispatcher				= btDispatcherPtr ( SENewObject<btCollisionDispatcher>(collisionConfiguration.get()) );
+	btBroadphaseInterfacePtr	overlappingPairCache	= btBroadphaseInterfacePtr( SENewObject<btDbvtBroadphase>() );
+	btConstraintSolverPtr		solver					= btConstraintSolverPtr( SENewObject<btSequentialImpulseConstraintSolver>() );
+
+	SEPhysicWorld::sharedInstance()->InitDiscreteDynamicsWorld( dispatcher ,overlappingPairCache, solver, collisionConfiguration );
+	SEPhysicWorld::sharedInstance()->world()->setGravity(btVector3(0,-8,0));
+
+	///create a few basic rigid bodies
+	btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(1.0),btScalar(1.0),btScalar(1.0)));
+
+	/*
+	btTriangleMesh* triangleMesh = new btTriangleMesh();
+	triangleMesh->addTriangle(
+
+	btCollisionShape = new btBvhTriangleMeshShape( triangleMesh, 1, 1 ); 
+	*/
+
+	btTransform groundTransform;
+	groundTransform.setIdentity();
+	groundTransform.setOrigin(btVector3(0,0,0));
+
+	{
+		btScalar mass(0.0);
+
+		//rigidbody is dynamic if and only if mass is non zero, otherwise static
+		bool isDynamic = (mass != 0.f);
+
+		btVector3 localInertia(0,0,0);
+		if (isDynamic)
+			groundShape->calculateLocalInertia(mass,localInertia);
+
+		//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
+		btDefaultMotionState* myMotionState = new btDefaultMotionState(groundTransform);
+		btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,groundShape,localInertia);
+		btRigidBody* body = new btRigidBody(rbInfo);
+
+		//add the body to the dynamics world
+		SEPhysicWorld::sharedInstance()->world()->addRigidBody(body);
+	}
+
+	groundTransform.setOrigin(btVector3(0.0,5,1));
+
+	{
+		btScalar mass(0.1);
+
+		//rigidbody is dynamic if and only if mass is non zero, otherwise static
+		bool isDynamic = (mass != 0.f);
+
+		btVector3 localInertia(0,0,0);
+		if (isDynamic)
+			groundShape->calculateLocalInertia(mass,localInertia);
+
+		//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
+		btDefaultMotionState* myMotionState = new btDefaultMotionState(groundTransform);
+		btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,groundShape,localInertia);
+		btRigidBody* body = new btRigidBody(rbInfo);
+
+		//add the body to the dynamics world
+		SEPhysicWorld::sharedInstance()->world()->addRigidBody(body);
+	}
+
+
 
 	//SEPath* a = (SEPath*) malloc(sizeof(SEPath));
 	//a = new(a) SEPath();

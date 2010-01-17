@@ -19,4 +19,7 @@
 #include "SEImageLoader.h"
 #include "SETexture.h"
 
+#include "SEPhysicWorld.h"
+#include "SEPhysicObject.h"
+
 #endif //SEMainDEF

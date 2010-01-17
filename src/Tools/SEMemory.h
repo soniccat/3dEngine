@@ -25,6 +25,20 @@ T* SENewObject( ARG1 arg1, ARG2 arg2)
 	return new(mem)T(arg1, arg2);
 }
 
+template<typename T, typename ARG1, typename ARG2, typename ARG3>
+T* SENewObject( ARG1 arg1, ARG2 arg2, ARG3 arg3)
+{
+	void* mem = malloc(sizeof(T));
+	return new(mem)T(arg1, arg2, arg3);
+}
+
+template<typename T, typename ARG1, typename ARG2, typename ARG3, typename ARG4>
+T* SENewObject( ARG1 arg1, ARG2 arg2, ARG3 arg3, ARG4 arg4)
+{
+	void* mem = malloc(sizeof(T));
+	return new(mem)T(arg1, arg2, arg3, arg4);
+}
+
 template<typename T>
 T* SENewArray( size_t itemCount )
 {

@@ -15,6 +15,7 @@ using namespace boost;
 #include <boost/filesystem.hpp>
 using namespace boost::filesystem;
 
+#include <btBulletDynamicsCommon.h>
 
 #include "SEAllocator.h"
 #include "SEMemory.h"

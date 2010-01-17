@@ -45,7 +45,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\OpenGLlibs\include;E:\Sources\boost_1_41_0;..\src;..\src\Tools;..\src\Tools\win;..\src\3D;..\libjpg;..\src\Images;..\src\win"
+				AdditionalIncludeDirectories="..\src\Objects;&quot;E:\Sources\Other\bullet-trunk\src&quot;;..\OpenGLlibs\include;E:\Sources\boost_1_41_0;..\src;..\src\Tools;..\src\Tools\win;..\src\3D;..\libjpg;..\src\Images;..\src\win"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -360,6 +360,66 @@
 					>
 				</File>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="bullet"
+			>
+			<File
+				RelativePath=".\libbulletcollision_d.lib"
+				>
+			</File>
+			<File
+				RelativePath=".\libbulletdynamics_d.lib"
+				>
+			</File>
+			<File
+				RelativePath=".\libbulletmath_d.lib"
+				>
+			</File>
+			<File
+				RelativePath=".\libconvexdecomposition_d.lib"
+				>
+			</File>
+			<File
+				RelativePath=".\libGIMPACTUtils_d.lib"
+				>
+			</File>
+			<File
+				RelativePath=".\libglui_d.lib"
+				>
+			</File>
+			<File
+				RelativePath=".\libiff_d.lib"
+				>
+			</File>
+			<File
+				RelativePath=".\liblibxml_d.lib"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Objects"
+			>
+			<File
+				RelativePath="..\src\Objects\SEObjectInterface.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\Objects\SEPhysicObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\src\Objects\SEPhysicObject.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\Objects\SEPhysicWorld.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\src\Objects\SEPhysicWorld.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath=".\GLUT_Window_Template.cpp"
