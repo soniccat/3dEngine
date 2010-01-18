@@ -36,6 +36,8 @@ SEImagePtr SEImageLoader::Load( const sechar* filePath )
 
 SEImagePtr SEImageLoader::Load(const SEPath& filePath)
 {
+	TRACE2( "Load file %s", filePath.cString() );
+	
 	SEString ext = filePath.Extension();
 	SEImagePtr returnImagePtr;
 

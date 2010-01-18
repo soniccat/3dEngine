@@ -89,6 +89,9 @@
 		8AA2456F10F861AD00AAAC13 /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8AA2456E10F861AD00AAAC13 /* test.jpg */; };
 		8AA2472410F871D000AAAC13 /* fon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8AA2472310F871D000AAAC13 /* fon.jpg */; };
 		8AA2477110F8755900AAAC13 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA2477010F8755900AAAC13 /* CoreGraphics.framework */; };
+		8AA6417411042F5800F70400 /* SEPhysicObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA6417011042F5800F70400 /* SEPhysicObject.cpp */; };
+		8AA6417511042F5800F70400 /* SEPhysicWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA6417211042F5800F70400 /* SEPhysicWorld.cpp */; };
+		8AEF088E110438E30045B7C6 /* libbulletLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEF088D110438E30045B7C6 /* libbulletLibrary.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -213,6 +216,12 @@
 		8AA2456E10F861AD00AAAC13 /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
 		8AA2472310F871D000AAAC13 /* fon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fon.jpg; sourceTree = "<group>"; };
 		8AA2477010F8755900AAAC13 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8AA6416F11042F5800F70400 /* SEObjectInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEObjectInterface.h; path = ../src/Objects/SEObjectInterface.h; sourceTree = SOURCE_ROOT; };
+		8AA6417011042F5800F70400 /* SEPhysicObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SEPhysicObject.cpp; path = ../src/Objects/SEPhysicObject.cpp; sourceTree = SOURCE_ROOT; };
+		8AA6417111042F5800F70400 /* SEPhysicObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEPhysicObject.h; path = ../src/Objects/SEPhysicObject.h; sourceTree = SOURCE_ROOT; };
+		8AA6417211042F5800F70400 /* SEPhysicWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SEPhysicWorld.cpp; path = ../src/Objects/SEPhysicWorld.cpp; sourceTree = SOURCE_ROOT; };
+		8AA6417311042F5800F70400 /* SEPhysicWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SEPhysicWorld.h; path = ../src/Objects/SEPhysicWorld.h; sourceTree = SOURCE_ROOT; };
+		8AEF088D110438E30045B7C6 /* libbulletLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbulletLibrary.a; path = simlib/libbulletLibrary.a; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* sample-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "sample-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -277,6 +286,7 @@
 				8AA2456B10F85F6900AAAC13 /* jcdctmgr.o in Frameworks */,
 				8AA2456C10F85F6900AAAC13 /* jchuff.o in Frameworks */,
 				8AA2477110F8755900AAAC13 /* CoreGraphics.framework in Frameworks */,
+				8AEF088E110438E30045B7C6 /* libbulletLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,7 +337,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				8AA2477010F8755900AAAC13 /* CoreGraphics.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -335,6 +344,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				8AEF088D110438E30045B7C6 /* libbulletLibrary.a */,
 				32CA4F630368D1EE00C91783 /* sample_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
@@ -356,6 +366,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8AA2477010F8755900AAAC13 /* CoreGraphics.framework */,
 				28FD15070DC6FC5B0079059D /* QuartzCore.framework */,
 				28FD14FF0DC6FC520079059D /* OpenGLES.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
@@ -381,6 +392,7 @@
 		8A8A2FEE10F26BA4004F63F5 /* engine */ = {
 			isa = PBXGroup;
 			children = (
+				8AA6416E11042F4300F70400 /* Objects */,
 				8AA2436D10F8532600AAAC13 /* images */,
 				8A3B3B3B10F31DA100CDC4D4 /* libs */,
 				8A8A2FF010F26BB1004F63F5 /* tools */,
@@ -516,6 +528,18 @@
 			name = jpgInclude;
 			sourceTree = "<group>";
 		};
+		8AA6416E11042F4300F70400 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				8AA6416F11042F5800F70400 /* SEObjectInterface.h */,
+				8AA6417011042F5800F70400 /* SEPhysicObject.cpp */,
+				8AA6417111042F5800F70400 /* SEPhysicObject.h */,
+				8AA6417211042F5800F70400 /* SEPhysicWorld.cpp */,
+				8AA6417311042F5800F70400 /* SEPhysicWorld.h */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -594,6 +618,8 @@
 				8AA2439910F8537000AAAC13 /* SEVertexGroup.cpp in Sources */,
 				8AA2439E10F8537F00AAAC13 /* SEImage.cpp in Sources */,
 				8AA2439F10F8537F00AAAC13 /* SEJpegImage.cpp in Sources */,
+				8AA6417411042F5800F70400 /* SEPhysicObject.cpp in Sources */,
+				8AA6417511042F5800F70400 /* SEPhysicWorld.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -614,10 +640,15 @@
 					DEBUG,
 				);
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				HEADER_SEARCH_PATHS = (
+					/Volumes/SECOND/iPhoneProjects/boost_1_41_0,
+					"/Volumes/SECOND/iPhoneProjects/bullet-trunk/src",
+				);
 				INFOPLIST_FILE = "sample-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/simlib\"",
 				);
 				PRODUCT_NAME = tetris3d;
 				SDKROOT = iphonesimulator3.0;
@@ -636,6 +667,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/simlib\"",
 				);
 				PRODUCT_NAME = sample;
 			};
@@ -653,7 +685,10 @@
 				GCC_VERSION = 4.0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = /Volumes/SECOND/iPhoneProjects/boost_1_41_0;
+				HEADER_SEARCH_PATHS = (
+					/Volumes/SECOND/iPhoneProjects/SIO2_SDK_v1.3.5/src/bullet,
+					/Volumes/SECOND/iPhoneProjects/boost_1_41_0,
+				);
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "AE662ED0-4764-40ED-ABD1-48E1409FA30C";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AE662ED0-4764-40ED-ABD1-48E1409FA30C";

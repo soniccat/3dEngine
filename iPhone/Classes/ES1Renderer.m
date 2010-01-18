@@ -17,6 +17,9 @@ GLuint depthRenderbuffer;
 
 #define USE_DEPTH_BUFFER 1
 
+SEPhysicObjectPtr physicObject1;
+SEPhysicObjectPtr physicObject2;
+
 @implementation ES1Renderer
 
 // Create an ES 1.1 context
@@ -61,12 +64,83 @@ GLuint depthRenderbuffer;
 		// Enable blending
 		//glEnable(GL_BLEND);
 		
+		SELoadDefaultOpenGLSettings();
+		
+		btCollisionConfigurationPtr collisionConfiguration	= btCollisionConfigurationPtr( SENewObject<btDefaultCollisionConfiguration>() );
+		btDispatcherPtr				dispatcher				= btDispatcherPtr ( SENewObject<btCollisionDispatcher>(collisionConfiguration.get()) );
+		btBroadphaseInterfacePtr	overlappingPairCache	= btBroadphaseInterfacePtr( SENewObject<btDbvtBroadphase>() );
+		btConstraintSolverPtr		solver					= btConstraintSolverPtr( SENewObject<btSequentialImpulseConstraintSolver>() );
+		
+		SEPhysicWorld::sharedInstance()->InitDiscreteDynamicsWorld( dispatcher ,overlappingPairCache, solver, collisionConfiguration );
+		SEPhysicWorld::sharedInstance()->world()->setGravity(btVector3(0,-10,0));
+		
+		
 		SEPath currentPath;
 		SEPath::CurrentDirectory(&currentPath);
 		currentPath.AppendName("objects");
 		
 		SESceneLoader loader;
 		loader.Load( &currentPath );
+		
+		
+		//add physic objects
+		
+		///create a few basic rigid bodies
+		btCollisionShape* groundShape = SENewObject<btBoxShape>(btVector3(btScalar(1.0),btScalar(1.0),btScalar(1.0)));
+
+		
+		btTransform groundTransform;
+		groundTransform.setIdentity();
+		groundTransform.setOrigin(btVector3(0,0,0));
+		
+		{
+			btScalar mass(0.0);
+			
+			//rigidbody is dynamic if and only if mass is non zero, otherwise static
+			bool isDynamic = (mass != 0.f);
+			
+			btVector3 localInertia(0,0,0);
+			if (isDynamic)
+				groundShape->calculateLocalInertia(mass,localInertia);
+			
+			//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
+			btDefaultMotionState* myMotionState = SENewObject<btDefaultMotionState>(groundTransform);
+			btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,groundShape,localInertia);
+			//btRigidBody* body = new btRigidBody(rbInfo);
+			
+			SEMeshPtr mesh = SEObjectStore::sharedInstance()->GetMesh( "Plane" );
+			
+			physicObject1 = SEPhysicObjectPtr(SENewObject<SEPhysicObject>());
+			physicObject1->Init( mesh, rbInfo );
+			
+			//add the body to the dynamics world
+			SEPhysicWorld::sharedInstance()->world()->addRigidBody( physicObject1->rigidBody().get() );
+		}
+		
+		groundTransform.setOrigin(btVector3(0.0,8,1));
+		
+		{
+			btScalar mass(0.1);
+			
+			//rigidbody is dynamic if and only if mass is non zero, otherwise static
+			bool isDynamic = (mass != 0.f);
+			
+			btVector3 localInertia(0,0,0);
+			if (isDynamic)
+				groundShape->calculateLocalInertia(mass,localInertia);
+			
+			//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
+			btDefaultMotionState* myMotionState = SENewObject<btDefaultMotionState>(groundTransform);
+			btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,groundShape,localInertia);
+			
+			SEMeshPtr mesh = SEObjectStore::sharedInstance()->GetMesh( "Plane" );
+			
+			physicObject2 = SEPhysicObjectPtr(SENewObject<SEPhysicObject>());
+			physicObject2->Init( mesh, rbInfo );
+			
+			//add the body to the dynamics world
+			SEPhysicWorld::sharedInstance()->world()->addRigidBody( physicObject2->rigidBody().get() );
+		}
 		
 		//SEImageLoader imageLoader;
 		//SEImagePtr image = imageLoader.Load("test.jpg");
@@ -113,17 +187,26 @@ GLuint depthRenderbuffer;
 	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
-	static float angle = 0;
-	angle += 0.1f;
+	//static float angle = 0;
+	//angle += 0.1f;
 	
-	glTranslatef(0,0,-5);
-	glRotatef(angle,1,1,0);
+	SEPhysicWorld::sharedInstance()->world()->stepSimulation(1.f/60.f,10);
 	
-	SEMeshPtr mesh = SEObjectStore::sharedInstance()->GetMesh("Cube");
-	mesh->Draw();
+	glTranslatef(0,0,-10);
+	//glRotatef(angle,1,1,0);
 	
-	glRotatef(-angle,1,1,0);
-	glTranslatef(0,0,5);
+	//SEMeshPtr mesh = SEObjectStore::sharedInstance()->GetMesh("Plane");
+	//mesh->Draw();
+	
+	if( physicObject1.get() )
+		physicObject1->Draw();
+	
+	if( physicObject2.get() )
+		physicObject2->Draw();
+	
+	
+	//glRotatef(-angle,1,1,0);
+	glTranslatef(0,0,10);
 	
 	/*
 	glTranslatef(0.0f, (GLfloat)(sinf(transY)/2.0f), 0.0f);

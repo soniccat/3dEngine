@@ -461,9 +461,6 @@ void main (int argc, sechar **argv)
 	SEPhysicWorld::sharedInstance()->InitDiscreteDynamicsWorld( dispatcher ,overlappingPairCache, solver, collisionConfiguration );
 	SEPhysicWorld::sharedInstance()->world()->setGravity(btVector3(0,-5,0));
 
-	///create a few basic rigid bodies
-	btCollisionShape* groundShape = SENewObject<btBoxShape>(btVector3(btScalar(1.0),btScalar(1.0),btScalar(1.0)));
-
 	/*
 	btTriangleMesh* triangleMesh = new btTriangleMesh();
 	triangleMesh->addTriangle(
@@ -513,6 +510,10 @@ void main (int argc, sechar **argv)
 	SEPath::CurrentDirectory( &currentPath );
 	currentPath.AppendName( "objects" );
 	loader.Load( &currentPath );
+
+	
+	///create a few basic rigid bodies
+	btCollisionShape* groundShape = SENewObject<btBoxShape>(btVector3(btScalar(1.0),btScalar(1.0),btScalar(1.0)));
 
 
 	btTransform groundTransform;
