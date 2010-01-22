@@ -461,18 +461,6 @@ void main (int argc, sechar **argv)
 	SEPhysicWorld::sharedInstance()->InitDiscreteDynamicsWorld( dispatcher ,overlappingPairCache, solver, collisionConfiguration );
 	SEPhysicWorld::sharedInstance()->world()->setGravity(btVector3(0,-5,0));
 
-	/*
-	btTriangleMesh* triangleMesh = new btTriangleMesh();
-	triangleMesh->addTriangle(
-
-	btCollisionShape = new btBvhTriangleMeshShape( triangleMesh, 1, 1 ); 
-	*/
-
-
-	//SEPath* a = (SEPath*) malloc(sizeof(SEPath));
-	//a = new(a) SEPath();
-	//delete a;
-
 
 	//  Set the window x and y coordinates such that the 
 	//  window becomes centered
@@ -505,15 +493,22 @@ void main (int argc, sechar **argv)
 	glutSpecialFunc (special);
 
 
-	SESceneLoader loader;
 	SEPath currentPath;
 	SEPath::CurrentDirectory( &currentPath );
 	currentPath.AppendName( "objects" );
+
+	SESceneLoader loader;
 	loader.Load( &currentPath );
 
 	
 	///create a few basic rigid bodies
+	SEMeshPtr mesh = SEObjectStore::sharedInstance()->GetMesh( "Plane" );
+
+	//btTriangleMesh* triangleMesh = SENewObject<btTriangleMesh>();
+	//mesh->GetTriangleMesh( triangleMesh );
+
 	btCollisionShape* groundShape = SENewObject<btBoxShape>(btVector3(btScalar(1.0),btScalar(1.0),btScalar(1.0)));
+	//btBvhTriangleMeshShape* groundShape = SENewObject<btBvhTriangleMeshShape>( triangleMesh, true, true );
 
 
 	btTransform groundTransform;
@@ -533,15 +528,12 @@ void main (int argc, sechar **argv)
 		//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
 		btDefaultMotionState* myMotionState = SENewObject<btDefaultMotionState>(groundTransform);
 		btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,groundShape,localInertia);
-		//btRigidBody* body = new btRigidBody(rbInfo);
-
-		SEMeshPtr mesh = SEObjectStore::sharedInstance()->GetMesh( "Plane" );
 
 		physicObject1 = SEPhysicObjectPtr(SENewObject<SEPhysicObject>());
 		physicObject1->Init( mesh, rbInfo );
 
 		//add the body to the dynamics world
-		SEPhysicWorld::sharedInstance()->world()->addRigidBody( physicObject1->rigidBody().get() );
+		SEPhysicWorld::sharedInstance()->AddObject( physicObject1 );
 	}
 
 	groundTransform.setOrigin(btVector3(0.0,5,1));
@@ -549,38 +541,26 @@ void main (int argc, sechar **argv)
 	{
 		btScalar mass(0.1);
 
-		//rigidbody is dynamic if and only if mass is non zero, otherwise static
 		bool isDynamic = (mass != 0.f);
 
 		btVector3 localInertia(0,0,0);
-		if (isDynamic)
-			groundShape->calculateLocalInertia(mass,localInertia);
+		//if (isDynamic)
+		//	groundShape->calculateLocalInertia(mass,localInertia);
 
-		//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
 		btDefaultMotionState* myMotionState = SENewObject<btDefaultMotionState>(groundTransform);
 		btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,groundShape,localInertia);
-
-		SEMeshPtr mesh = SEObjectStore::sharedInstance()->GetMesh( "Plane" );
 
 		physicObject2 = SEPhysicObjectPtr(SENewObject<SEPhysicObject>());
 		physicObject2->Init( mesh, rbInfo );
 
-		//add the body to the dynamics world
-		SEPhysicWorld::sharedInstance()->world()->addRigidBody( physicObject2->rigidBody().get() );
+		SEPhysicWorld::sharedInstance()->AddObject( physicObject2 );
 	}
 
-
-	//SEImageLoader imageLoader;
-	//SEImagePtr image = imageLoader.Load( "test.jpg" );
-
-	//SETexturePtr texture( new SETexture );
-	//texture->Init( image );
-	//texture->Use();
-	//objectTexture = texture;
 
 	//  Start GLUT event processing loop
 	glutMainLoop();
 
+	SEPhysicWorld::sharedInstance()->RemoveObjects();
 
 }
 

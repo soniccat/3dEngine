@@ -49,6 +49,8 @@ public:
 	virtual void ParseData( SESceneLoader* loader );
 
 	void Draw();
+
+	void GetTriangleMesh( btTriangleMesh* trianlgeShape );
 };
 
 #endif SEMesh_H

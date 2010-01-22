@@ -11,6 +11,7 @@ typedef shared_ptr<btRigidBody> btRigidBodyPtr;
 
 class SEPhysicObject;
 typedef shared_ptr<SEPhysicObject> SEPhysicObjectPtr;
+typedef vector< SEPhysicObjectPtr > SEPhysicObjectArray;
 
 
 class SEPhysicObject: public SEObjectInterface

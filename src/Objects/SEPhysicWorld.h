@@ -4,6 +4,7 @@
 
 
 #include "SEIncludeLibrary.h"
+#include "SEPhysicObject.h"
 
 
 class SEPhysicWorld;
@@ -21,6 +22,7 @@ class SEPhysicWorld
 	static SEPhysicWorldPtr		mInstance;
 
 	btDynamicsWorldPtr			mWorld;
+	SEPhysicObjectArray			mPhysicObjectArray;
 
 	btCollisionConfigurationPtr	mCollisionConfiguration;
 	btBroadphaseInterfacePtr	mBroadphaseInterface;
@@ -35,6 +37,9 @@ public:
 	void InitDiscreteDynamicsWorld( btDispatcherPtr dispatcher, btBroadphaseInterfacePtr broadphaseInterface, btConstraintSolverPtr constraintSolver, btCollisionConfigurationPtr collisionConfiguration );
 
 	btDynamicsWorldPtr world();
+
+	void AddObject( SEPhysicObjectPtr object);
+	void RemoveObjects();
 };
 
 

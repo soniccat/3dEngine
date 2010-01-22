@@ -11,6 +11,7 @@ SEPhysicWorld::SEPhysicWorld(void)
 
 SEPhysicWorld::~SEPhysicWorld(void)
 {
+	RemoveObjects();
 	BREAKPOINTPLACE;
 }
 
@@ -37,4 +38,21 @@ void SEPhysicWorld::InitDiscreteDynamicsWorld( btDispatcherPtr dispatcher, btBro
 btDynamicsWorldPtr SEPhysicWorld::world()
 {
 	return mWorld;
+}
+
+void SEPhysicWorld::AddObject( SEPhysicObjectPtr object)
+{
+	mPhysicObjectArray.push_back( object );
+	mWorld->addRigidBody( object->rigidBody().get() );
+}
+
+void SEPhysicWorld::RemoveObjects()
+{
+	for (int j= mWorld->getNumCollisionObjects()-1; j>=0 ;j--)
+	{
+		btRigidBody* obj = static_cast<btRigidBody*>( mWorld->getCollisionObjectArray()[j] );
+		mWorld->removeRigidBody( obj );
+	}
+
+	mPhysicObjectArray.clear();
 }
