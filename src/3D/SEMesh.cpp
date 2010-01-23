@@ -167,20 +167,20 @@ void SEMesh::Draw()
 	SEGLAssert;
 }
 
-void SEMesh::GetTriangleMesh( btTriangleMesh* triangleMesh )
+void SEMesh::GetTriangleMesh( btTriangleMeshPtr triangleMesh )
 {
 	SEVertexGroupArray::iterator start = mVertexGroupArray.begin();
 	SEVertexGroupArray::iterator end   = mVertexGroupArray.end();
 
-	int indexCount = 0;
+	int faceCount = 0;
 	SEIndexNativeArrayPtr indexArray;
 
 	while( start != end )
 	{
-		indexCount = (*start)->indexArraySize()/3;
+		faceCount = (*start)->indexArraySize()/3;
 		indexArray = (*start)->indexArray();
 		
-		for( int i=0; i<indexCount; i+=3 )
+		for( int i=0; i<faceCount; i+=3 )
 		{
 			triangleMesh->addTriangle( 
 				btVector3( mVertexArray[ indexArray[i]*3   ], mVertexArray[ indexArray[i]*3   +1 ], mVertexArray[ indexArray[i]*3   +2 ] ), 

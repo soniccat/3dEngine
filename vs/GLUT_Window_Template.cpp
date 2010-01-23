@@ -459,7 +459,7 @@ void main (int argc, sechar **argv)
 	btConstraintSolverPtr		solver					= btConstraintSolverPtr( SENewObject<btSequentialImpulseConstraintSolver>() );
 
 	SEPhysicWorld::sharedInstance()->InitDiscreteDynamicsWorld( dispatcher ,overlappingPairCache, solver, collisionConfiguration );
-	SEPhysicWorld::sharedInstance()->world()->setGravity(btVector3(0,-5,0));
+	SEPhysicWorld::sharedInstance()->world()->setGravity(btVector3(0,-10,0));
 
 
 	//  Set the window x and y coordinates such that the 
@@ -504,11 +504,13 @@ void main (int argc, sechar **argv)
 	///create a few basic rigid bodies
 	SEMeshPtr mesh = SEObjectStore::sharedInstance()->GetMesh( "Plane" );
 
-	//btTriangleMesh* triangleMesh = SENewObject<btTriangleMesh>();
-	//mesh->GetTriangleMesh( triangleMesh );
+	btTriangleMeshPtr triangleMesh = btTriangleMeshPtr( SENewObject<btTriangleMesh>() );
+	mesh->GetTriangleMesh( triangleMesh );
 
-	btCollisionShape* groundShape = SENewObject<btBoxShape>(btVector3(btScalar(1.0),btScalar(1.0),btScalar(1.0)));
-	//btBvhTriangleMeshShape* groundShape = SENewObject<btBvhTriangleMeshShape>( triangleMesh, true, true );
+	//btTriangleVertexArrayPtr vertexArray = mesh->CreateTriangleIndexVertexArray();
+
+	btCollisionShape* boxShape = SENewObject<btBoxShape>(btVector3(btScalar(1.0),btScalar(1.0),btScalar(1.0)));
+	btBvhTriangleMeshShape* triangleShape = SENewObject<btBvhTriangleMeshShape>( triangleMesh.get(), true, true );
 
 
 	btTransform groundTransform;
@@ -523,11 +525,11 @@ void main (int argc, sechar **argv)
 
 		btVector3 localInertia(0,0,0);
 		if (isDynamic)
-			groundShape->calculateLocalInertia(mass,localInertia);
+			triangleShape->calculateLocalInertia(mass,localInertia);
 
 		//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
 		btDefaultMotionState* myMotionState = SENewObject<btDefaultMotionState>(groundTransform);
-		btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,groundShape,localInertia);
+		btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,triangleShape,localInertia);
 
 		physicObject1 = SEPhysicObjectPtr(SENewObject<SEPhysicObject>());
 		physicObject1->Init( mesh, rbInfo );
@@ -536,7 +538,7 @@ void main (int argc, sechar **argv)
 		SEPhysicWorld::sharedInstance()->AddObject( physicObject1 );
 	}
 
-	groundTransform.setOrigin(btVector3(0.0,5,1));
+	groundTransform.setOrigin(btVector3(0.0,5,0.5));
 
 	{
 		btScalar mass(0.1);
@@ -544,11 +546,11 @@ void main (int argc, sechar **argv)
 		bool isDynamic = (mass != 0.f);
 
 		btVector3 localInertia(0,0,0);
-		//if (isDynamic)
-		//	groundShape->calculateLocalInertia(mass,localInertia);
+		if (isDynamic)
+			boxShape->calculateLocalInertia(mass,localInertia);
 
 		btDefaultMotionState* myMotionState = SENewObject<btDefaultMotionState>(groundTransform);
-		btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,groundShape,localInertia);
+		btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,boxShape,localInertia);
 
 		physicObject2 = SEPhysicObjectPtr(SENewObject<SEPhysicObject>());
 		physicObject2->Init( mesh, rbInfo );
