@@ -72,7 +72,7 @@ int full_screen = 0;
 void init ()
 {	
 	//  Set the frame buffer clear color to black. 
-	glClearColor (0.0, 0.0, 0.0, 0.0);
+	glClearColor (0.5, 0.5, 0.5, 1.0);
 	
 	SELoadDefaultOpenGLSettings();
 }
@@ -95,8 +95,13 @@ void display (void)
 	//  buffer by the clear color (black in our case)
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	//static float z = -1;
+	//z += 0.1f;
+
+
 	glLoadIdentity();
 	glTranslatef(0,0,-10);
+	glRotatef(30,1,1,0);
 
 
 	//for (int i=0;i<150;i++)
@@ -151,6 +156,7 @@ void display (void)
 			physicObject2->Draw();
 	
 
+	glRotatef(-30,1,1,0);
 	glTranslatef(0,0,10);
 
 	//  Swap contents of backward and forward frame buffers
@@ -459,7 +465,7 @@ void main (int argc, sechar **argv)
 	btConstraintSolverPtr		solver					= btConstraintSolverPtr( SENewObject<btSequentialImpulseConstraintSolver>() );
 
 	SEPhysicWorld::sharedInstance()->InitDiscreteDynamicsWorld( dispatcher ,overlappingPairCache, solver, collisionConfiguration );
-	SEPhysicWorld::sharedInstance()->world()->setGravity(btVector3(0,-10,0));
+	SEPhysicWorld::sharedInstance()->world()->setGravity(btVector3(0,-9,0));
 
 
 	//  Set the window x and y coordinates such that the 
@@ -502,10 +508,11 @@ void main (int argc, sechar **argv)
 
 	
 	///create a few basic rigid bodies
-	SEMeshPtr mesh = SEObjectStore::sharedInstance()->GetMesh( "Plane" );
+	SEMeshPtr planeMesh = SEObjectStore::sharedInstance()->GetMesh( "Plane.001" );
+	SEMeshPtr cubeMesh = SEObjectStore::sharedInstance()->GetMesh( "Plane" );
 
 	btTriangleMeshPtr triangleMesh = btTriangleMeshPtr( SENewObject<btTriangleMesh>() );
-	mesh->GetTriangleMesh( triangleMesh );
+	planeMesh->GetTriangleMesh( triangleMesh );
 
 	//btTriangleVertexArrayPtr vertexArray = mesh->CreateTriangleIndexVertexArray();
 
@@ -516,6 +523,7 @@ void main (int argc, sechar **argv)
 	btTransform groundTransform;
 	groundTransform.setIdentity();
 	groundTransform.setOrigin(btVector3(0,0,0));
+	groundTransform.setRotation( btQuaternion( -DEGREES_TO_RADIANS(60) ,0,0,1) );
 
 	{
 		btScalar mass(0.0);
@@ -531,12 +539,13 @@ void main (int argc, sechar **argv)
 		btDefaultMotionStatePtr myMotionState = btDefaultMotionStatePtr( SENewObject<btDefaultMotionState>(groundTransform) );
 
 		physicObject1 = SEPhysicObjectPtr(SENewObject<SEPhysicObject>());
-		physicObject1->Init( mass, mesh, myMotionState,triangleShape,localInertia );
+		physicObject1->Init( mass, planeMesh, myMotionState,triangleShape,localInertia );
 
 		SEPhysicWorld::sharedInstance()->AddObject( physicObject1 );
 	}
 
-	groundTransform.setOrigin(btVector3(0.0,5,0.5));
+	groundTransform.setOrigin(btVector3(0.0,5,5.0));
+	groundTransform.setRotation( btQuaternion() );
 
 	{
 		btScalar mass(0.1);
@@ -550,7 +559,7 @@ void main (int argc, sechar **argv)
 		btDefaultMotionStatePtr myMotionState = btDefaultMotionStatePtr( SENewObject<btDefaultMotionState>(groundTransform) );
 
 		physicObject2 = SEPhysicObjectPtr(SENewObject<SEPhysicObject>());
-		physicObject2->Init( mass, mesh, myMotionState, boxShape, localInertia  );
+		physicObject2->Init( mass, cubeMesh, myMotionState, boxShape, localInertia  );
 
 		SEPhysicWorld::sharedInstance()->AddObject( physicObject2 );
 	}
@@ -558,8 +567,5 @@ void main (int argc, sechar **argv)
 
 	//  Start GLUT event processing loop
 	glutMainLoop();
-
-	SEPhysicWorld::sharedInstance()->RemoveObjects();
-
 }
 

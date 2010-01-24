@@ -1,0 +1,6 @@
+type Material
+name Material.002
+texture
+path ..\images\test.jpg
+end
+end

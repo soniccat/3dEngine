@@ -1,0 +1,6 @@
+type Material
+name lowGround
+texture
+path ..\images\ground1.jpg
+end
+end
