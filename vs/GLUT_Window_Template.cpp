@@ -509,8 +509,8 @@ void main (int argc, sechar **argv)
 
 	//btTriangleVertexArrayPtr vertexArray = mesh->CreateTriangleIndexVertexArray();
 
-	btCollisionShape* boxShape = SENewObject<btBoxShape>(btVector3(btScalar(1.0),btScalar(1.0),btScalar(1.0)));
-	btBvhTriangleMeshShape* triangleShape = SENewObject<btBvhTriangleMeshShape>( triangleMesh.get(), true, true );
+	btCollisionShapePtr boxShape = btCollisionShapePtr( SENewObject<btBoxShape>(btVector3(btScalar(1.0),btScalar(1.0),btScalar(1.0))) );
+	btBvhTriangleMeshShapePtr triangleShape = btBvhTriangleMeshShapePtr( SENewObject<btBvhTriangleMeshShape>( triangleMesh.get(), true, true ) );
 
 
 	btTransform groundTransform;
@@ -528,13 +528,11 @@ void main (int argc, sechar **argv)
 			triangleShape->calculateLocalInertia(mass,localInertia);
 
 		//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
-		btDefaultMotionState* myMotionState = SENewObject<btDefaultMotionState>(groundTransform);
-		btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,triangleShape,localInertia);
+		btDefaultMotionStatePtr myMotionState = btDefaultMotionStatePtr( SENewObject<btDefaultMotionState>(groundTransform) );
 
 		physicObject1 = SEPhysicObjectPtr(SENewObject<SEPhysicObject>());
-		physicObject1->Init( mesh, rbInfo );
+		physicObject1->Init( mass, mesh, myMotionState,triangleShape,localInertia );
 
-		//add the body to the dynamics world
 		SEPhysicWorld::sharedInstance()->AddObject( physicObject1 );
 	}
 
@@ -549,11 +547,10 @@ void main (int argc, sechar **argv)
 		if (isDynamic)
 			boxShape->calculateLocalInertia(mass,localInertia);
 
-		btDefaultMotionState* myMotionState = SENewObject<btDefaultMotionState>(groundTransform);
-		btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,boxShape,localInertia);
+		btDefaultMotionStatePtr myMotionState = btDefaultMotionStatePtr( SENewObject<btDefaultMotionState>(groundTransform) );
 
 		physicObject2 = SEPhysicObjectPtr(SENewObject<SEPhysicObject>());
-		physicObject2->Init( mesh, rbInfo );
+		physicObject2->Init( mass, mesh, myMotionState, boxShape, localInertia  );
 
 		SEPhysicWorld::sharedInstance()->AddObject( physicObject2 );
 	}

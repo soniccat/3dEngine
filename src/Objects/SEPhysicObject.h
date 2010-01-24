@@ -9,6 +9,13 @@
 
 typedef shared_ptr<btRigidBody> btRigidBodyPtr;
 
+typedef shared_ptr<btMotionState> btMotionStatePtr;
+typedef shared_ptr<btDefaultMotionState> btDefaultMotionStatePtr;
+
+typedef shared_ptr<btCollisionShape> btCollisionShapePtr;
+typedef shared_ptr<btBvhTriangleMeshShape> btBvhTriangleMeshShapePtr;
+typedef shared_ptr<btCollisionShape> btCollisionShapePtr;
+
 class SEPhysicObject;
 typedef shared_ptr<SEPhysicObject> SEPhysicObjectPtr;
 typedef vector< SEPhysicObjectPtr > SEPhysicObjectArray;
@@ -16,14 +23,19 @@ typedef vector< SEPhysicObjectPtr > SEPhysicObjectArray;
 
 class SEPhysicObject: public SEObjectInterface
 {
-	btRigidBodyPtr	mRigidBody;
+	//bullet info
+	btRigidBodyPtr		mRigidBody;
+	btMotionStatePtr	mMotionState;
+	btCollisionShapePtr mCollisionShape;
+
+
 	SEMeshPtr		mMesh;
 
 public:
 	SEPhysicObject();
 	virtual ~SEPhysicObject(void);
 
-	void Init( SEMeshPtr mesh, const btRigidBody::btRigidBodyConstructionInfo& info );
+	void Init( btScalar mass, SEMeshPtr mesh, btMotionStatePtr motionState, btCollisionShapePtr shape, const btVector3& localInertia );
 
 	virtual void Draw();
 	btRigidBodyPtr  rigidBody();

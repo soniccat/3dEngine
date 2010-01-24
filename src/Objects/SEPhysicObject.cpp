@@ -11,10 +11,14 @@ SEPhysicObject::~SEPhysicObject(void)
 	//SEPhysicWorld::sharedInstance()->world()->removeRigidBody( mRigidBody.get() );
 }
 
-void SEPhysicObject::Init( SEMeshPtr mesh, const btRigidBody::btRigidBodyConstructionInfo& info )
+void SEPhysicObject::Init( btScalar mass, SEMeshPtr mesh, btMotionStatePtr motionState, btCollisionShapePtr shape, const btVector3& localInertia )
 {
-	mMesh = mesh;
-	mRigidBody = btRigidBodyPtr( SENewObject<btRigidBody>( info ) );
+	mMesh			= mesh;
+	mMotionState	= motionState;
+	mCollisionShape = shape;
+
+	btRigidBody::btRigidBodyConstructionInfo rbInfo( mass, motionState.get(), shape.get(), localInertia );
+	mRigidBody = btRigidBodyPtr( SENewObject<btRigidBody>( rbInfo ) );
 }
 
 void SEPhysicObject::Draw()
