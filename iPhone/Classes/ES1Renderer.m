@@ -86,8 +86,8 @@ SEPhysicObjectPtr physicObject2;
 		//add physic objects
 		
 		///create a few basic rigid bodies
-		btCollisionShape* groundShape = SENewObject<btBoxShape>(btVector3(btScalar(1.0),btScalar(1.0),btScalar(1.0)));
-
+		btCollisionShapePtr boxShape = btCollisionShapePtr( SENewObject<btBoxShape>(btVector3(btScalar(1.0),btScalar(1.0),btScalar(1.0))) );
+		
 		
 		btTransform groundTransform;
 		groundTransform.setIdentity();
@@ -101,23 +101,24 @@ SEPhysicObjectPtr physicObject2;
 			
 			btVector3 localInertia(0,0,0);
 			if (isDynamic)
-				groundShape->calculateLocalInertia(mass,localInertia);
+				boxShape->calculateLocalInertia(mass,localInertia);
 			
 			//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
-			btDefaultMotionState* myMotionState = SENewObject<btDefaultMotionState>(groundTransform);
-			btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,groundShape,localInertia);
+			//btDefaultMotionState* myMotionState = SENewObject<btDefaultMotionState>(groundTransform);
+			//btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,groundShape,localInertia);
 			//btRigidBody* body = new btRigidBody(rbInfo);
 			
 			SEMeshPtr mesh = SEObjectStore::sharedInstance()->GetMesh( "Plane" );
 			
-			physicObject1 = SEPhysicObjectPtr(SENewObject<SEPhysicObject>());
-			physicObject1->Init( mesh, rbInfo );
+			btDefaultMotionStatePtr myMotionState = btDefaultMotionStatePtr( SENewObject<btDefaultMotionState>(groundTransform) );
 			
-			//add the body to the dynamics world
-			SEPhysicWorld::sharedInstance()->world()->addRigidBody( physicObject1->rigidBody().get() );
+			physicObject1 = SEPhysicObjectPtr(SENewObject<SEPhysicObject>());
+			physicObject1->Init( mass, mesh, myMotionState, boxShape, localInertia  );
+			
+			SEPhysicWorld::sharedInstance()->AddObject( physicObject1 );
 		}
 		
-		groundTransform.setOrigin(btVector3(0.0,8,1));
+		groundTransform.setOrigin(btVector3(0.0,8,1.5));
 		
 		{
 			btScalar mass(0.1);
@@ -127,19 +128,20 @@ SEPhysicObjectPtr physicObject2;
 			
 			btVector3 localInertia(0,0,0);
 			if (isDynamic)
-				groundShape->calculateLocalInertia(mass,localInertia);
+				boxShape->calculateLocalInertia(mass,localInertia);
 			
 			//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
-			btDefaultMotionState* myMotionState = SENewObject<btDefaultMotionState>(groundTransform);
-			btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,groundShape,localInertia);
+			//btDefaultMotionState* myMotionState = SENewObject<btDefaultMotionState>(groundTransform);
+			//btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,groundShape,localInertia);
 			
 			SEMeshPtr mesh = SEObjectStore::sharedInstance()->GetMesh( "Plane" );
 			
-			physicObject2 = SEPhysicObjectPtr(SENewObject<SEPhysicObject>());
-			physicObject2->Init( mesh, rbInfo );
+			btDefaultMotionStatePtr myMotionState = btDefaultMotionStatePtr( SENewObject<btDefaultMotionState>(groundTransform) );
 			
-			//add the body to the dynamics world
-			SEPhysicWorld::sharedInstance()->world()->addRigidBody( physicObject2->rigidBody().get() );
+			physicObject2 = SEPhysicObjectPtr(SENewObject<SEPhysicObject>());
+			physicObject2->Init( mass, mesh, myMotionState, boxShape, localInertia  );
+			
+			SEPhysicWorld::sharedInstance()->AddObject( physicObject2 );
 		}
 		
 		//SEImageLoader imageLoader;
