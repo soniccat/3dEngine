@@ -240,6 +240,38 @@
 		<Filter
 			Name="tools"
 			>
+			<File
+				RelativePath="..\src\Tools\SECamera.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\src\Tools\SECamera.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\Tools\SETouch.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\src\Tools\SETouch.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\Tools\SETouchController.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\src\Tools\SETouchController.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\Tools\SETouchControllerDelegate.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\src\Tools\SETouchControllerDelegate.h"
+				>
+			</File>
 			<Filter
 				Name="header"
 				>
