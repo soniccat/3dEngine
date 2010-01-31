@@ -22,4 +22,6 @@
 #include "SEPhysicWorld.h"
 #include "SEPhysicObject.h"
 
+#include "SETouchController.h"
+
 #endif //SEMainDEF

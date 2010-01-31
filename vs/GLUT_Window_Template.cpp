@@ -33,8 +33,6 @@ using namespace std;
 #define DEGREES_TO_RADIANS(__ANGLE__) ((__ANGLE__) / 180.0 * 3.14f)
 #include <cmath>
 
-vector<int, SEAllocator<int>> mass;
-
 //  Initialization
 void init ();
 
@@ -248,11 +246,19 @@ void mouse (int button, int state, int x, int y)
 				//  Pressed 
 				case GLUT_DOWN:
 					printf ("Mouse Left Button Pressed (Down)...\n");
-					mass.push_back(100);
+
+					SETouchController::sharedInstance()->BeginTouching();
+					SETouchController::sharedInstance()->AddTouch( SETouch( x,y ) );
+					SETouchController::sharedInstance()->EndTouching( SETouchBegin, SETouchButtonLeft );
 					break;
+
 				//  Released
 				case GLUT_UP:
 					printf ("Mouse Left Button Released (Up)...\n");
+
+					SETouchController::sharedInstance()->BeginTouching();
+					SETouchController::sharedInstance()->AddTouch( SETouch( x,y ) );
+					SETouchController::sharedInstance()->EndTouching( SETouchEnd, SETouchButtonLeft );
 					break;
 			}
 
@@ -266,10 +272,18 @@ void mouse (int button, int state, int x, int y)
 				//  Pressed
 				case GLUT_DOWN:
 					printf ("Mouse Middle Button Pressed (Down)...\n");
+
+					SETouchController::sharedInstance()->BeginTouching();
+					SETouchController::sharedInstance()->AddTouch( SETouch( x,y ) );
+					SETouchController::sharedInstance()->EndTouching( SETouchBegin, SETouchButtonMiddle );
 					break;
 				//  Released
 				case GLUT_UP:
 					printf ("Mouse Middle Button Released (Up)...\n");
+
+					SETouchController::sharedInstance()->BeginTouching();
+					SETouchController::sharedInstance()->AddTouch( SETouch( x,y ) );
+					SETouchController::sharedInstance()->EndTouching( SETouchEnd, SETouchButtonMiddle );
 					break;
 			}
 
@@ -283,10 +297,19 @@ void mouse (int button, int state, int x, int y)
 				//  Pressed
 				case GLUT_DOWN:
 					printf ("Mouse Right Button Pressed (Down)...\n");
+
+					SETouchController::sharedInstance()->BeginTouching();
+					SETouchController::sharedInstance()->AddTouch( SETouch( x,y ) );
+					SETouchController::sharedInstance()->EndTouching( SETouchBegin, SETouchButtonRight );
 					break;
 				//  Released
+
 				case GLUT_UP:
 					printf ("Mouse Right Button Released (Up)...\n");
+
+					SETouchController::sharedInstance()->BeginTouching();
+					SETouchController::sharedInstance()->AddTouch( SETouch( x,y ) );
+					SETouchController::sharedInstance()->EndTouching( SETouchEnd, SETouchButtonRight );
 					break;
 			}
 
@@ -303,6 +326,10 @@ void motion (int x, int y)
 {
 	//  Print the mouse drag position
 	printf ("Mouse Drag Position: %d, %d.\n", x, y);
+
+	SETouchController::sharedInstance()->BeginTouching();
+	SETouchController::sharedInstance()->AddTouch( SETouch( x,y ) );
+	SETouchController::sharedInstance()->EndTouching( SETouchMove );
 }
 
 //-------------------------------------------------------------------------
@@ -457,8 +484,6 @@ SETexturePtr objectTexture;
 
 void main (int argc, sechar **argv)
 {
-	mass.reserve(8);
-
 	btCollisionConfigurationPtr collisionConfiguration	= btCollisionConfigurationPtr( SENewObject<btDefaultCollisionConfiguration>() );
 	btDispatcherPtr				dispatcher				= btDispatcherPtr ( SENewObject<btCollisionDispatcher>(collisionConfiguration.get()) );
 	btBroadphaseInterfacePtr	overlappingPairCache	= btBroadphaseInterfacePtr( SENewObject<btDbvtBroadphase>() );

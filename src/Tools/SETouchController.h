@@ -11,11 +11,20 @@ class SETouchController;
 
 typedef shared_ptr<SETouchController> SETouchControllerPtr;
 
-enum SETouchingType
+enum SETouchType
 {
-	SETouchingAddTouches,
-	SETouchingMoveTouches,
-	SETouchingEndTouches
+	SETouchNone,
+	SETouchBegin,
+	SETouchMove,
+	SETouchEnd
+};
+
+enum SETouchButton
+{
+	SETouchButtonNone,
+	SETouchButtonLeft,
+	SETouchButtonMiddle,
+	SETouchButtonRight
 };
 
 
@@ -25,7 +34,7 @@ class SETouchController
 	static SETouchControllerPtr mInstance;
 
 	SETouchControllerDelegateArray mDelegateArray;
-	int mPressedTouch;
+	int mPressedTouchCount;
 
 	//touch buffer
 	SETouchArray mModifyTouchArray;
@@ -36,13 +45,14 @@ public:
 
 	static SETouchControllerPtr sharedInstance();
 
-	int pressedTouch();
+	int pressedTouchCount();
 
 	void AddHandler( SETouchControllerDelegatePtr obj );
 
 	void BeginTouching();
 	void AddTouch( SETouch touch );
-	void EndTouching(SETouchingType type);
+	void EndTouching(SETouchType type, SETouchButton button);
+	void EndTouching( SETouchType type );
 };
 
 

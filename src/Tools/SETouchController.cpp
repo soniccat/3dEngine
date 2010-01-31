@@ -7,6 +7,7 @@ SETouchControllerPtr SETouchController::mInstance;
 
 SETouchController::SETouchController(void)
 {
+	mPressedTouchCount = 0;
 }
 
 SETouchController::~SETouchController(void)
@@ -36,7 +37,7 @@ void SETouchController::AddTouch( SETouch touch )
 	mModifyTouchArray.push_back( touch );
 }
 
-void SETouchController::EndTouching( SETouchingType type )
+void SETouchController::EndTouching( SETouchType type, SETouchButton button )
 {
 	SEAssert( mModifyTouchArray.size(), "End not begin touch" );
 	
@@ -47,16 +48,18 @@ void SETouchController::EndTouching( SETouchingType type )
 	{
 		switch( type )
 		{
-			case SETouchingAddTouches:
-				(*start)->TouchesBegin( mModifyTouchArray.begin(), mModifyTouchArray.size() );
+			case SETouchBegin:
+				mPressedTouchCount += mModifyTouchArray.size();
+				(*start)->TouchesBegin( mModifyTouchArray.begin(), mModifyTouchArray.size(), button );
 				break;
 
-			case SETouchingMoveTouches:
-				(*start)->TouchesMove( mModifyTouchArray.begin(), mModifyTouchArray.size() );
+			case SETouchMove:
+				(*start)->TouchesMove( mModifyTouchArray.begin(), mModifyTouchArray.size(), button );
 				break;
 
-			case SETouchingEndTouches:
-				(*start)->TouchesEnd( mModifyTouchArray.begin(), mModifyTouchArray.size() );
+			case SETouchEnd:
+				mPressedTouchCount -= mModifyTouchArray.size();
+				(*start)->TouchesEnd( mModifyTouchArray.begin(), mModifyTouchArray.size(), button );
 				break;
 		}
 
@@ -64,4 +67,14 @@ void SETouchController::EndTouching( SETouchingType type )
 	}
 	
 	mModifyTouchArray.clear();
+}
+
+void SETouchController::EndTouching( SETouchType type )
+{
+	EndTouching( type, SETouchButtonNone );
+}
+
+int SETouchController::pressedTouchCount()
+{
+	return mPressedTouchCount;
 }
