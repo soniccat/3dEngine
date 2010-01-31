@@ -23,6 +23,10 @@ def	compareVertexIndexPair(a, b):
 		return 0
 	else:
 		return 1
+	
+#convert blender coord to OpenGL coord
+def vectorExport(file, name, vec):
+	file.write( name+" %f %f %f\n" % ( -vec.x, vec.z, vec.y ) )
 
 
 def meshProcess(object):
@@ -111,15 +115,20 @@ def meshProcess(object):
 	
 	outFile.write( "vertexCount %d\n" % (len(baseVertex.keys()) + len( newUVvertexList ) + len(solidFaceList)*3) )
 	for pair in baseVertexPair:
-		outFile.write( "vert %f %f %f\n" % ( pair[0].co.x, pair[0].co.y, pair[0].co.z) )
+		#outFile.write( "vert %f %f %f\n" % ( pair[0].co.x, pair[0].co.y, pair[0].co.z) )
+		vectorExport( outFile, "vert", pair[0].co)
 	
 	for vert in newUVvertexList:
-		outFile.write( "vert %f %f %f\n" % ( vert.co.x, vert.co.y, vert.co.z) )
+		#outFile.write( "vert %f %f %f\n" % ( vert.co.x, vert.co.y, vert.co.z) )
+		vectorExport( outFile, "vert", vert.co)
 	
 	for face in solidFaceList:
-		outFile.write( "vert %f %f %f\n" % (face.verts[0].co.x, face.verts[0].co.y, face.verts[0].co.z) )
-		outFile.write( "vert %f %f %f\n" % (face.verts[1].co.x, face.verts[1].co.y, face.verts[1].co.z) )
-		outFile.write( "vert %f %f %f\n" % (face.verts[2].co.x, face.verts[2].co.y, face.verts[2].co.z) )
+		#outFile.write( "vert %f %f %f\n" % (face.verts[0].co.x, face.verts[0].co.y, face.verts[0].co.z) )
+		#outFile.write( "vert %f %f %f\n" % (face.verts[1].co.x, face.verts[1].co.y, face.verts[1].co.z) )
+		#outFile.write( "vert %f %f %f\n" % (face.verts[2].co.x, face.verts[2].co.y, face.verts[2].co.z) )
+		vectorExport( outFile, "vert", face.verts[0].co)
+		vectorExport( outFile, "vert", face.verts[1].co)
+		vectorExport( outFile, "vert", face.verts[2].co)
 		
 	
 	#delimeter it need to reload loader state
@@ -129,15 +138,20 @@ def meshProcess(object):
 	#normal export
 	#
 	for pair in baseVertexPair:
-		outFile.write( "norm %f %f %f\n" % ( pair[0].no.x, pair[0].no.y, pair[0].no.z) )
+		#outFile.write( "norm %f %f %f\n" % ( pair[0].no.x, pair[0].no.y, pair[0].no.z) )
+		vectorExport( outFile, "norm", pair[0].no)
 		
 	for vert in newUVvertexList:
-		outFile.write( "norm %f %f %f\n" % ( vert.no.x, vert.no.y, vert.no.z) )
+		#outFile.write( "norm %f %f %f\n" % ( vert.no.x, vert.no.y, vert.no.z) )
+		vectorExport( outFile, "norm", vert.no)
 		
 	for face in solidFaceList:
-		outFile.write( "norm %f %f %f\n" % (face.no.x, face.no.y, face.no.z) )
-		outFile.write( "norm %f %f %f\n" % (face.no.x, face.no.y, face.no.z) )
-		outFile.write( "norm %f %f %f\n" % (face.no.x, face.no.y, face.no.z) )
+		#outFile.write( "norm %f %f %f\n" % (face.no.x, face.no.y, face.no.z) )
+		#outFile.write( "norm %f %f %f\n" % (face.no.x, face.no.y, face.no.z) )
+		#outFile.write( "norm %f %f %f\n" % (face.no.x, face.no.y, face.no.z) )
+		vectorExport( outFile, "norm", face.no)
+		vectorExport( outFile, "norm", face.no)
+		vectorExport( outFile, "norm", face.no)
 		
 	#
 	#uv export
@@ -262,6 +276,25 @@ def meshProcess(object):
 def cameraProcess(object):
 	print "---- cameraProcess start ----"
 	print object.getData(name_only=1)
+	
+	outFile = open("cameras/%s" % object.getData(name_only=1), "w")
+	
+	outFile.write( "type Camera\n" )
+	outFile.write( "name %s\n" % object.getData(name_only=1) )
+	#outFile.write( "pos %f %f %f\n" % ( -object.LocX, object.LocZ,	object.LocY ) )
+	vectorExport(outFile, "pos", Blender.Mathutils.Vector( object.LocX, object.LocY, object.LocZ ))
+	
+	tar = ( Blender.Mathutils.Vector( 0.0, 0.0, -1.0 ) * obj.matrixWorld )
+	loc = Blender.Mathutils.Vector( obj.loc[0], obj.loc[1], obj.loc[2] )
+	dir = tar - loc
+				
+	#outFile.write( "see %f %f %f\n" % ( -(object.LocX + dir.x), object.LocZ + dir.z, object.LocY + dir.y) )
+	vectorExport( outFile, "see", tar )
+
+	outFile.write( "end\n" )
+	
+	outFile.close()
+	
 	print "---- cameraProcess end ----"
 	
 	
@@ -276,6 +309,7 @@ print "---- start ----"
 createDirectory("images")
 createDirectory("materials")
 createDirectory("meshes")
+createDirectory("cameras")
 
 print list(bpy.data.objects)
 
@@ -283,10 +317,10 @@ for obj in bpy.data.objects:
 	mesh = obj.getData(mesh=1)
 	print type(mesh)
 
-	if( type(mesh) == Types.MeshType ):
-		meshProcess(obj)
+	#if( type(mesh) == Types.MeshType ):
+	#	meshProcess(obj)
 		
-	elif( type(mesh) == Types.CameraType ):
+	if( type(mesh) == Types.CameraType ):
 		cameraProcess(obj)
 		
 	elif( type(mesh) == Types.LampType ):

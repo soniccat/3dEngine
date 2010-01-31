@@ -98,8 +98,21 @@ void display (void)
 
 
 	glLoadIdentity();
-	glTranslatef(0,0,-10);
-	glRotatef(30,1,1,0);
+
+	SECameraPtr camera = SEObjectStore::sharedInstance()->GetCamera("Camera");
+
+	//camera->SetPosition( btVector3(4.473089, 1.650703, -15.311015) );
+	//camera->SetSeePoint( btVector3(4.064754, 1.819738, -14.413970) );
+
+
+	//camera->SetPosition( btVector3(0, 50, 1.0) );
+	//camera->SetSeePoint( btVector3(0, 0, 0.0) );
+
+	//camera->SetSeePoint( btVector3(0,0,0) );
+	camera->Use();
+
+	//glTranslatef(0,0,-10);
+	//glRotatef(30,1,1,0);
 
 
 	//for (int i=0;i<150;i++)
@@ -154,8 +167,8 @@ void display (void)
 			physicObject2->Draw();
 	
 
-	glRotatef(-30,1,1,0);
-	glTranslatef(0,0,10);
+	//glRotatef(-30,1,1,0);
+	//glTranslatef(0,0,10);
 
 	//  Swap contents of backward and forward frame buffers
 	glutSwapBuffers ();
@@ -548,7 +561,7 @@ void main (int argc, sechar **argv)
 	btTransform groundTransform;
 	groundTransform.setIdentity();
 	groundTransform.setOrigin(btVector3(0,0,0));
-	groundTransform.setRotation( btQuaternion( -DEGREES_TO_RADIANS(60) ,0,0,1) );
+	//groundTransform.setRotation( btQuaternion( -DEGREES_TO_RADIANS(180) ,0, 0,1) );
 
 	{
 		btScalar mass(0.0);
@@ -569,7 +582,7 @@ void main (int argc, sechar **argv)
 		SEPhysicWorld::sharedInstance()->AddObject( physicObject1 );
 	}
 
-	groundTransform.setOrigin(btVector3(0.0,5,5.0));
+	groundTransform.setOrigin(btVector3(0.0,10,0.0));
 	groundTransform.setRotation( btQuaternion() );
 
 	{

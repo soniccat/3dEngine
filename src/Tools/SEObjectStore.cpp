@@ -65,3 +65,25 @@ SEMaterialPtr SEObjectStore::GetMaterial( const char* name )
 	SEAssert(false, "Material not found");
 	return SEMaterialPtr();
 }
+
+void SEObjectStore::AddCamera( SECameraPtr camera )
+{
+	mCameraArray.push_back( camera );
+}
+
+SECameraPtr SEObjectStore::GetCamera( const char* name )
+{
+	SECameraArray::iterator start = mCameraArray.begin();
+	SECameraArray::iterator end = mCameraArray.end();
+
+	while( start != end )
+	{
+		if( streq( (*start)->name().c_str(), name) )
+			return *start;
+
+		++start;
+	}
+
+	SEAssert(false, "Camera not found");
+	return SECameraPtr();
+}

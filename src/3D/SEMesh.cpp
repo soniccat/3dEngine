@@ -73,9 +73,6 @@ void SEMesh::AddVertexGroup( SEVertexGroupPtr group )
 
 void SEMesh::ParseData( SESceneLoader* loader )
 {
-	if( loader->currentIndex() == 97 )
-		BREAKPOINTPLACE;
-
 	switch( loader->validValueCount() )
 	{
 	case 1:

@@ -87,7 +87,15 @@ void SESceneLoader::HandleString(const sechar* string, bool isEndOfFile)
 			mDelegateStack.push( material );
 
 			SEObjectStore::sharedInstance()->AddMaterial( material );
+
+		}else if( streq( mValue1, "Camera" ) )
+		{
+			SECameraPtr camera( SENewObject<SECamera>() );
+			mDelegateStack.push( camera );
+
+			SEObjectStore::sharedInstance()->AddCamera( camera );
 		}
+
 	}
 }
 
