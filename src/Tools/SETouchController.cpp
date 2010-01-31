@@ -22,7 +22,7 @@ SETouchControllerPtr SETouchController::sharedInstance()
 	return mInstance;
 }
 
-void SETouchController::AddHandler( SETouchControllerDelegatePtr obj )
+void SETouchController::AddDelegate( SETouchControllerDelegatePtr obj )
 {
 	mDelegateArray.push_back( obj );
 }

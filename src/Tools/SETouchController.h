@@ -47,7 +47,7 @@ public:
 
 	int pressedTouchCount();
 
-	void AddHandler( SETouchControllerDelegatePtr obj );
+	void AddDelegate( SETouchControllerDelegatePtr obj );
 
 	void BeginTouching();
 	void AddTouch( SETouch touch );

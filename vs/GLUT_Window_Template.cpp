@@ -64,6 +64,92 @@ sechar *window_title = "GLUT Window Template";
 //  Press Alt + Esc to exit a full screen.
 int full_screen = 0;
 
+
+class CameraController: public SETouchControllerDelegate
+{
+	bool leftButtonPressed;
+	bool rightButtonPressed;
+	SETouch curTouch;
+
+public:
+	CameraController()
+	{
+		leftButtonPressed = false;
+		rightButtonPressed = false;
+	}
+
+	virtual void TouchesBegin( SETouchArray::iterator touch, size_t count, SETouchButton button )
+	{
+		if(button == SETouchButtonLeft)
+			leftButtonPressed = true;
+
+		if(button == SETouchButtonRight)
+			rightButtonPressed = true;
+
+		curTouch = *touch;
+	}
+
+	virtual void TouchesMove( SETouchArray::iterator touch, size_t count, SETouchButton button )
+	{
+		SECameraPtr camera = SEObjectStore::sharedInstance()->GetCamera("Camera");
+
+		if(leftButtonPressed)
+		{
+			float dx = touch->x() - curTouch.x();
+			float dy = touch->y() - curTouch.y();
+
+			camera->AddPosition( btVector3( dx/50.0f, dy/50.0f, 0 ) );
+			camera->AddSeePoint( btVector3( dx/50.0f, dy/50.0f, 0 ) );
+		}
+
+		if(rightButtonPressed)
+		{
+			const btVector3& seeVector = camera->seePoint();
+			const btVector3& position = camera->position();
+
+			static float dx12 = position.x() - seeVector.x();
+			static float dy12 = position.y() - seeVector.y();
+			static float dz12 = position.z() - seeVector.z();
+
+			float dx = touch->x() - curTouch.x();
+			float dy = touch->y() - curTouch.y();
+
+			static float axz = 0; 
+			static float ayz = 0; 
+
+			axz -= dx / 100.0f;
+			ayz -= dy / 100.0f;
+
+			float x = seeVector.x() + dx12*1*cos(axz) + dz12*sin(axz);
+			float y = seeVector.y() + dy12*1*cos(ayz) + dz12*sin(ayz);
+			float z = seeVector.z() + dz12*cos(ayz)*cos(axz) + dy12*sin(ayz) + dx12*sin(axz);
+
+			camera->SetPosition( btVector3( x, y, z ) );
+/*
+sio2->_SIO2camera->_SIO2transform->loc->x = center.x() + dxCenter*cos(zangleCenter)*cos(yangleCenter) - dyCenter*sin(zangleCenter) + dzCenter*sin(yangleCenter);
+sio2->_SIO2camera->_SIO2transform->loc->y = center.y() + dyCenter*cos(zangleCenter)*1			+ dxCenter*sin(zangleCenter);
+sio2->_SIO2camera->_SIO2transform->loc->z = center.z() + dzCenter*1*cos(yangleCenter)			+ dyCenter*sin(yangleCenter) + dxCenter*sin(yangleCenter);
+*/
+
+			
+		}
+
+		curTouch = *touch;
+	}
+
+	virtual void TouchesEnd( SETouchArray::iterator touch, size_t count, SETouchButton button )
+	{
+		if(button == SETouchButtonLeft)
+			leftButtonPressed = false;
+
+		if(button == SETouchButtonRight)
+			rightButtonPressed = false;
+	}
+};
+
+typedef shared_ptr<CameraController> CameraControllerPtr;
+
+
 //-------------------------------------------------------------------------
 //  Set OpenGL program initial state.
 //-------------------------------------------------------------------------
@@ -100,15 +186,6 @@ void display (void)
 	glLoadIdentity();
 
 	SECameraPtr camera = SEObjectStore::sharedInstance()->GetCamera("Camera");
-
-	//camera->SetPosition( btVector3(4.473089, 1.650703, -15.311015) );
-	//camera->SetSeePoint( btVector3(4.064754, 1.819738, -14.413970) );
-
-
-	//camera->SetPosition( btVector3(0, 50, 1.0) );
-	//camera->SetSeePoint( btVector3(0, 0, 0.0) );
-
-	//camera->SetSeePoint( btVector3(0,0,0) );
 	camera->Use();
 
 	//glTranslatef(0,0,-10);
@@ -492,11 +569,12 @@ void centerOnScreen ()
 //  Program Main method.
 //-------------------------------------------------------------------------
 SETexturePtr objectTexture;
-
+CameraControllerPtr cameraController;
 
 
 void main (int argc, sechar **argv)
 {
+	//physic world
 	btCollisionConfigurationPtr collisionConfiguration	= btCollisionConfigurationPtr( SENewObject<btDefaultCollisionConfiguration>() );
 	btDispatcherPtr				dispatcher				= btDispatcherPtr ( SENewObject<btCollisionDispatcher>(collisionConfiguration.get()) );
 	btBroadphaseInterfacePtr	overlappingPairCache	= btBroadphaseInterfacePtr( SENewObject<btDbvtBroadphase>() );
@@ -544,6 +622,9 @@ void main (int argc, sechar **argv)
 	SESceneLoader loader;
 	loader.Load( &currentPath );
 
+	//camera
+	cameraController = CameraControllerPtr( SENewObject<CameraController>() );
+	SETouchController::sharedInstance()->AddDelegate( cameraController );
 	
 	///create a few basic rigid bodies
 	SEMeshPtr planeMesh = SEObjectStore::sharedInstance()->GetMesh( "Plane.001" );

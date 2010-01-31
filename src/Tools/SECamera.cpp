@@ -67,6 +67,22 @@ const SEString& SECamera::name()
 	return mName;
 }
 
+void SECamera::AddPosition( btVector3& v )
+{
+	mPosition += v;
+}
+
+void SECamera::AddSeePoint( btVector3& v )
+{
+	mSeePoint += v;
+}
+
+void SECamera::AddUpVector( btVector3& v )
+{
+	mUpVector += v;
+}
+
+
 void SECamera::SetPosition( btVector3& position )
 {
 	mPosition = position;
@@ -77,7 +93,7 @@ void SECamera::SetSeePoint( btVector3& seePoint )
 	mSeePoint = seePoint;
 }
 
-const btVector3& SECamera::postiton() const
+const btVector3& SECamera::position() const
 {
 	return mPosition;
 }

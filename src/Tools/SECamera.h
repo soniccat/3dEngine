@@ -33,12 +33,15 @@ public:
 	void SetName( const char* name );
 	const SEString& name();
 
+	void AddPosition( btVector3& v );
+	void AddSeePoint( btVector3& v );
+	void AddUpVector( btVector3& v );
 
 	void SetPosition( btVector3& position );
 	void SetSeePoint( btVector3& seePoint );
 	void SetUpVector( btVector3& upVector );
 
-	const btVector3& postiton() const;
+	const btVector3& position() const;
 	const btVector3& seePoint() const;
 	const btVector3& upVector() const;
 };
