@@ -71,11 +71,21 @@ class CameraController: public SETouchControllerDelegate
 	bool rightButtonPressed;
 	SETouch curTouch;
 
+	btVector3 vec;
+
 public:
 	CameraController()
 	{
 		leftButtonPressed = false;
 		rightButtonPressed = false;
+
+		SECameraPtr camera = SEObjectStore::sharedInstance()->GetCamera("Camera");
+		camera->SetSeePoint( btVector3(0,0,0) );
+		
+		const btVector3& position = camera->position();
+		camera->SetPosition( btVector3( 0,position.y(),position.z()) );
+
+		vec = camera->position();
 	}
 
 	virtual void TouchesBegin( SETouchArray::iterator touch, size_t count, SETouchButton button )
@@ -93,19 +103,12 @@ public:
 	{
 		SECameraPtr camera = SEObjectStore::sharedInstance()->GetCamera("Camera");
 
-		if(leftButtonPressed)
-		{
-			float dx = touch->x() - curTouch.x();
-			float dy = touch->y() - curTouch.y();
-
-			camera->AddPosition( btVector3( dx/50.0f, dy/50.0f, 0 ) );
-			camera->AddSeePoint( btVector3( dx/50.0f, dy/50.0f, 0 ) );
-		}
-
 		if(rightButtonPressed)
-		{
+		{	
 			const btVector3& seeVector = camera->seePoint();
 			const btVector3& position = camera->position();
+
+			printf( "position pt %f %f %f\n", position.x(), position.y(), position.z() );
 
 			static float dx12 = position.x() - seeVector.x();
 			static float dy12 = position.y() - seeVector.y();
@@ -117,21 +120,49 @@ public:
 			static float axz = 0; 
 			static float ayz = 0; 
 
-			axz -= dx / 100.0f;
-			ayz -= dy / 100.0f;
+			//axz -= dx / 100.0f;
+			//ayz -= dy / 100.0f;
 
-			float x = seeVector.x() + dx12*1*cos(axz) + dz12*sin(axz);
-			float y = seeVector.y() + dy12*1*cos(ayz) + dz12*sin(ayz);
-			float z = seeVector.z() + dz12*cos(ayz)*cos(axz) + dy12*sin(ayz) + dx12*sin(axz);
+			static float a1 = 0;
+			static float a2 = 0;
 
-			camera->SetPosition( btVector3( x, y, z ) );
-/*
-sio2->_SIO2camera->_SIO2transform->loc->x = center.x() + dxCenter*cos(zangleCenter)*cos(yangleCenter) - dyCenter*sin(zangleCenter) + dzCenter*sin(yangleCenter);
-sio2->_SIO2camera->_SIO2transform->loc->y = center.y() + dyCenter*cos(zangleCenter)*1			+ dxCenter*sin(zangleCenter);
-sio2->_SIO2camera->_SIO2transform->loc->z = center.z() + dzCenter*1*cos(yangleCenter)			+ dyCenter*sin(yangleCenter) + dxCenter*sin(yangleCenter);
+			a1 += dy / 100.0f; 
+			a2 -= dx / 100.0f;
+
+			/*btQuaternion quat(0,1,0,0.1f);
+			btQuaternion q2 = vec * quat;
+
+			btVector3 v( q2.getX()/q2.getW(), q2.getY()/q2.getW(), q2.getZ()/q2.getW());
 */
 
-			
+			btQuaternion q1 = btQuaternion(btVector3(1.0, 0.0, 0.0), a1);
+			btQuaternion q2 = btQuaternion(btVector3(0.0, 1.0, 0.0), a2);
+
+			btQuaternion q3 = q2 * q1;
+
+			btTransform tr(q3);
+			btVector3 drawVec = tr(vec);
+
+			camera->SetPosition( drawVec );
+/*
+			btMatrix3x3 matrix1( 1,0,0,
+				0,cos(a1),-sin(a1),
+				0,sin(a1),cos(a1));
+
+			btMatrix3x3 matrix2( cos (a2),0,sin (a2),
+				0,1,0,
+				-sin(a2),0,cos(a2));
+
+			//btMatrix3x3 matrix2( cos(angle),-sin (angle), 0,
+			//	sin(angle),cos(angle),0,
+			//	0,0,1);
+
+			btMatrix3x3 matrix = matrix1 * matrix2;
+
+			btVector3 drawVec = vec * matrix;
+
+			camera->SetPosition( btVector3( drawVec.x(), drawVec.y(), drawVec.z() ) );
+*/
 		}
 
 		curTouch = *touch;
@@ -306,7 +337,7 @@ void reshape (int w, int h)
 
 
 const GLfloat zNear = 0.1; 
-GLfloat zFar = 100.0;
+GLfloat zFar = 200.0;
 GLfloat fieldOfView = 60.0; 
 GLfloat size; 
 

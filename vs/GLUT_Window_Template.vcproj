@@ -45,7 +45,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\src\Objects;&quot;E:\Sources\Other\bullet-trunk\src&quot;;..\OpenGLlibs\include;E:\Sources\boost_1_41_0;..\src;..\src\Tools;..\src\Tools\win;..\src\3D;..\libjpg;..\src\Images;..\src\win"
+				AdditionalIncludeDirectories="..\src\Objects;&quot;I:\Sources\Other\bullet-trunk\src&quot;;..\OpenGLlibs\include;I:\Sources\Other\boost_1_41_0;..\src;..\src\Tools;..\src\Tools\win;..\src\3D;..\libjpg;..\src\Images;..\src\win"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
