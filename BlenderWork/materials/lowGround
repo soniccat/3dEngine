@@ -1,6 +1,6 @@
 type Material
 name lowGround
 texture
-path ..\images\ground1.jpg
+path ..\images\ground2.jpg
 end
 end

@@ -13,7 +13,7 @@ SECamera::SECamera( )
 	mUpVector.setX(0);
 	mUpVector.setY(1);
 	mUpVector.setZ(0);
-	mUpVector.setW(1);
+	mUpVector.setW(0);
 }
 
 SECamera::~SECamera(void)

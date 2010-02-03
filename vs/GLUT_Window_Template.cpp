@@ -90,6 +90,39 @@ public:
 
 	virtual void TouchesBegin( SETouchArray::iterator touch, size_t count, SETouchButton button )
 	{
+		//check selected object
+
+		SECameraPtr camera = SEObjectStore::sharedInstance()->GetCamera("Camera");
+
+		btVector3 rayTo = getRayTo( camera, window_width, window_height, touch->x(), touch->y() );
+
+		btVector3 rayFrom;
+					/*if (m_ortho)
+					{
+						rayFrom = rayTo;
+						rayFrom.setZ(-100.f);
+					} else*/
+					{
+						rayFrom = camera->position();
+					}
+					
+					btCollisionWorld::ClosestRayResultCallback rayCallback(rayFrom,rayTo);
+					SEPhysicWorld::sharedInstance()->world()->rayTest(rayFrom,rayTo,rayCallback);
+					if (rayCallback.hasHit())
+					{
+
+
+						btRigidBody* body = btRigidBody::upcast(rayCallback.m_collisionObject);
+
+						if (body)
+						{
+							printf( "up up %p ,%d\n", body, rand()%1000 ); 
+						}
+					}
+
+
+
+
 		if(button == SETouchButtonLeft)
 			leftButtonPressed = true;
 
@@ -332,10 +365,33 @@ void reshape (int w, int h)
 
 	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity ();
-	//glOrtho(-10,10,10,-10,-10,10);
-	//glFrustum (-5.0, 5.0, -5.0, 5.0, 1.5, 200.0);
+
+	
+	btScalar aspect;
+	btVector3 extents;
+
+	if (window_width > window_height) 
+	{
+		aspect = window_width / (btScalar)window_height;
+		extents.setValue(aspect * 1.0f, 1.0f,0);
+	} else 
+	{
+		aspect = window_height / (btScalar)window_width;
+		extents.setValue(1.0f, aspect*1.f,0);
+	}
+
+		if (window_width > window_height) 
+		{
+			glFrustum (-aspect, aspect, -1.0, 1.0, 1.0, 10000.0);
+		} else 
+		{
+			glFrustum (-1.0, 1.0, -aspect, aspect, 1.0, 10000.0);
+		}
+
+		glMatrixMode(GL_MODELVIEW);
 
 
+	/*
 const GLfloat zNear = 0.1; 
 GLfloat zFar = 200.0;
 GLfloat fieldOfView = 60.0; 
@@ -349,6 +405,7 @@ glFrustum(-size, size, -size / (window_width / window_height), size / (window_wi
 
 	//  Print current width and height on the screen
 	printf ("Window Width: %d, Window Height: %d.\n", window_width, window_height);
+	*/
 }
 
 //-------------------------------------------------------------------------
@@ -366,7 +423,7 @@ void mouse (int button, int state, int x, int y)
 			{
 				//  Pressed 
 				case GLUT_DOWN:
-					printf ("Mouse Left Button Pressed (Down)...\n");
+					//printf ("Mouse Left Button Pressed (Down)...\n");
 
 					SETouchController::sharedInstance()->BeginTouching();
 					SETouchController::sharedInstance()->AddTouch( SETouch( x,y ) );
@@ -375,7 +432,7 @@ void mouse (int button, int state, int x, int y)
 
 				//  Released
 				case GLUT_UP:
-					printf ("Mouse Left Button Released (Up)...\n");
+					//printf ("Mouse Left Button Released (Up)...\n");
 
 					SETouchController::sharedInstance()->BeginTouching();
 					SETouchController::sharedInstance()->AddTouch( SETouch( x,y ) );
@@ -392,7 +449,7 @@ void mouse (int button, int state, int x, int y)
 			{
 				//  Pressed
 				case GLUT_DOWN:
-					printf ("Mouse Middle Button Pressed (Down)...\n");
+					//printf ("Mouse Middle Button Pressed (Down)...\n");
 
 					SETouchController::sharedInstance()->BeginTouching();
 					SETouchController::sharedInstance()->AddTouch( SETouch( x,y ) );
@@ -400,7 +457,7 @@ void mouse (int button, int state, int x, int y)
 					break;
 				//  Released
 				case GLUT_UP:
-					printf ("Mouse Middle Button Released (Up)...\n");
+					//printf ("Mouse Middle Button Released (Up)...\n");
 
 					SETouchController::sharedInstance()->BeginTouching();
 					SETouchController::sharedInstance()->AddTouch( SETouch( x,y ) );
@@ -417,7 +474,7 @@ void mouse (int button, int state, int x, int y)
 			{
 				//  Pressed
 				case GLUT_DOWN:
-					printf ("Mouse Right Button Pressed (Down)...\n");
+					//printf ("Mouse Right Button Pressed (Down)...\n");
 
 					SETouchController::sharedInstance()->BeginTouching();
 					SETouchController::sharedInstance()->AddTouch( SETouch( x,y ) );
@@ -426,7 +483,7 @@ void mouse (int button, int state, int x, int y)
 				//  Released
 
 				case GLUT_UP:
-					printf ("Mouse Right Button Released (Up)...\n");
+					//printf ("Mouse Right Button Released (Up)...\n");
 
 					SETouchController::sharedInstance()->BeginTouching();
 					SETouchController::sharedInstance()->AddTouch( SETouch( x,y ) );
@@ -446,7 +503,7 @@ void mouse (int button, int state, int x, int y)
 void motion (int x, int y)
 {
 	//  Print the mouse drag position
-	printf ("Mouse Drag Position: %d, %d.\n", x, y);
+	//printf ("Mouse Drag Position: %d, %d.\n", x, y);
 
 	SETouchController::sharedInstance()->BeginTouching();
 	SETouchController::sharedInstance()->AddTouch( SETouch( x,y ) );
@@ -460,7 +517,7 @@ void motion (int x, int y)
 void pmotion (int x, int y)
 {
 	//  Print mouse move positopn
-	printf ("Mouse Move Position: %d, %d.\n", x, y);
+	//printf ("Mouse Move Position: %d, %d.\n", x, y);
 }
 
 //-------------------------------------------------------------------------
@@ -694,7 +751,7 @@ void main (int argc, sechar **argv)
 		SEPhysicWorld::sharedInstance()->AddObject( physicObject1 );
 	}
 
-	groundTransform.setOrigin(btVector3(0.0,10,0.0));
+	groundTransform.setOrigin(btVector3(0.0,40,5.0));
 	groundTransform.setRotation( btQuaternion() );
 
 	{
