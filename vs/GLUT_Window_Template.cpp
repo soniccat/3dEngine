@@ -751,7 +751,7 @@ void main (int argc, sechar **argv)
 		SEPhysicWorld::sharedInstance()->AddObject( physicObject1 );
 	}
 
-	groundTransform.setOrigin(btVector3(0.0,40,5.0));
+	groundTransform.setOrigin(btVector3(0.0,40,-30.0));
 	groundTransform.setRotation( btQuaternion() );
 
 	{
