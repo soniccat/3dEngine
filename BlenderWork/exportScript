@@ -84,23 +84,24 @@ def meshProcess(object):
 	
 	baseVertexCount = len( baseVertex )
 			
-	for face in mesh.faces:
-		if( face.smooth ):
-			for vert in face.verts:
-				vertIndex = face.verts.index(vert)
+	if mesh.faceUV:
+		for face in mesh.faces:
+			if( face.smooth ):
+				for vert in face.verts:
+					vertIndex = face.verts.index(vert)
 				
-				if( vert not in vertexUVdict.keys() ):
-					vertexUVdict[ vert ] = face.uv[ vertIndex ]
+					if( vert not in vertexUVdict.keys() ):
+						vertexUVdict[ vert ] = face.uv[ vertIndex ]
 					
-				elif vertexUVdict[ vert ].x != face.uv[ vertIndex ].x or vertexUVdict[ vert ].y != face.uv[ vertIndex ].y:
+					elif vertexUVdict[ vert ].x != face.uv[ vertIndex ].x or vertexUVdict[ vert ].y != face.uv[ vertIndex ].y:
 
-					if face in faceVertexReplaceDict.keys():
-						faceVertexReplaceDict[ face ][vertIndex] = baseVertexCount + len( newUVvertexList )
-					else:
-						faceVertexReplaceDict[ face ] = {}
-						faceVertexReplaceDict[ face ][vertIndex] = baseVertexCount + len( newUVvertexList )
+						if face in faceVertexReplaceDict.keys():
+							faceVertexReplaceDict[ face ][vertIndex] = baseVertexCount + len( newUVvertexList )
+						else:
+							faceVertexReplaceDict[ face ] = {}
+							faceVertexReplaceDict[ face ][vertIndex] = baseVertexCount + len( newUVvertexList )
 						
-					newUVvertexList.append( vert )
+						newUVvertexList.append( vert )
 		
 	
 	#
@@ -252,7 +253,7 @@ def meshProcess(object):
 		outMaterialFile.write( "name %s\n" % material.name )
 		
 		for texture in material.getTextures():
-			if(texture != None):
+			if(texture != None and texture.tex.image != None):
 				outMaterialFile.write( "texture\n" )
 				
 				filename = texture.tex.image.filename
@@ -317,8 +318,8 @@ for obj in bpy.data.objects:
 	mesh = obj.getData(mesh=1)
 	print type(mesh)
 
-	#if( type(mesh) == Types.MeshType ):
-	#	meshProcess(obj)
+	if( type(mesh) == Types.MeshType ):
+		meshProcess(obj)
 		
 	if( type(mesh) == Types.CameraType ):
 		cameraProcess(obj)

@@ -1,6 +1,0 @@
-type Material
-name lowGround
-texture
-path ..\images\ground2.jpg
-end
-end

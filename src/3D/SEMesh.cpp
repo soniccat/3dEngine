@@ -174,15 +174,16 @@ void SEMesh::GetTriangleMesh( btTriangleMeshPtr triangleMesh )
 
 	while( start != end )
 	{
-		faceCount = (*start)->indexArraySize()/3;
+		faceCount = (*start)->indexArraySize();
 		indexArray = (*start)->indexArray();
 		
 		for( int i=0; i<faceCount; i+=3 )
 		{
-			triangleMesh->addTriangle( 
-				btVector3( mVertexArray[ indexArray[i]*3   ], mVertexArray[ indexArray[i]*3   +1 ], mVertexArray[ indexArray[i]*3   +2 ] ), 
-				btVector3( mVertexArray[ indexArray[i+1]*3 ], mVertexArray[ indexArray[i+1]*3 +1 ], mVertexArray[ indexArray[i+1]*3 +2 ] ), 
-				btVector3( mVertexArray[ indexArray[i+2]*3 ], mVertexArray[ indexArray[i+2]*3 +1 ], mVertexArray[ indexArray[i+2]*3 +2 ] ) );
+			triangleMesh->addTriangle( 				
+					btVector3( mVertexArray[ indexArray[i]*3   ], mVertexArray[ indexArray[i]*3   +1 ], mVertexArray[ indexArray[i]*3   +2 ] ),
+					btVector3( mVertexArray[ indexArray[i+1]*3 ], mVertexArray[ indexArray[i+1]*3 +1 ], mVertexArray[ indexArray[i+1]*3 +2 ] ),
+					btVector3( mVertexArray[ indexArray[i+2]*3 ], mVertexArray[ indexArray[i+2]*3 +1 ], mVertexArray[ indexArray[i+2]*3 +2 ] )
+				);
 		}
 
 		++start;
