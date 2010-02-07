@@ -54,8 +54,8 @@ int window_x;
 int window_y;
 
 //  variables representing the window size
-int window_width = 240;
-int window_height = 240;
+int window_width = 800;
+int window_height = 800;
 
 //  variable representing the window title
 sechar *window_title = "GLUT Window Template";
@@ -230,8 +230,8 @@ void init ()
 //	OpenGL contents on the window.
 //-------------------------------------------------------------------------
 
-SEPhysicObjectPtr physicObject1;
-SEPhysicObjectPtr physicObject2;
+//SEPhysicObjectPtr physicObject1;
+//SEPhysicObjectPtr physicObject2;
 
 
 void display (void)
@@ -252,13 +252,15 @@ void display (void)
 	SECameraPtr camera = SEObjectStore::sharedInstance()->GetCamera("Camera");
 	camera->Use();
 
+	SEGameLoop::sharedInstance()->Run();
+
 	//glTranslatef(0,0,-10);
 	//glRotatef(30,1,1,0);
 
 
 	//for (int i=0;i<150;i++)
 	//{
-		SEPhysicWorld::sharedInstance()->world()->stepSimulation(1.f/60.f,10);
+		//SEPhysicWorld::sharedInstance()->world()->stepSimulation(1.f/60.f,10);
 		
 		//print positions of all objects
 		/*for (int j= SEPhysicWorld::sharedInstance()->world()->getNumCollisionObjects()-1; j>=0 ;j--)
@@ -301,15 +303,17 @@ void display (void)
 
 	//  Draw object
 
-		if( physicObject1.get() )
+		/*if( physicObject1.get() )
 			physicObject1->Draw();
 
 		if( physicObject2.get() )
-			physicObject2->Draw();
+			physicObject2->Draw();*/
 	
 
 	//glRotatef(-30,1,1,0);
 	//glTranslatef(0,0,10);
+
+	//SEPhysicWorld::sharedInstance()->Draw();
 
 	//  Swap contents of backward and forward frame buffers
 	glutSwapBuffers ();
@@ -745,16 +749,23 @@ void main (int argc, sechar **argv)
 		//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
 		btDefaultMotionStatePtr myMotionState = btDefaultMotionStatePtr( SENewObject<btDefaultMotionState>(groundTransform) );
 
-		physicObject1 = SEPhysicObjectPtr(SENewObject<SEPhysicObject>());
-		physicObject1->Init( mass, planeMesh, myMotionState,triangleShape,localInertia );
+		SEPhysicObjectPtr physicObject = SEPhysicObjectPtr(SENewObject<SEPhysicObject>());
+		physicObject->Init( mass, planeMesh, myMotionState,triangleShape,localInertia );
 
-		SEPhysicWorld::sharedInstance()->AddObject( physicObject1 );
+		SEPhysicWorld::sharedInstance()->AddObject( physicObject );
 	}
 
 	groundTransform.setOrigin(btVector3(0.0,10,-30.0));
 	groundTransform.setRotation( btQuaternion() );
 
+	//int y=10;
+	//int z=1;
+	for (int z=0;z<5;++z)
+	for (int y=10;y<15;++y)
+	for (int i=0;i<5;++i)
 	{
+		groundTransform.setOrigin(btVector3(i*5.0,y*10,z*5.0));
+
 		btScalar mass(0.1);
 
 		bool isDynamic = (mass != 0.f);
@@ -765,10 +776,10 @@ void main (int argc, sechar **argv)
 
 		btDefaultMotionStatePtr myMotionState = btDefaultMotionStatePtr( SENewObject<btDefaultMotionState>(groundTransform) );
 
-		physicObject2 = SEPhysicObjectPtr(SENewObject<SEPhysicObject>());
-		physicObject2->Init( mass, cubeMesh, myMotionState, boxShape, localInertia  );
+		SEPhysicObjectPtr physicObject = SEPhysicObjectPtr(SENewObject<SEPhysicObject>());
+		physicObject->Init( mass, cubeMesh, myMotionState, boxShape, localInertia  );
 
-		SEPhysicWorld::sharedInstance()->AddObject( physicObject2 );
+		SEPhysicWorld::sharedInstance()->AddObject( physicObject );
 	}
 
 

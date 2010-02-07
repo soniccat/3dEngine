@@ -23,5 +23,7 @@
 #include "SEPhysicObject.h"
 
 #include "SETouchController.h"
+#include "SEGameLoop.h"
+#include "SEGameLoopEngineConstantGameSpeedMaximumFPS.h"
 
 #endif //SEMainDEF

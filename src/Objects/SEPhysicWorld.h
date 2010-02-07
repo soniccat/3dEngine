@@ -38,6 +38,8 @@ public:
 
 	btDynamicsWorldPtr world();
 
+	void Draw();
+
 	void AddObject( SEPhysicObjectPtr object);
 	void RemoveObjects();
 };

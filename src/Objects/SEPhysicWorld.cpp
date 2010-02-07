@@ -40,6 +40,18 @@ btDynamicsWorldPtr SEPhysicWorld::world()
 	return mWorld;
 }
 
+void SEPhysicWorld::Draw()
+{
+	SEPhysicObjectArray::iterator start = mPhysicObjectArray.begin();
+	SEPhysicObjectArray::iterator end = mPhysicObjectArray.end();
+
+	while(start != end)
+	{
+		(*start)->Draw();
+		++start;
+	}
+}
+
 void SEPhysicWorld::AddObject( SEPhysicObjectPtr object)
 {
 	mPhysicObjectArray.push_back( object );

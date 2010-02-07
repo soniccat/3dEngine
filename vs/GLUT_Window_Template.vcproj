@@ -45,7 +45,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\src\Objects;&quot;I:\Sources\Other\bullet-trunk\src&quot;;..\OpenGLlibs\include;I:\Sources\Other\boost_1_41_0;..\src;..\src\Tools;..\src\Tools\win;..\src\3D;..\libjpg;..\src\Images;..\src\win"
+				AdditionalIncludeDirectories="..\src\Objects;&quot;E:\Sources\Other\bullet-trunk\src&quot;;..\OpenGLlibs\include;E:\Sources\Other\boost_1_41_0;..\src;..\src\Tools;..\src\Tools\win;..\src\3D;..\libjpg;..\src\Images;..\src\win"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -76,7 +76,7 @@
 				SuppressStartupBanner="true"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile=".\Debug/GLUT_Window_Template.pdb"
-				SubSystem="1"
+				SubSystem="2"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
 				TargetMachine="1"
@@ -241,35 +241,27 @@
 			Name="tools"
 			>
 			<File
-				RelativePath="..\src\Tools\SECamera.cpp"
+				RelativePath="..\src\Tools\SEGameLoop.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\src\Tools\SECamera.h"
+				RelativePath="..\src\Tools\SEGameLoop.h"
 				>
 			</File>
 			<File
-				RelativePath="..\src\Tools\SETouch.cpp"
+				RelativePath="..\src\Tools\SEGameLoopEngineConstantGameSpeedMaximumFPS.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\src\Tools\SETouch.h"
+				RelativePath="..\src\Tools\SEGameLoopEngineConstantGameSpeedMaximumFPS.h"
 				>
 			</File>
 			<File
-				RelativePath="..\src\Tools\SETouchController.cpp"
+				RelativePath="..\src\Tools\SEGameLoopEngineInterface.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\src\Tools\SETouchController.h"
-				>
-			</File>
-			<File
-				RelativePath="..\src\Tools\SETouchControllerDelegate.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\src\Tools\SETouchControllerDelegate.h"
+				RelativePath="..\src\Tools\SEGameLoopEngineInterface.h"
 				>
 			</File>
 			<Filter
@@ -277,6 +269,10 @@
 				>
 				<File
 					RelativePath="..\src\Tools\SEAllocator.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\Tools\SECamera.h"
 					>
 				</File>
 				<File
@@ -331,12 +327,28 @@
 					RelativePath="..\src\Tools\SETools.h"
 					>
 				</File>
+				<File
+					RelativePath="..\src\Tools\SETouch.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\Tools\SETouchController.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\Tools\SETouchControllerDelegate.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="src"
 				>
 				<File
 					RelativePath="..\src\Tools\SEAllocator.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\Tools\SECamera.cpp"
 					>
 				</File>
 				<File
@@ -369,6 +381,18 @@
 				</File>
 				<File
 					RelativePath="..\src\Tools\SETools.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\Tools\SETouch.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\Tools\SETouchController.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\Tools\SETouchControllerDelegate.cpp"
 					>
 				</File>
 			</Filter>
@@ -453,25 +477,21 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath=".\GLUT_Window_Template.cpp"
+		<Filter
+			Name="OpenGL"
 			>
-			<FileConfiguration
-				Name="Debug|Win32"
+			<File
+				RelativePath=".\GLU32.LIB"
 				>
-				<Tool
-					Name="VCCLCompilerTool"
-					PreprocessorDefinitions=""
-				/>
-			</FileConfiguration>
-			<FileConfiguration
-				Name="Release|Win32"
+			</File>
+			<File
+				RelativePath=".\OPENGL32.LIB"
 				>
-				<Tool
-					Name="VCCLCompilerTool"
-					PreprocessorDefinitions=""
-				/>
-			</FileConfiguration>
+			</File>
+		</Filter>
+		<File
+			RelativePath=".\Lesson1.cpp"
+			>
 		</File>
 		<File
 			RelativePath=".\libjpeg.lib"
