@@ -35,6 +35,7 @@ public:
 
 	static SEPhysicWorldPtr sharedInstance();
 	void InitDiscreteDynamicsWorld( btDispatcherPtr dispatcher, btBroadphaseInterfacePtr broadphaseInterface, btConstraintSolverPtr constraintSolver, btCollisionConfigurationPtr collisionConfiguration );
+	void InitContinuousDynamicsWorld( btDispatcherPtr dispatcher, btBroadphaseInterfacePtr broadphaseInterface, btConstraintSolverPtr constraintSolver, btCollisionConfigurationPtr collisionConfiguration );
 
 	btDynamicsWorldPtr world();
 
@@ -42,6 +43,7 @@ public:
 
 	void AddObject( SEPhysicObjectPtr object);
 	void RemoveObjects();
+	SEPhysicObjectPtr GetObject(const char* name);
 };
 
 

@@ -55,3 +55,8 @@ btRigidBodyPtr SEPhysicObject::rigidBody()
 {
 	return mRigidBody;
 }
+
+const SEString& SEPhysicObject::name()
+{
+	return mMesh->name();
+}

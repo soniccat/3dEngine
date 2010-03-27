@@ -44,6 +44,7 @@ public:
 	virtual void Draw();
 	btRigidBodyPtr  rigidBody();
 	SEMeshPtr		mesh();
+	const SEString& name();
 };
 
 

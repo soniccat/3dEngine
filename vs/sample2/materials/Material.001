@@ -1,5 +1,5 @@
 type Material
-name Material.002
+name Material.001
 texture
 path ..\images\test.jpg
 end

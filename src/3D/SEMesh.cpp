@@ -189,3 +189,36 @@ void SEMesh::GetTriangleMesh( btTriangleMeshPtr triangleMesh )
 		++start;
 	}
 }
+
+btBoxShapePtr SEMesh::GetBoxShape( )
+{
+	float minX = FLT_MAX, maxX = FLT_MIN;
+	float minY = FLT_MAX, maxY = FLT_MIN;
+	float minZ = FLT_MAX, maxZ = FLT_MIN;
+
+	float* vertexArray = mVertexArray.get();
+	for( int i=0; i<mVertexArraySize; i+=3 )
+	{
+		if( minX > vertexArray[i] ) minX = vertexArray[i];
+		if( maxX < vertexArray[i] ) maxX = vertexArray[i];
+
+		if( minY > vertexArray[i+1] ) minY = vertexArray[i+1];
+		if( maxY < vertexArray[i+1] ) maxY = vertexArray[i+1];
+
+		if( minZ > vertexArray[i+2] ) minZ = vertexArray[i+2];
+		if( maxZ < vertexArray[i+2] ) maxZ = vertexArray[i+2];
+	}
+
+	btVector3 vec =  btVector3( (maxX - minX)/2.0f,
+								(maxY - minY)/2.0f,
+								(maxZ - minZ)/2.0f );
+
+	/*if( vec.x() < 0.1 ) 
+		vec.setX(0.1f);
+	if( vec.y() < 0.1 )
+		vec.setY(0.1f);
+	if( vec.z() < 0.1 ) 
+		vec.setZ(0.1f);*/
+
+	return btBoxShapePtr( SENewObject<btBoxShape>( vec ) );
+}

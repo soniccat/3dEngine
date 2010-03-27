@@ -35,6 +35,17 @@ void SEPhysicWorld::InitDiscreteDynamicsWorld( btDispatcherPtr dispatcher, btBro
 	mWorld = btDynamicsWorldPtr( SENewObject<btDiscreteDynamicsWorld>( mDispatcher.get(), mBroadphaseInterface.get(), mConstraintSolver.get(), mCollisionConfiguration.get() ) );
 }
 
+void SEPhysicWorld::InitContinuousDynamicsWorld( btDispatcherPtr dispatcher, btBroadphaseInterfacePtr broadphaseInterface, btConstraintSolverPtr constraintSolver, btCollisionConfigurationPtr collisionConfiguration )
+{
+	mCollisionConfiguration = collisionConfiguration;
+	mBroadphaseInterface	= broadphaseInterface;
+	mDispatcher				= dispatcher;
+	mConstraintSolver		= constraintSolver;
+
+	mWorld = btDynamicsWorldPtr( SENewObject<btContinuousDynamicsWorld>( mDispatcher.get(), mBroadphaseInterface.get(), mConstraintSolver.get(), mCollisionConfiguration.get() ) );
+
+}
+
 btDynamicsWorldPtr SEPhysicWorld::world()
 {
 	return mWorld;
@@ -67,4 +78,21 @@ void SEPhysicWorld::RemoveObjects()
 	}
 
 	mPhysicObjectArray.clear();
+}
+
+SEPhysicObjectPtr SEPhysicWorld::GetObject(const char* name)
+{
+	SEPhysicObjectArray::iterator start = mPhysicObjectArray.begin();
+	SEPhysicObjectArray::iterator end = mPhysicObjectArray.end();
+
+	while(start != end)
+	{
+		if( (*start)->name() == name )
+			return *start;
+
+		++start;
+	}
+
+	SEAssert(false, "Physic object not found");
+	return SEPhysicObjectPtr();
 }

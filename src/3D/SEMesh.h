@@ -21,7 +21,7 @@ typedef shared_array<float> SEUVNativeArrayPtr;
 
 typedef shared_ptr<btTriangleMesh> btTriangleMeshPtr;
 typedef shared_ptr<btConvexHullShape> btConvexHullShapePtr;
-
+typedef shared_ptr<btBoxShape> btBoxShapePtr;
 
 class SEMesh: public SESceneLoaderDelegate
 {
@@ -32,7 +32,7 @@ class SEMesh: public SESceneLoaderDelegate
 	SENormalNativeArrayPtr	mNormalArray;
 	SEUVNativeArrayPtr		mUVArray;
 	
-	SEVertexGroupArray mVertexGroupArray;
+	SEVertexGroupArray		mVertexGroupArray;
 
 public:
 	SEMesh(void);
@@ -56,6 +56,7 @@ public:
 
 	void GetTriangleMesh( btTriangleMeshPtr trianlgeShape );
 	void GetConvexHullShape(  );
+	btBoxShapePtr GetBoxShape( );
 };
 
 #endif SEMesh_H

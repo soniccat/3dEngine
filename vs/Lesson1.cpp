@@ -95,7 +95,25 @@ public:
 
 
 		if(button == SETouchButtonLeft)
+		{
 			leftButtonPressed = true;
+
+			//for second sample
+			SEPhysicObjectPtr washer = SEPhysicWorld::sharedInstance()->GetObject( "Washer" );
+
+			btVector3 impulse( 0.1,0.1,1 );
+			impulse.normalize();
+
+			float powerValue = 18;
+			btVector3 resultVector = powerValue*impulse;
+
+			washer->rigidBody()->activate();
+
+			washer->rigidBody()->getWorldTransform().setOrigin( btVector3(-2,5,-5) );
+			washer->rigidBody()->setLinearVelocity( btVector3(0,0,0) );
+			//washer->rigidBody()->setLinearVelocity( btVector3(0,0,0) );
+			washer->rigidBody()->applyImpulse(resultVector, btVector3(0,0,0));
+		}
 
 		if(button == SETouchButtonRight)
 			rightButtonPressed = true;
@@ -489,7 +507,8 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 SETexturePtr objectTexture;
 CameraControllerPtr cameraController;
 
-void LoadScene()
+//land with falling boxes - ground.blend
+void LoadScene1()
 {
 	//physic world
 	btCollisionConfigurationPtr collisionConfiguration	= btCollisionConfigurationPtr( SENewObject<btDefaultCollisionConfiguration>() );
@@ -503,7 +522,7 @@ void LoadScene()
 
 	SEPath currentPath;
 	SEPath::CurrentDirectory( &currentPath );
-	currentPath.AppendName( "objects" );
+	currentPath.AppendName( "sample1" );
 
 	SESceneLoader loader;
 	loader.Load( &currentPath );
@@ -521,7 +540,7 @@ void LoadScene()
 
 	//btTriangleVertexArrayPtr vertexArray = mesh->CreateTriangleIndexVertexArray();
 
-	btCollisionShapePtr boxShape = btCollisionShapePtr( SENewObject<btBoxShape>(btVector3(btScalar(1.0),btScalar(1.0),btScalar(1.0))) );
+	btCollisionShapePtr boxShape = cubeMesh->GetBoxShape(); //btCollisionShapePtr( SENewObject<btBoxShape>(btVector3(btScalar(1.0),btScalar(1.0),btScalar(1.0))) );
 	btBvhTriangleMeshShapePtr triangleShape = btBvhTriangleMeshShapePtr( SENewObject<btBvhTriangleMeshShape>( triangleMesh.get(), true, true ) );
 
 
@@ -552,10 +571,10 @@ void LoadScene()
 	groundTransform.setOrigin(btVector3(0.0,10,-30.0));
 	groundTransform.setRotation( btQuaternion() );
 
-	//int y=10;
 	int z=1;
+	int y=10;
 	//for (int z=0;z<5;++z)
-	for (int y=10;y<15;++y)
+	//for (int y=10;y<15;++y)
 	for (int i=0;i<5;++i)
 	{
 		groundTransform.setOrigin(btVector3(i*5.0,y*10,z*5.0));
@@ -575,6 +594,135 @@ void LoadScene()
 
 		SEPhysicWorld::sharedInstance()->AddObject( physicObject );
 	}
+}
+
+//continuous collision test - colisionTestt.blend
+void LoadScene2()
+{
+	//physic world
+	btCollisionConfigurationPtr collisionConfiguration	= btCollisionConfigurationPtr( SENewObject<btDefaultCollisionConfiguration>() );
+	btDispatcherPtr				dispatcher				= btDispatcherPtr ( SENewObject<btCollisionDispatcher>(collisionConfiguration.get()) );
+	btBroadphaseInterfacePtr	overlappingPairCache	= btBroadphaseInterfacePtr( SENewObject<btDbvtBroadphase>() );
+	btConstraintSolverPtr		solver					= btConstraintSolverPtr( SENewObject<btSequentialImpulseConstraintSolver>() );
+
+	//InitContinuousDynamicsWorld InitDiscreteDynamicsWorld
+	SEPhysicWorld::sharedInstance()->InitDiscreteDynamicsWorld( dispatcher ,overlappingPairCache, solver, collisionConfiguration );
+	SEPhysicWorld::sharedInstance()->world()->setGravity(btVector3(0,-9,0));
+	SEPhysicWorld::sharedInstance()->world()->getDispatchInfo().m_enableSPU = true;
+
+	SEPath currentPath;
+	SEPath::CurrentDirectory( &currentPath );
+	currentPath.AppendName( "sample2" );
+
+	SESceneLoader loader;
+	loader.Load( &currentPath );
+
+	//camera
+	cameraController = CameraControllerPtr( SENewObject<CameraController>() );
+	SETouchController::sharedInstance()->AddDelegate( cameraController );
+	
+	///create a few basic rigid bodies
+	SEMeshPtr planeMesh = SEObjectStore::sharedInstance()->GetMesh( "Plane" );
+	SEMeshPtr washerMesh = SEObjectStore::sharedInstance()->GetMesh( "Washer" );
+	SEMeshPtr wallMesh = SEObjectStore::sharedInstance()->GetMesh( "Wall" );
+
+	//btTriangleMeshPtr triangleMesh = btTriangleMeshPtr( SENewObject<btTriangleMesh>() );
+	//planeMesh->GetTriangleMesh( triangleMesh );
+
+	//btTriangleVertexArrayPtr vertexArray = mesh->CreateTriangleIndexVertexArray();
+
+	btCollisionShapePtr planeShape  = planeMesh->GetBoxShape();//btCollisionShapePtr( SENewObject<btBoxShape>(btVector3(btScalar(1.0),btScalar(1.0),btScalar(1.0))) );
+	btCollisionShapePtr washerShape = washerMesh->GetBoxShape();
+	btCollisionShapePtr wallShape = wallMesh->GetBoxShape();
+
+	//planeShape->setMargin(gCollisionMargin);
+	washerShape->setMargin(0.05f);
+	//wallShape->setMargin(gCollisionMargin);
+
+	//btBvhTriangleMeshShapePtr triangleShape = btBvhTriangleMeshShapePtr( SENewObject<btBvhTriangleMeshShape>( triangleMesh.get(), true, true ) );
+
+
+	btTransform groundTransform;
+	groundTransform.setIdentity();
+	groundTransform.setOrigin(btVector3(0,0,0));
+	//groundTransform.setRotation( btQuaternion( -DEGREES_TO_RADIANS(180) ,0, 0,1) );
+
+	{
+		btScalar mass(0.0);
+
+		//rigidbody is dynamic if and only if mass is non zero, otherwise static
+		bool isDynamic = (mass != 0.f);
+
+		btVector3 localInertia(0,0,0);
+		if (isDynamic)
+			planeShape->calculateLocalInertia(mass,localInertia);
+
+		//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
+		btDefaultMotionStatePtr myMotionState = btDefaultMotionStatePtr( SENewObject<btDefaultMotionState>(groundTransform) );
+
+		SEPhysicObjectPtr physicObject = SEPhysicObjectPtr(SENewObject<SEPhysicObject>());
+		physicObject->Init( mass, planeMesh, myMotionState, planeShape,localInertia );
+
+		SEPhysicWorld::sharedInstance()->AddObject( physicObject );
+	}
+
+	groundTransform.setOrigin(btVector3(0,0,10));
+
+	{
+		btScalar mass(0.0);
+
+		//rigidbody is dynamic if and only if mass is non zero, otherwise static
+		bool isDynamic = (mass != 0.f);
+
+		btVector3 localInertia(0,0,0);
+		if (isDynamic)
+			wallShape->calculateLocalInertia(mass,localInertia);
+
+		//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
+		btDefaultMotionStatePtr myMotionState = btDefaultMotionStatePtr( SENewObject<btDefaultMotionState>(groundTransform) );
+
+		SEPhysicObjectPtr physicObject = SEPhysicObjectPtr(SENewObject<SEPhysicObject>());
+		physicObject->Init( mass, wallMesh, myMotionState, wallShape,localInertia );
+
+		SEPhysicWorld::sharedInstance()->AddObject( physicObject );
+	}
+
+	//groundTransform.setOrigin(btVector3(0.0,10,-30.0));
+	groundTransform.setRotation( btQuaternion( btVector3(1,1,1),1 ) );
+	//groundTransform.setIdentity();
+
+	int z=-5;
+	int y=5;
+	int i=-2;
+	{
+		groundTransform.setOrigin(btVector3(i,y,z));
+
+		btScalar mass(0.1);
+
+		bool isDynamic = (mass != 0.f);
+
+		btVector3 localInertia(0,0,0);
+		if (isDynamic)
+			washerShape->calculateLocalInertia(mass,localInertia);
+
+		btDefaultMotionStatePtr myMotionState = btDefaultMotionStatePtr( SENewObject<btDefaultMotionState>(groundTransform) );
+
+		SEPhysicObjectPtr physicObject = SEPhysicObjectPtr(SENewObject<SEPhysicObject>());
+		physicObject->Init( mass, washerMesh, myMotionState, washerShape, localInertia  );
+
+		// Only do CCD if  motion in one timestep (1.f/60.f) exceeds CUBE_HALF_EXTENTS
+		physicObject->rigidBody()->setCcdMotionThreshold( 0.1 );
+
+		//Experimental: better estimation of CCD Time of Impact:
+		physicObject->rigidBody()->setCcdSweptSphereRadius( 0.2*0.2 );
+
+		SEPhysicWorld::sharedInstance()->AddObject( physicObject );
+	}
+}
+
+void LoadScene()
+{
+	LoadScene2();
 }
 
 LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
